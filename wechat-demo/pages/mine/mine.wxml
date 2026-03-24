@@ -1,0 +1,110 @@
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-header">
+      <view class="avatar-section">
+        <view class="avatar-wrapper">
+          <image class="avatar-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEyIDEyYzIuMjEgMCA0LTEuNzkgNC00cy0xLjc5LTQtNC00LTQgMS43OS00IDQgMS43OSA0IDQgNHptMCAyYy0yLjY3IDAtOCAxLjM0LTggNHYyaDE2di0yYzAtMi42Ni01LjMzLTQtOC00eiIvPjwvc3ZnPg=="/>
+        </view>
+        <view class="user-info">
+          <text class="user-name">美食家</text>
+          <text class="user-level">Lv.1 初级吃货</text>
+        </view>
+      </view>
+      <view class="settings-btn" bindtap="goToSettings">
+        <image class="settings-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE5LjE0IDEyLjk0Yy4wNC0uMzEuMDYtLjYzLjA2LS45NCAwLS4zMS0uMDItLjYzLS4wNi0uOTRsMi4wMy0xLjU4Yy4xOC0uMTQuMjMtLjQxLjEyLS42MWwtMS45Mi0zLjMyYy0uMTItLjIyLS4zNy0uMjktLjU5LS4yMmwtMi4zOS45NmMtLjUtLjM4LTEuMDMtLjctMS42Mi0uOTRsLS4zNi0yLjU0Yy0uMDQtLjI0LS4yNC0uNDEtLjQ4LS40MWgtMy44NGMtLjI0IDAtLjQzLjE3LS40Ny40MWwtLjM2IDIuNTRjLS41OS4yNC0xLjEzLjU3LTEuNjIuOTRsLTIuMzktLjk2Yy0uMjItLjA4LS40NyAwLS41OS4yMmwtMS45MiAzLjMyYy0uMTIuMjEtLjA4LjQ3LjEyLjYxbDIuMDMgMS41OGMtLjA0LjMxLS4wNi42My0uMDYuOTRzLjAyLjYzLjA2Ljk0bC0yLjAzIDEuNThjLS4xOC4xNC0uMjMuNDEtLjEyLjYxbDEuOTIgMy4zMmMuMTIuMjIuMzcuMjkuNTkuMjJsMi4zOS0uOTZjLjUuMzggMS4wMy43IDEuNjIuOTRsLjM2IDIuNTRjLjA0LjI0LjI0LjQxLjQ4LjQxaDMuODRjLjI0IDAgLjQ0LS4xNy40Ny0uNDFsLjM2LTIuNTRjLjU5LS4yNCAxLjEzLS41NiAxLjYyLS45NGwyLjM5Ljk2Yy4yMi4wOC40NyAwIC41OS0uMjJsMS45Mi0zLjMyYy4xMi0uMjIuMDctLjQ3LS4xMi0uNjFsLTIuMDEtMS41OHpNMTIgMTUuNmMtMS45OCAwLTMuNi0xLjYyLTMuNi0zLjZzMS42Mi0zLjYgMy42LTMuNiAzLjYgMS42MiAzLjYgMy42LTEuNjIgMy42LTMuNiAzLjZ6Ii8+PC9zdmc+"/>
+      </view>
+    </view>
+
+    <!-- 统计数据 -->
+    <view class="stats-section">
+      <view class="stat-item">
+        <text class="stat-num">{{orderCount}}</text>
+        <text class="stat-label">订单</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-num">{{favoriteCount}}</text>
+        <text class="stat-label">收藏</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-num">¥{{totalSpent}}</text>
+        <text class="stat-label">消费</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-title">我的服务</view>
+    
+    <view class="menu-list">
+      <view class="menu-item" bindtap="goToOrders">
+        <view class="menu-left">
+          <view class="menu-icon order-icon">
+            <image class="menu-icon-img" src="{{icons.document}}"></image>
+          </view>
+          <text class="menu-text">我的订单</text>
+        </view>
+        <view class="menu-arrow">›</view>
+      </view>
+
+      <view class="menu-item" bindtap="goToFavorites">
+        <view class="menu-left">
+          <view class="menu-icon fav-icon">
+            <image class="menu-icon-img" src="{{icons.heart}}"></image>
+          </view>
+          <text class="menu-text">我的收藏</text>
+        </view>
+        <view class="menu-arrow">›</view>
+      </view>
+
+      <view class="menu-item" bindtap="goToAddress">
+        <view class="menu-left">
+          <view class="menu-icon addr-icon">
+            <image class="menu-icon-img" src="{{icons.location}}"></image>
+          </view>
+          <text class="menu-text">收货地址</text>
+        </view>
+        <view class="menu-arrow">›</view>
+      </view>
+
+      <view class="menu-item" bindtap="clearCart">
+        <view class="menu-left">
+          <view class="menu-icon cart-icon">
+            <image class="menu-icon-img" src="{{icons.cart}}"></image>
+          </view>
+          <text class="menu-text">清空购物车</text>
+        </view>
+        <view class="menu-arrow">›</view>
+      </view>
+
+      <view class="menu-item" bindtap="clearOrders">
+        <view class="menu-left">
+          <view class="menu-icon clear-icon">
+            <image class="menu-icon-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzllOWU5ZSIgZD0iTTYgMTljMCAxLjEuOSAyIDIgMmg4YzEuMSAwIDItLjkgMi0yVjdINnYxM3pNMTkgNGgtMy41bC0xLTFoLTVsLTEgMUg1djJoMTRWNHoiLz48L3N2Zz4="/>
+          </view>
+          <text class="menu-text">清空订单记录</text>
+        </view>
+        <view class="menu-arrow">›</view>
+      </view>
+
+      <view class="menu-item" bindtap="showAbout">
+        <view class="menu-left">
+          <view class="menu-icon about-icon">
+            <image class="menu-icon-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzljMjdiMCIgZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bTEgMTVoLTJ2LTZoMnY2em0wLThoLTJWN2gydjJ6Ii8+PC9zdmc+"/>
+          </view>
+          <text class="menu-text">关于我们</text>
+        </view>
+        <view class="menu-arrow">›</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部信息 -->
+  <view class="footer">
+    <text class="footer-text">家庭点饭 v1.0.0</text>
+    <text class="footer-slogan">让每一餐都充满家的味道</text>
+  </view>
+</view>

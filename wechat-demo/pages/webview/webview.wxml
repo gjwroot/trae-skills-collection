@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="warning-box">
+    <view class="warning-title">⚠️ WebView 使用限制</view>
+    <view class="warning-item">1. 个人类型小程序无法使用 WebView</view>
+    <view class="warning-item">2. 只能打开已配置的业务域名</view>
+    <view class="warning-item">3. WebView 页面无法调用小程序 API</view>
+    <view class="warning-item">4. 域名需要 ICP 备案</view>
+  </view>
+  
+  <web-view src="https://developers.weixin.qq.com/miniprogram/dev/component/web-view.html"></web-view>
+</view>

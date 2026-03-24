@@ -1,0 +1,110 @@
+<view class="container">
+  <!-- 标签栏 -->
+  <view class="tab-header">
+    <view class="tab-item {{currentTab === 'cart' ? 'active' : ''}}" bindtap="switchTab" data-tab="cart">
+      <text class="tab-text">购物车</text>
+      <view wx:if="{{cart.length > 0}}" class="tab-badge">{{cart.length}}</view>
+    </view>
+    <view class="tab-item {{currentTab === 'orders' ? 'active' : ''}}" bindtap="switchTab" data-tab="orders">
+      <text class="tab-text">我的订单</text>
+    </view>
+  </view>
+
+  <!-- 购物车内容 -->
+  <view wx:if="{{currentTab === 'cart'}}" class="content-area">
+    <!-- 空状态 -->
+    <view wx:if="{{cart.length === 0}}" class="empty-state">
+      <view class="empty-icon-wrapper">
+        <text class="empty-icon">🛒</text>
+      </view>
+      <text class="empty-title">购物车空空如也</text>
+      <text class="empty-desc">快去挑选心仪的美食吧</text>
+      <view class="empty-btn" bindtap="goToMenu">去逛逛</view>
+    </view>
+
+    <!-- 购物车列表 -->
+    <view wx:else class="cart-content">
+      <view class="cart-list">
+        <view class="cart-card" wx:for="{{cart}}" wx:key="id">
+          <image class="cart-image" src="{{item.image}}" mode="aspectFill"/>
+          <view class="cart-info">
+            <text class="cart-name">{{item.name}}</text>
+            <text class="cart-desc">{{item.description}}</text>
+            <view class="cart-bottom">
+              <text class="cart-price">¥{{item.price}}</text>
+              <view class="quantity-control">
+                <view class="qty-btn minus" bindtap="decreaseQuantity" data-id="{{item.id}}">−</view>
+                <text class="qty-num">{{item.quantity}}</text>
+                <view class="qty-btn plus" bindtap="increaseQuantity" data-id="{{item.id}}">+</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 结算栏 -->
+      <view class="checkout-bar">
+        <view class="total-section">
+          <text class="total-label">合计</text>
+          <view class="total-price-wrapper">
+            <text class="total-symbol">¥</text>
+            <text class="total-price">{{total}}</text>
+          </view>
+        </view>
+        <view class="checkout-btn" bindtap="placeOrder">
+          <text class="checkout-text">提交订单</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单内容 -->
+  <view wx:if="{{currentTab === 'orders'}}" class="content-area">
+    <!-- 空状态 -->
+    <view wx:if="{{orders.length === 0}}" class="empty-state">
+      <view class="empty-icon-wrapper">
+        <image class="empty-icon-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI2RkZCIgZD0iTTE5IDNINWMtMS4xIDAtMiAuOS0yIDJ2MTRjMCAxLjEuOSAyIDIgMmgxNGMxLjEgMCAyLS45IDItMlY1YzAtMS4xLS45LTItMi0yem0tNSAxNEg3di0yaDd2MnptMy00SDd2LTJoMTB2MnptMC00SDdWN2gxMHYyeiIvPjwvc3ZnPg=="/>
+      </view>
+      <text class="empty-title">暂无订单</text>
+      <text class="empty-desc">您还没有下过订单哦</text>
+    </view>
+
+    <!-- 订单列表 -->
+    <view wx:else class="order-list">
+      <view class="order-card" wx:for="{{orders}}" wx:key="id">
+        <view class="order-header">
+          <view class="order-info">
+            <text class="order-id">订单 {{item.id}}</text>
+            <text class="order-time">{{item.createTime}}</text>
+          </view>
+          <view class="order-status-tag {{item.status === '已完成' ? 'completed' : 'pending'}}">
+            {{item.status}}
+          </view>
+        </view>
+
+        <view class="divider"></view>
+
+        <view class="order-items">
+          <view class="order-item-row" wx:for="{{item.items}}" wx:for-item="orderItem" wx:key="id">
+            <image class="order-item-image" src="{{orderItem.image}}" mode="aspectFill"/>
+            <view class="order-item-info">
+              <text class="order-item-name">{{orderItem.name}}</text>
+              <text class="order-item-price">¥{{orderItem.price}}</text>
+            </view>
+            <text class="order-item-qty">x{{orderItem.quantity}}</text>
+          </view>
+        </view>
+
+        <view class="divider"></view>
+
+        <view class="order-footer">
+          <text class="order-total-label">共 {{item.items.length}} 件商品</text>
+          <view class="order-total-wrapper">
+            <text class="order-total-label">实付</text>
+            <text class="order-total-price">¥{{item.total}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

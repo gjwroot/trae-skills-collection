@@ -1,0 +1,70 @@
+<view class="container">
+  <!-- 顶部装饰区域 -->
+  <view class="header-section">
+    <view class="logo-wrapper">
+      <view class="logo-icon">
+        <text class="logo-text">家</text>
+      </view>
+    </view>
+    <view class="title">家庭点饭</view>
+    <view class="subtitle">美味 · 健康 · 便捷</view>
+  </view>
+
+  <!-- 登录表单 -->
+  <view class="form-section">
+    <view class="form-item">
+      <view class="input-wrapper">
+        <text class="input-label">+86</text>
+        <input class="phone-input" type="number" maxlength="11" placeholder="请输入手机号" placeholder-class="placeholder" bindinput="bindPhoneInput" value="{{phone}}"></input>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="input-wrapper code-wrapper">
+        <input class="code-input" type="number" maxlength="6" placeholder="请输入验证码" placeholder-class="placeholder" bindinput="bindCodeInput" value="{{code}}"></input>
+        <button class="code-btn {{countdown > 0 ? 'disabled' : ''}}" bindtap="getCode" disabled="{{countdown > 0}}">
+          {{countdown > 0 ? countdown + 's' : '获取验证码'}}
+        </button>
+      </view>
+    </view>
+
+    <button class="login-btn {{!canLogin ? 'disabled' : ''}}" bindtap="login" disabled="{{!canLogin}}">登录</button>
+
+    <!-- 分割线 -->
+    <view class="divider">
+      <view class="line"></view>
+      <text class="divider-text">快捷登录</text>
+      <view class="line"></view>
+    </view>
+
+    <!-- 微信登录 -->
+    <button class="wechat-btn" bindtap="wechatLogin">
+      <view class="btn-content">
+        <view class="icon-wrapper">
+          <image class="login-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2307c160'%3E%3Cpath d='M8.5 13.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM15.5 13.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z'/%3E%3Cpath fill-rule='evenodd' d='M12 2C6.48 2 2 6.48 2 12c0 1.82.38 3.55 1.07 5.12.1.24.04.52-.15.7l-1.6 1.6c-.2.2-.06.54.22.54h.17c4.42 0 8.36-2.1 10.9-5.36A9.96 9.96 0 0022 12c0-5.52-4.48-10-10-10zm-5.5 7a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm7 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z' clip-rule='evenodd'/%3E%3C/svg%3E" mode="aspectFit"></image>
+        </view>
+        <text class="btn-text">微信一键登录</text>
+      </view>
+    </button>
+
+    <button class="phone-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+      <view class="btn-content">
+        <view class="icon-wrapper">
+          <image class="login-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231a73e8'%3E%3Cpath d='M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z'/%3E%3C/svg%3E" mode="aspectFit"></image>
+        </view>
+        <text class="btn-text">手机号快捷登录</text>
+      </view>
+    </button>
+  </view>
+
+  <!-- 底部协议 -->
+  <view class="footer">
+    <view class="agreement">
+      <checkbox class="agree-checkbox" checked="{{agreed}}" bindtap="toggleAgreement"></checkbox>
+      <text class="agree-text">我已阅读并同意</text>
+      <text class="link" bindtap="showAgreement">用户协议</text>
+      <text class="agree-text">和</text>
+      <text class="link" bindtap="showPrivacy">隐私政策</text>
+    </view>
+  </view>
+</view>

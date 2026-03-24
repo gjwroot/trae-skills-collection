@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "VIP Benefits",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "custom-icon": "/components/icon/icon"
+  }
+}

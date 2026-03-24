@@ -1,0 +1,50 @@
+<view class="container">
+  <view class="category-bar">
+    <scroll-view scroll-x="true" class="category-scroll">
+      <view class="category-item {{currentCategory === item ? 'active' : ''}}" 
+            wx:for="{{categories}}" 
+            wx:key="*this" 
+            bindtap="selectCategory" 
+            data-category="{{item}}">
+        {{item}}
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="menu-list">
+    <view class="menu-item" wx:for="{{filteredItems}}" wx:key="id">
+      <view class="item-header">
+        <image class="item-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="favorite-btn" bindtap="toggleFavorite" data-item="{{item}}">
+          <!-- 已收藏：红色实心 -->
+          <image wx:if="{{isFavorites[item.id]}}" class="favorite-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI2ZmNDc1NyIgZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+"/>
+          <!-- 未收藏：白色空心 -->
+          <image wx:else class="favorite-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiIGQ9Ik0xMiAyMS4zNWwtMS40NS0xLjMyQzUuNCAxNS4zNiAyIDEyLjI4IDIgOC41IDIgNS40MiA0LjQyIDMgNy41IDNjMS43NCAwIDMuNDEuODEgNC41IDIuMDlDMTMuMDkgMy44MSAxNC43NiAzIDE2LjUgMyAxOS41OCAzIDIyIDUuNDIgMjIgOC41YzAgMy43OC0zLjQgNi44Ni04LjU1IDExLjU0TDEyIDIxLjM1eiIvPjwvc3ZnPg=="/>
+        </view>
+      </view>
+      <view class="item-info">
+        <view class="item-name">{{item.name}}</view>
+        <view class="item-desc">{{item.description}}</view>
+        <view class="item-bottom">
+          <view class="item-price">¥{{item.price}}</view>
+          <view wx:if="{{!itemQuantities[item.id] || itemQuantities[item.id] === 0}}" class="add-cart-btn" bindtap="addToCart" data-item="{{item}}">
+            加入购物车
+          </view>
+          <view wx:else class="quantity-control">
+            <view class="quantity-btn" bindtap="decreaseQuantity" data-id="{{item.id}}">-</view>
+            <view class="quantity">{{itemQuantities[item.id]}}</view>
+            <view class="quantity-btn" bindtap="increaseQuantity" data-id="{{item.id}}">+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="cart-bar" wx:if="{{cartCount > 0}}">
+    <view class="cart-info">
+      <view class="cart-count">共{{cartCount}}件</view>
+      <view class="cart-total">¥{{cartTotal}}</view>
+    </view>
+    <view class="checkout-btn" bindtap="goToCart">去结算</view>
+  </view>
+</view>

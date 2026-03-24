@@ -1,0 +1,99 @@
+<view class="container">
+  <!-- 头部搜索区 -->
+  <view class="header">
+    <view class="search-box" bindtap="goToSearch">
+      <image class="search-icon" src="{{icons.search}}"></image>
+      <text class="search-placeholder">搜索美食...</text>
+    </view>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="quick-access">
+    <view class="quick-item" bindtap="goToMenu">
+      <view class="quick-icon menu-icon">
+        <image class="icon-img" src="{{icons.menu}}"></image>
+      </view>
+      <text class="quick-text">全部菜单</text>
+    </view>
+    <view class="quick-item" bindtap="goToCart">
+      <view class="quick-icon cart-icon">
+        <image class="icon-img" src="{{icons.cart}}"></image>
+      </view>
+      <text class="quick-text">购物车</text>
+    </view>
+    <view class="quick-item" bindtap="goToFavorites">
+      <view class="quick-icon fav-icon">
+        <image class="icon-img" src="{{icons.heart}}"></image>
+      </view>
+      <text class="quick-text">我的收藏</text>
+    </view>
+    <view class="quick-item" bindtap="goToAddress">
+      <view class="quick-icon addr-icon">
+        <image class="icon-img" src="{{icons.location}}"></image>
+      </view>
+      <text class="quick-text">收货地址</text>
+    </view>
+  </view>
+
+  <!-- 特色服务 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">特色服务</text>
+    </view>
+    <view class="service-grid">
+      <view class="service-item" bindtap="goToService" data-type="fresh">
+        <view class="service-icon fresh-icon">
+          <image class="service-icon-img" src="{{icons.fresh}}"></image>
+        </view>
+        <text class="service-name">新鲜食材</text>
+        <text class="service-desc">每日采购</text>
+      </view>
+      <view class="service-item" bindtap="goToService" data-type="fast">
+        <view class="service-icon fast-icon">
+          <image class="service-icon-img" src="{{icons.clock}}"></image>
+        </view>
+        <text class="service-name">快速制作</text>
+        <text class="service-desc">30分钟送达</text>
+      </view>
+      <view class="service-item" bindtap="goToService" data-type="healthy">
+        <view class="service-icon healthy-icon">
+          <image class="service-icon-img" src="{{icons.document}}"></image>
+        </view>
+        <text class="service-name">健康美味</text>
+        <text class="service-desc">营养均衡</text>
+      </view>
+      <view class="service-item" bindtap="goToService" data-type="home">
+        <view class="service-icon home-icon">
+          <image class="service-icon-img" src="{{icons.home}}"></image>
+        </view>
+        <text class="service-name">家的味道</text>
+        <text class="service-desc">温馨家庭餐</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 今日推荐 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">今日推荐</text>
+      <text class="section-more" bindtap="goToMenu">查看全部 ></text>
+    </view>
+    <view class="recommend-list">
+      <view class="recommend-item" wx:for="{{recommendItems}}" wx:key="id" bindtap="viewDetail" data-item="{{item}}">
+        <image class="recommend-image" src="{{item.image}}" mode="aspectFill"/>
+        <view class="recommend-info">
+          <text class="recommend-name">{{item.name}}</text>
+          <text class="recommend-desc">{{item.description}}</text>
+          <view class="recommend-bottom">
+            <text class="recommend-price">¥{{item.price}}</text>
+            <view class="quantity-control" catchtap="preventBubble">
+              <view class="quantity-btn minus" wx:if="{{item.quantity > 0}}" catchtap="decreaseQuantity" data-item="{{item}}">−</view>
+              <text class="quantity" wx:if="{{item.quantity > 0}}">{{item.quantity}}</text>
+              <view class="quantity-btn plus" catchtap="addRecommend" data-item="{{item}}">+</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

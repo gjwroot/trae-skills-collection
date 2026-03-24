@@ -1,0 +1,15 @@
+{
+  "name": "overseas-mall",
+  "version": "1.0.0",
+  "description": "一个功能完整的海外电商微信小程序，支持多语言、多货币、全球购物体验。",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vant/weapp": "^1.11.7"
+  }
+}

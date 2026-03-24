@@ -1,0 +1,120 @@
+<view class="points-rules-container">
+  <scroll-view class="main-content" scroll-y="{{true}}">
+    <view class="points-header">
+      <view class="points-card">
+        <text class="points-label">Total Points</text>
+        <text class="points-value">{{userInfo.points || 0}}</text>
+        <text class="points-level">VIP {{userInfo.vipLevel || 1}}</text>
+      </view>
+    </view>
+
+    <view class="checkin-section">
+      <view class="section-title">Daily Check-in</view>
+      <view class="checkin-card">
+        <view class="checkin-streak">
+          <text class="streak-label">🔥 {{checkInStreak}} Day Streak!</text>
+        </view>
+        <view class="checkin-calendar">
+          <view class="calendar-day {{item.isChecked ? 'checked' : ''}} {{item.isToday ? 'today' : ''}}" wx:for="{{checkInCalendar}}" wx:key="dateStr">
+            <text class="day-weekday">{{item.weekday}}</text>
+            <text class="day-date">{{item.date}}</text>
+            <view class="day-check" wx:if="{{item.isChecked}}">
+              <custom-icon name="check" size="16px" color="#fff" />
+            </view>
+          </view>
+        </view>
+        <button class="checkin-btn {{hasCheckedIn ? 'checked' : ''}}" bindtap="doCheckIn">
+          {{hasCheckedIn ? 'Checked In ✓' : 'Check In Now'}}
+        </button>
+      </view>
+    </view>
+
+    <view class="tasks-section">
+      <view class="section-title">Daily Tasks</view>
+      <view class="tasks-list">
+        <view class="task-item {{item.completed ? 'completed' : ''}}" wx:for="{{dailyTasks}}" wx:key="id">
+          <view class="task-icon">
+            <custom-icon name="{{item.icon}}" size="28px" color="{{item.completed ? '#10B981' : '#FF6B4A'}}" />
+          </view>
+          <view class="task-info">
+            <text class="task-name">{{item.name}}</text>
+            <text class="task-points">+{{item.points}} pts</text>
+          </view>
+          <view class="task-status">
+            <custom-icon name="{{item.completed ? 'check' : 'circle-o'}}" size="24px" color="{{item.completed ? '#10B981' : '#ddd'}}" />
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="history-section">
+      <view class="section-title">Points History</view>
+      <view class="history-list">
+        <view class="history-item" wx:for="{{historyList}}" wx:key="id">
+          <view class="history-info">
+            <text class="history-title">{{item.title}}</text>
+            <text class="history-time">{{item.time}}</text>
+          </view>
+          <text class="history-points {{item.type === 'earn' ? 'earn' : 'spend'}}">{{item.type === 'earn' ? '+' : '-'}}{{item.points}}</text>
+        </view>
+      </view>
+      <view class="empty-state" wx:if="{{historyList.length === 0}}">
+        <custom-icon name="description" size="64px" color="#ddd" />
+        <text>No points history yet</text>
+      </view>
+    </view>
+
+    <view class="rules-section">
+      <view class="section-title">Points Rules</view>
+      <view class="rule-card">
+        <view class="rule-header">
+          <custom-icon name="info-o" size="20px" color="#FF6B4A" />
+          <text class="rule-card-title">How to Earn Points</text>
+        </view>
+        <view class="rule-content">
+          <view class="rule-item">
+            <text class="rule-dot">•</text>
+            <text class="rule-text">Daily check-in: +10 points</text>
+          </view>
+          <view class="rule-item">
+            <text class="rule-dot">•</text>
+            <text class="rule-text">Complete order: $1 spent = 1 point</text>
+          </view>
+          <view class="rule-item">
+            <text class="rule-dot">•</text>
+            <text class="rule-text">Write review: +30 points</text>
+          </view>
+          <view class="rule-item">
+            <text class="rule-dot">•</text>
+            <text class="rule-text">Share product: +20 points</text>
+          </view>
+          <view class="rule-item">
+            <text class="rule-dot">•</text>
+            <text class="rule-text">Invite friend: +100 points</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="rule-card">
+        <view class="rule-header">
+          <custom-icon name="balance-o" size="20px" color="#FF6B4A" />
+          <text class="rule-card-title">How to Redeem Points</text>
+        </view>
+        <view class="rule-content">
+          <view class="rule-item">
+            <text class="rule-dot">•</text>
+            <text class="rule-text">100 points = $1 discount</text>
+          </view>
+          <view class="rule-item">
+            <text class="rule-dot">•</text>
+            <text class="rule-text">Redeem at checkout</text>
+          </view>
+          <view class="rule-item">
+            <text class="rule-dot">•</text>
+            <text class="rule-text">Points never expire</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

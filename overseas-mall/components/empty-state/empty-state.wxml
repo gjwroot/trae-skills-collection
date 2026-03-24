@@ -1,0 +1,11 @@
+<view class="empty-state-container">
+  <view class="empty-icon-wrapper" style="background: {{bgColor}}">
+    <custom-icon name="{{icon}}" size="{{iconSize}}" color="#ddd" />
+  </view>
+  <text class="empty-title">{{title}}</text>
+  <text class="empty-desc" wx:if="{{desc}}">{{desc}}</text>
+  <button class="empty-btn" wx:if="{{showBtn}}" bindtap="onBtnTap">
+    <custom-icon wx:if="{{btnIcon}}" name="{{btnIcon}}" size="16px" color="#fff" />
+    <text style="margin-left: {{btnIcon ? '8rpx' : '0'}};">{{btnText}}</text>
+  </button>
+</view>

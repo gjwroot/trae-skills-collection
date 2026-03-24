@@ -1,0 +1,85 @@
+<view class="member-activity-container">
+  <view class="page-header">
+    <view class="header-bg"></view>
+    <view class="user-section">
+      <view class="user-avatar">{{userInfo.nickname ? userInfo.nickname.slice(0,1) : '会'}}</view>
+      <view class="user-info">
+        <view class="user-name">{{userInfo.nickname || '会员用户'}}</view>
+        <view class="member-badge" style="background: {{memberLevel.color}}">
+          {{memberLevel.icon}} {{memberLevel.name}}
+        </view>
+      </view>
+      <view class="points-section">
+        <text class="points-label">积分</text>
+        <text class="points-value">{{memberPoints}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="tabs">
+    <view 
+      class="tab-item {{activeTab === 'all' ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="all"
+    >
+      全部活动
+    </view>
+    <view 
+      class="tab-item {{activeTab === 'exclusive' ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="exclusive"
+    >
+      专属活动
+    </view>
+  </view>
+
+  <view class="activity-content">
+    <view class="loading-state" wx:if="{{loading}}">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <view class="empty-state" wx:elif="{{activities.length === 0}}">
+      <view class="empty-icon">🎉</view>
+      <text class="empty-text">暂无活动</text>
+      <text class="empty-hint">敬请期待更多精彩活动</text>
+    </view>
+
+    <view class="activity-list" wx:else>
+      <view class="activity-item" wx:for="{{activities}}" wx:key="id">
+        <view class="activity-icon" style="background: {{item.color}}">
+          <text class="icon-text">{{item.icon}}</text>
+        </view>
+        <view class="activity-content-main">
+          <view class="activity-header">
+            <text class="activity-title">{{item.title}}</text>
+            <view class="level-badge" style="background: {{item.color}}20; color: {{item.color}}">
+              {{item.minLevel}}级及以上
+            </view>
+          </view>
+          <text class="activity-desc">{{item.description}}</text>
+          <view class="activity-meta">
+            <view class="activity-time">
+              <text>有效期：{{formatTime(item.startTime)}} - {{formatTime(item.endTime)}}</text>
+            </view>
+            <view class="activity-rewards">
+              <text wx:if="{{item.pointsReward}}" class="reward-tag points">+{{item.pointsReward}}积分</text>
+              <text wx:if="{{item.discount}}" class="reward-tag discount">{{item.discountDisplay}}折优惠</text>
+              <text wx:if="{{item.pointsMultiplier}}" class="reward-tag multiplier">{{item.pointsMultiplier}}倍积分</text>
+            </view>
+          </view>
+        </view>
+        <view class="activity-action">
+          <button 
+            class="action-btn {{item.hasParticipated ? 'participated' : ''}}"
+            bindtap="participateActivity"
+            data-activity="{{item}}"
+            disabled="{{item.hasParticipated}}"
+          >
+            {{item.hasParticipated ? '已参与' : '立即参与'}}
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

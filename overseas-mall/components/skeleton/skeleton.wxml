@@ -1,0 +1,10 @@
+<view class="skeleton-container">
+  <view class="skeleton-item" wx:for="{{count}}" wx:key="index">
+    <view class="skeleton-image skeleton-loading"></view>
+    <view class="skeleton-content">
+      <view class="skeleton-title skeleton-loading"></view>
+      <view class="skeleton-price skeleton-loading"></view>
+      <view class="skeleton-desc skeleton-loading"></view>
+    </view>
+  </view>
+</view>

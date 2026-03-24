@@ -1,0 +1,96 @@
+.profile-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 30rpx;
+}
+
+.avatar-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40rpx;
+  position: relative;
+}
+
+.avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.avatar-edit {
+  position: absolute;
+  right: calc(50% - 100rpx);
+  bottom: 0;
+  width: 48rpx;
+  height: 48rpx;
+  background: #FF6B4A;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 0 30rpx;
+  margin-bottom: 40rpx;
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.form-item:last-child {
+  border-bottom: none;
+}
+
+.form-label {
+  width: 160rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.form-input {
+  flex: 1;
+  text-align: right;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.form-picker {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8rpx;
+}
+
+.picker-value {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.picker-placeholder {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #FF6B4A 0%, #FF8E6B 100%);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  padding: 28rpx 0;
+  border-radius: 50rpx;
+  border: none;
+  margin-top: 40rpx;
+}
+
+.save-btn::after {
+  border: none;
+}

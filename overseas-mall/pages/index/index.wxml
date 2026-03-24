@@ -1,0 +1,146 @@
+<view class="index-container">
+  <view class="search-bar" bindtap="navigateToSearch">
+    <custom-icon name="search" size="18px" color="#999" />
+    <text class="search-placeholder">Search products, brands...</text>
+  </view>
+
+  <swiper 
+    class="banner-swiper" 
+    indicator-dots="{{true}}" 
+    autoplay="{{autoplay}}" 
+    interval="{{bannerInterval}}" 
+    duration="{{bannerDuration}}" 
+    circular="{{true}}"
+    bindchange="onBannerChange"
+    bindtouchstart="onBannerTouchStart"
+    bindtouchend="onBannerTouchEnd"
+    indicator-color="rgba(255,255,255,0.3)"
+    indicator-active-color="#FF6B4A"
+    current="{{currentBanner}}"
+  >
+    <swiper-item wx:for="{{banners}}" wx:key="id" bindtap="onBannerTap" data-item="{{item}}">
+      <view class="banner-item" style="background: {{item.bgColor || 'linear-gradient(135deg, #FF6B4A 0%, #FF8E6B 100%)'}}">
+        <image class="banner-image" src="{{item.image || '/assets/images/banner-1.jpg'}}" mode="aspectFill" />
+        <view class="banner-content">
+          <text class="banner-title">{{item.title || 'Summer Sale'}}</text>
+          <text class="banner-subtitle">{{item.subtitle || 'Up to 50% OFF'}}</text>
+          <text class="banner-btn">Shop Now</text>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <view class="category-nav">
+    <view 
+      class="category-item" 
+      wx:for="{{categories}}" 
+      wx:key="id"
+      bindtap="navigateToCategory"
+      data-id="{{item.id}}"
+    >
+      <view class="category-icon-box">
+        <custom-icon name="{{item.icon || 'apps-o'}}" size="24px" color="#FF6B4A" />
+      </view>
+      <text class="category-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">Flash Sale</text>
+      <view class="countdown">
+        <text>{{countdownHours}}</text>
+        <text class="colon">:</text>
+        <text>{{countdownMinutes}}</text>
+        <text class="colon">:</text>
+        <text>{{countdownSeconds}}</text>
+      </view>
+      <text class="more" bindtap="navigateToFlashSale">More ></text>
+    </view>
+    
+    <scroll-view class="goods-scroll" scroll-x="{{true}}">
+      <view 
+        class="goods-item" 
+        wx:for="{{flashGoods}}" 
+        wx:key="id"
+        bindtap="navigateToDetail"
+        data-id="{{item.id}}"
+      >
+        <image class="goods-image" lazy-load="{{true}}" src="{{item.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+        <view class="goods-info">
+          <text class="goods-name">{{item.name}}</text>
+          <view class="price-row">
+            <text class="current-price">${{item.price}}</text>
+            <text class="original-price" wx:if="{{item.originalPrice}}">${{item.originalPrice}}</text>
+          </view>
+          <view class="sales-info">
+            <view class="sales-progress" style="width: {{item.salesPercent}}%"></view>
+            <text class="sales-text">{{item.salesPercent}}% sold</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">Hot Products</text>
+      <text class="more" bindtap="navigateToHotGoods">More ></text>
+    </view>
+    
+    <skeleton wx:if="{{hotGoodsLoading}}" count="4"></skeleton>
+    <view class="goods-grid" wx:else>
+      <view 
+        class="goods-card" 
+        wx:for="{{hotGoods}}" 
+        wx:key="id"
+        bindtap="navigateToDetail"
+        data-id="{{item.id}}"
+      >
+        <image class="goods-image" lazy-load="{{true}}" src="{{item.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+        <view class="goods-info">
+          <text class="goods-name">{{item.name}}</text>
+          <view class="price-row">
+            <text class="current-price">${{item.price}}</text>
+            <text class="original-price" wx:if="{{item.originalPrice}}">${{item.originalPrice}}</text>
+          </view>
+          <view class="goods-tags">
+            <text class="tag tag-primary" wx:if="{{item.isNew}}">NEW</text>
+            <text class="tag tag-danger" wx:if="{{item.isHot}}">HOT</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">New Arrivals</text>
+      <text class="more" bindtap="navigateToNewGoods">More ></text>
+    </view>
+    
+    <skeleton wx:if="{{newGoodsLoading}}" count="4"></skeleton>
+    <view class="goods-grid" wx:else>
+      <view 
+        class="goods-card" 
+        wx:for="{{newGoods}}" 
+        wx:key="id"
+        bindtap="navigateToDetail"
+        data-id="{{item.id}}"
+      >
+        <image class="goods-image" lazy-load="{{true}}" src="{{item.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+        <view class="goods-info">
+          <text class="goods-name">{{item.name}}</text>
+          <view class="price-row">
+            <text class="current-price">${{item.price}}</text>
+            <text class="original-price" wx:if="{{item.originalPrice}}">${{item.originalPrice}}</text>
+          </view>
+          <view class="goods-tags">
+            <text class="tag tag-primary" wx:if="{{item.isNew}}">NEW</text>
+            <text class="tag tag-danger" wx:if="{{item.isHot}}">HOT</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

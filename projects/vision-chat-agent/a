@@ -1,0 +1,288 @@
+
+Re: [trae-community/trae-skills] feat: add wechat-miniprogram skillfor WeChat mini-program development (PR #8)
+Copilot<notifications@github.com>
+由
+noreply
+@
+github.com
+代发
+trae-community/trae-skills<trae-skills@noreply.github.com>
+!#威！~<1017444825@qq.com>
+,
+Author<author@noreply.github.com>
+@Copilot commented on this pull request.
+
+Pull request overview
+This PR adds a new TRAE skill called wechat-miniprogram for WeChat mini-program development. It provides boilerplate project structure, a unified HTTP request wrapper, API endpoint management, and configuration file conventions. The skill is intended to be loaded by the TRAE agent when a user asks for help developing WeChat mini-programs.
+
+Changes:
+
+Adds skills/wechat-miniprogram/SKILL.md with project structure template, utils/api.js endpoint management, utils/request.js request wrapper, utils/config.js configuration, and usage examples.
+Does not update the Skills catalog in README.md or README.zh-CN.md (required by CONTRIBUTING.md).
+💡 Add Copilot custom instructions for smarter, more guided reviews. Learn how to get started.
+
+In skills/wechat-miniprogram/SKILL.md:
+
+> +# 微信小程序开发专用 Skill
++
++## 核心功能
++
++提供微信小程序开发的完整规范和最佳实践，包括：
++- 标准项目结构生成
++- 统一请求封装
++- 接口地址统一管理
++- 配置文件规范
+Per CONTRIBUTING.md (line 17): "Prefer English for Skills. If other languages are required for special cases, please explain in the PR." The entire skill (title, section headers, descriptions, code comments) is written in Chinese, while the existing cn-punctuation-checker skill—which also targets Chinese users—is written in English. The description in the frontmatter does include an English sentence, but the body should also be in English (or at minimum bilingual) to be consistent with the repository convention, unless the PR explains why Chinese is required here.
+
+In skills/wechat-miniprogram/SKILL.md:
+
+> +## 核心功能
++
++提供微信小程序开发的完整规范和最佳实践，包括：
++- 标准项目结构生成
++- 统一请求封装
++- 接口地址统一管理
++- 配置文件规范
+The skill is missing the recommended sections from the SKILL.md template (skills/_template/SKILL.md): Usage Scenario (describing when the skill should be triggered) and Instructions (clear step-by-step instructions for the agent). The current content is primarily a reference/code-dump of boilerplate rather than actionable instructions for an AI agent. A good skill should tell the agent what to do and when, not just provide static code snippets. Consider adding a "Usage Scenario" section (e.g., "Trigger when the user asks to scaffold a WeChat mini-program project") and an "Instructions" section with step-by-step agent behavior (e.g., "1. Create the project directory structure, 2. Generate utils/request.js with the request wrapper, …").
+
+In skills/wechat-miniprogram/SKILL.md:
+
+> +export default {
++  // 用户模块
++  user: {
++    login: '/user/login',
++    info: '/user/info',
++    update: '/user/update'
++  },
++  // 商品模块
++  goods: {
++    list: '/goods/list',
++    detail: '/goods/detail',
++    search: '/goods/search'
++  },
++  // 订单模块
++  order: {
++    create: '/order/create',
++    list: '/order/list',
++    detail: '/order/detail'
++  }
++};
+WeChat mini-programs traditionally use CommonJS module syntax (module.exports/require). While export default (ES module syntax) is shown here, the default WeChat DevTools project setup uses CommonJS. Using export default may not work out of the box unless the project explicitly enables ES module support. Since this is a reference/template skill, it would be better to either use the more universally compatible CommonJS syntax or mention that ES module support must be enabled in project.config.json.
+
+In skills/wechat-miniprogram/SKILL.md:
+
+> +    if (options.method === 'GET' && options.data) {
++      const queryParams = Object.keys(options.data)
++        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(options.data[key])}`)
++        .join('&');
++      url += (url.includes('?') ? '&' : '?') + queryParams;
++    }
++
++    wx.request({
++      url: url,
++      method: options.method || 'GET',
++      data: options.method !== 'GET' ? options.data : {},
+The manual GET parameter encoding (lines 102-107) is redundant because wx.request natively serializes data as query parameters for GET requests. Moreover, after manually appending the query string, data is set to {} (line 112), so the built-in behavior is explicitly bypassed. This dual approach could lead to subtle bugs (e.g., if options.data values contain objects or arrays that need special serialization). Consider simply passing data: options.data regardless of method and letting wx.request handle the serialization, which is simpler and more reliable.
+
+⬇️ Suggested change
+-    if (options.method === 'GET' && options.data) {
+-      const queryParams = Object.keys(options.data)
+-        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(options.data[key])}`)
+-        .join('&');
+-      url += (url.includes('?') ? '&' : '?') + queryParams;
+-    }
+-
+-    wx.request({
+-      url: url,
+-      method: options.method || 'GET',
+-      data: options.method !== 'GET' ? options.data : {},
++
++    wx.request({
++      url: url,
++      method: options.method || 'GET',
++      data: options.data || {},
+In skills/wechat-miniprogram/SKILL.md:
+
+> +            if (data.code === 401) {
++              wx.removeStorageSync('token');
++              wx.removeStorageSync('userInfo');
++              wx.redirectTo({ url: '/pages/login/login' });
++            }
++            wx.showToast({
++              title: data.msg || '请求失败',
++              icon: 'none',
++              duration: 2000
++            });
++            reject(data);
+When the business code is 401, a toast with an error message is shown (lines 132-136) and then wx.redirectTo is called (line 130). However, wx.redirectTo cannot navigate to a tabBar page and requires the target page to exist. More importantly, showing both a toast and a redirect simultaneously may result in the toast being hidden before the user reads it. Also, wx.redirectTo replaces the current page in the stack—wx.reLaunch might be more appropriate for a login redirect since it clears the entire page stack. Consider using wx.reLaunch and potentially showing the toast on the login page instead.
+
+In skills/wechat-miniprogram/SKILL.md:
+
+> +- 自动处理 GET/POST 参数格式
++
++### 响应拦截器功能
++- 统一隐藏加载状态
++- HTTP 状态码 200-299 视为成功
++- 业务状态码 code: 0 为成功
++- 自动返回业务数据 data 字段
++- 业务失败自动弹窗提示
++- 401 自动跳转登录页并清除 token
++- 5xx 和网络错误统一处理
++
++### 标准实现代码
++
++```javascript
++import config from './config.js';
++import api from './api.js';
+The api module is imported on this line but never used in the request function. Since this is a template/reference code that the agent will use to generate actual code, an unused import sets a bad example and could confuse users. Remove the import api from './api.js'; line.
+
+⬇️ Suggested change
+-import api from './api.js';
+In skills/wechat-miniprogram/SKILL.md:
+
+> +---
++name: "wechat-miniprogram"
+Per the CONTRIBUTING.md PR checklist (line 31): "Update the Skills catalog in README.md with your new skill." This PR does not add an entry for wechat-miniprogram to the Skills catalog table in README.md (line 95-98) or README.zh-CN.md (line 96-99). Both tables need a new row for this skill.
+
+—
+Reply to this email directly, view it on GitHub, or unsubscribe.
+You are receiving this because you authored the thread.
+
+
+Re: [trae-community/trae-skills] feat: add wechat-miniprogram skillfor WeChat mini-program development (PR #8)
+Sherlock Yin<notifications@github.com>
+由
+noreply
+@
+github.com
+代发
+trae-community/trae-skills<trae-skills@noreply.github.com>
+!#威！~<1017444825@qq.com>
+,
+Author<author@noreply.github.com>
+@MasamiYui commented on this pull request.
+
+Hi, thanks for your PR.
+1.Please describe the SKILLS in English unless there are special circumstances.
+2.Update README.md and README.zh-CN.md #Skills catalog
+
+—
+Reply to this email directly, view it on GitHub, or unsubscribe.
+You are receiving this because you authored the thread.
+
+Re: [trae-community/trae-skills] feat: add wechat-miniprogram skillfor WeChat mini-program development (PR #8)
+Copilot<notifications@github.com>
+由
+noreply
+@
+github.com
+代发
+trae-community/trae-skills<trae-skills@noreply.github.com>
+!#威！~<1017444825@qq.com>
+,
+Author<author@noreply.github.com>
+@Copilot commented on this pull request.
+
+Pull request overview
+Copilot reviewed 3 out of 3 changed files in this pull request and generated 4 comments.
+
+💡 Add Copilot custom instructions for smarter, more guided reviews. Learn how to get started.
+
+In skills/wechat-miniprogram/SKILL.md:
+
+> +
++## Key Improvements
++
++1. **Language**: English content following repository conventions
++2. **Structure**: Added "Usage Scenario" and "Instructions" sections from template
++3. **Module Syntax**: Uses CommonJS (module.exports/require) for WeChat mini-program compatibility
++4. **GET Requests**: Simplified parameter handling by letting wx.request serialize data natively
++5. **401 Handling**: Removed toast when redirecting to login page for better UX
+The "Key Improvements" section reads like PR review notes or changelog commentary rather than actual skill content. The other skills (git-commit-generator, cn-punctuation-checker) don't include such meta-commentary sections. This section should be removed from the SKILL.md file — it belongs in the PR description, not in the skill itself. An AI agent consuming this skill file would find this section confusing as it doesn't provide actionable instructions.
+
+⬇️ Suggested change
+-
+-## Key Improvements
+-
+-1. **Language**: English content following repository conventions
+-2. **Structure**: Added "Usage Scenario" and "Instructions" sections from template
+-3. **Module Syntax**: Uses CommonJS (module.exports/require) for WeChat mini-program compatibility
+-4. **GET Requests**: Simplified parameter handling by letting wx.request serialize data natively
+-5. **401 Handling**: Removed toast when redirecting to login page for better UX
+In skills/wechat-miniprogram/SKILL.md:
+
+> +      url: url,
++      method: options.method || 'GET',
++      data: options.data || {},
++      header: {
++        'Content-Type': 'application/json',
++        'Authorization': token ? 'Bearer ' + token : '',
++        ...options.header
++      },
++      timeout: options.timeout || config.timeout,
++      success: (res) => {
++        if (showLoading) wx.hideLoading();
++        const { statusCode, data } = res;
++
++        if (statusCode >= 200 && statusCode < 300) {
++          if (data.code === 0) {
++            resolve(data.data || {});
+Bug in the example code: resolve(data.data || {}) will incorrectly replace valid falsy response values (such as 0, false, null, or empty string "") with an empty object {}. Consider using a nullish coalescing approach instead, e.g., resolve(data.data !== undefined ? data.data : {}) or resolve(data.data ?? {}) (if targeting environments that support it).
+
+⬇️ Suggested change
+-            resolve(data.data || {});
++            resolve(data.data !== undefined ? data.data : {});
+In skills/wechat-miniprogram/SKILL.md:
+
+> +            if (data.code === 401) {
++              wx.removeStorageSync('token');
++              wx.removeStorageSync('userInfo');
++              wx.redirectTo({ url: '/pages/login/login' });
+The 401 handling here checks the business status code (data.code === 401) inside the HTTP 2xx success branch, but the documentation on line 110 says "401 automatically redirects to login page and clears token" which is ambiguous — most developers would expect this to refer to HTTP 401 status codes. If the server actually returns HTTP 401, this code would fall through to the else branch on line 160 and incorrectly show a generic "Network error" toast instead of redirecting to the login page. Consider also handling HTTP 401 in the non-2xx branch (lines 160-167) by checking statusCode === 401 and performing the same redirect logic there.
+
+In skills/wechat-miniprogram/SKILL.md:
+
+> +    create: '/order/create',
++    list: '/order/list',
++    detail: '/order/detail'
++  }
++};
++```
++
++### 4. Create Request Wrapper (utils/request.js)
++
++Create `utils/request.js` with unified request/response interceptors:
++
++**Request Interceptor Features:**
++- Automatically concatenate full request URL (baseUrl + endpoint path)
++- Automatically add unified request headers (Content-Type: application/json)
++- Automatically inject user authentication token
++- Automatically add common parameters
+The documentation lists "Automatically add common parameters" as a Request Interceptor Feature, but the code example below doesn't implement this — there is no logic to add common parameters to requests. Either remove this bullet point from the feature list or add the corresponding implementation in the code example to avoid misleading developers who use this skill.
+
+⬇️ Suggested change
+-- Automatically add common parameters
+—
+Reply to this email directly, view it on GitHub, or unsubscribe.
+You are receiving this because you authored the thread.
+
+
+Re: [trae-community/trae-skills] feat: add wechat-miniprogram skillfor WeChat mini-program development (PR #8)
+Sherlock Yin<notifications@github.com>
+由
+noreply
+@
+github.com
+代发
+trae-community/trae-skills<trae-skills@noreply.github.com>
+!#威！~<1017444825@qq.com>
+,
+Author<author@noreply.github.com>
+@MasamiYui commented on this pull request.
+
+Hi, How about change skill name to "wechat-mini-program-development", it lookes more clearer and more straightforward.
+
+—
+Reply to this email directly, view it on GitHub, or unsubscribe.
+You are receiving this because you authored the thread.
+

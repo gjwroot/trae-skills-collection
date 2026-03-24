@@ -1,0 +1,15 @@
+{
+  "articles": [
+    {
+      "title": "你好，我是分支人生！",
+      "author": "分支人生",
+      "digest": "欢迎来到我的小天地！在这里，我会分享技术笔记、生活记录和减肥日记。",
+      "content": "<h2 style=\"font-size:24px;font-weight:bold;margin-bottom:16px;\">你好，我是分支人生！</h2><p style=\"margin-bottom:16px;\">欢迎来到我的小天地！</p><h3 style=\"font-size:20px;font-weight:bold;margin-top:24px;margin-bottom:12px;\">关于我</h3><p style=\"margin-bottom:16px;\">我是一个热爱技术、喜欢折腾的程序员。</p><p style=\"margin-bottom:16px;\">在这个公众号里，我会分享三个方面的内容：</p><h4 style=\"font-size:18px;font-weight:bold;margin-top:20px;margin-bottom:10px;\">💻 技术笔记</h4><ul style=\"margin-bottom:16px;padding-left:20px;\"><li style=\"margin-bottom:8px;\">前端开发</li><li style=\"margin-bottom:8px;\">后端架构</li><li style=\"margin-bottom:8px;\">AI 工具探索</li><li style=\"margin-bottom:8px;\">各种有趣的技术折腾</li></ul><h4 style=\"font-size:18px;font-weight:bold;margin-top:20px;margin-bottom:10px;\">🌱 生活记录</h4><ul style=\"margin-bottom:16px;padding-left:20px;\"><li style=\"margin-bottom:8px;\">日常思考</li><li style=\"margin-bottom:8px;\">读书笔记</li><li style=\"margin-bottom:8px;\">旅行见闻</li><li style=\"margin-bottom:8px;\">生活中的小确幸</li></ul><h4 style=\"font-size:18px;font-weight:bold;margin-top:20px;margin-bottom:10px;\">🏃 减肥日记</h4><ul style=\"margin-bottom:16px;padding-left:20px;\"><li style=\"margin-bottom:8px;\">减肥历程记录</li><li style=\"margin-bottom:8px;\">运动打卡</li><li style=\"margin-bottom:8px;\">饮食控制心得</li><li style=\"margin-bottom:8px;\">目标达成分享</li></ul><h3 style=\"font-size:20px;font-weight:bold;margin-top:24px;margin-bottom:12px;\">为什么叫「分支人生」？</h3><p style=\"margin-bottom:16px;\">程序员都知道，代码可以有不同的分支。人生也是一样，每一个选择都会开启新的分支。</p><p style=\"margin-bottom:16px;\">我想在这里记录我的人生分支，也希望能给你一些启发。</p><h3 style=\"font-size:20px;font-weight:bold;margin-top:24px;margin-bottom:12px;\">写在最后</h3><p style=\"margin-bottom:16px;\">感谢你的关注！让我们一起在代码和生活中，探索更多可能性！</p>",
+      "content_source_url": "",
+      "thumb_media_id": "YQejVjE5T-n_deEPiqWo0jGxJKeM0qPSvVlhgyN_Rtxo8kb2K5Tlsf8aNpFOXJD_",
+      "show_cover_pic": 1,
+      "need_open_comment": 1,
+      "only_fans_can_comment": 0
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+.container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 0 32rpx 40rpx;
+}
+
+/* 页面标题 */
+.page-header {
+  padding: 32rpx 0;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+/* 头像区域 */
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48rpx 0;
+}
+
+.avatar-wrapper {
+  width: 160rpx;
+  height: 160rpx;
+  background: linear-gradient(135deg, #ff6b4a 0%, #ff8a6d 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 6rpx solid #ffffff;
+  box-shadow: 0 8rpx 32rpx rgba(255, 107, 74, 0.3);
+  margin-bottom: 20rpx;
+}
+
+.avatar-emoji {
+  font-size: 80rpx;
+}
+
+.avatar-hint {
+  font-size: 26rpx;
+  color: #636e72;
+}
+
+/* 表单区域 */
+.form-section {
+  background: #ffffff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+  padding: 32rpx;
+  border-bottom: 2rpx solid #f8f9fa;
+}
+
+.form-item:last-child {
+  border-bottom: none;
+}
+
+.form-label {
+  width: 140rpx;
+  font-size: 30rpx;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.form-input {
+  flex: 1;
+  font-size: 30rpx;
+  color: #1a1a1a;
+  text-align: right;
+}
+
+.form-picker {
+  flex: 1;
+}
+
+.picker-value {
+  font-size: 30rpx;
+  color: #1a1a1a;
+  text-align: right;
+}
+
+/* 保存按钮 */
+.save-section {
+  margin-top: 48rpx;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #ff6b4a 0%, #ff8a6d 100%);
+  color: white;
+  text-align: center;
+  padding: 32rpx;
+  border-radius: 24rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 74, 0.3);
+}

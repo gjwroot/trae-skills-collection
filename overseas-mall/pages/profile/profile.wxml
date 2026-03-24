@@ -1,0 +1,47 @@
+<view class="profile-container">
+  <view class="avatar-section" bindtap="changeAvatar">
+    <image class="avatar" src="{{userInfo.avatar || '/assets/images/default-avatar.png'}}" mode="aspectFill" />
+    <view class="avatar-edit">
+      <custom-icon name="edit" size="16px" color="#fff" />
+    </view>
+  </view>
+
+  <view class="form-section">
+    <view class="form-item">
+      <text class="form-label">Nickname</text>
+      <input class="form-input" placeholder="Enter nickname" value="{{userInfo.nickname}}" bindinput="onNicknameInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">Phone</text>
+      <input class="form-input" type="number" placeholder="Enter phone number" value="{{userInfo.phone}}" bindinput="onPhoneInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">Email</text>
+      <input class="form-input" placeholder="Enter email" value="{{userInfo.email}}" bindinput="onEmailInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">Gender</text>
+      <picker mode="selector" range="{{genderOptions}}" value="{{genderIndex}}" bindchange="onGenderChange">
+        <view class="form-picker">
+          <text class="{{userInfo.gender ? 'picker-value' : 'picker-placeholder'}}">{{userInfo.gender || 'Please select'}}</text>
+          <custom-icon name="arrow" size="14px" color="#999" />
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">Birthday</text>
+      <picker mode="date" value="{{userInfo.birthday}}" start="1950-01-01" end="2020-12-31" bindchange="onBirthdayChange">
+        <view class="form-picker">
+          <text class="{{userInfo.birthday ? 'picker-value' : 'picker-placeholder'}}">{{userInfo.birthday || 'Please select'}}</text>
+          <custom-icon name="arrow" size="14px" color="#999" />
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <button class="save-btn" bindtap="saveProfile">Save Changes</button>
+</view>

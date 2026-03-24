@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>霓虹贪吃蛇 - 现代版</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #05051a;
+            color: #ffffff;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%2300ffff" opacity="0.1"/><circle cx="20" cy="20" r="0.5" fill="%23ff00ff" opacity="0.05"/><circle cx="80" cy="80" r="0.7" fill="%2300ffff" opacity="0.05"/><circle cx="80" cy="20" r="0.5" fill="%23ff00ff" opacity="0.05"/><circle cx="20" cy="80" r="0.7" fill="%2300ffff" opacity="0.05"/></svg>');
+        }
+        
+        .game-container {
+            background-color: #10103a;
+            border: 3px solid #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><path d="M25 5L28 18L41 20L32 28L34 41L25 33L16 41L18 28L9 20L22 18Z" fill="%2300ffff" opacity="0.1"/></svg>');
+        }
+        
+        h1 {
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            border-bottom: 3px solid #00ffff;
+        }
+        
+        .scoreboard {
+            background-color: #10102a;
+            border: 2px solid #00ffff;
+        }
+        
+        .score-item span:first-child {
+            color: #00ffff;
+        }
+        
+        .score-item span:last-child {
+            color: #ff00ff;
+        }
+        
+        #gameCanvas {
+            border: 3px solid #00ffff;
+            background-color: #05051a;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+        
+        .controls {
+            background-color: #10102a;
+            border: 2px solid #00ffff;
+        }
+        
+        .control-group label {
+            color: #00ffff;
+        }
+        
+        .control-group input[type="range"] {
+            background: #10102a;
+        }
+        
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            background: #00ffff;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+        
+        .control-group input[type="range"]::-webkit-slider-thumb:hover {
+            background: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+        
+        .control-group span {
+            color: #ff00ff;
+        }
+        
+        #startButton {
+            background-color: #00ffff;
+            color: #05051a;
+            border: 2px solid #ff00ff;
+        }
+        
+        #startButton:hover {
+            background-color: #00cccc;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+        }
+        
+        #resetButton {
+            background-color: #ff00ff;
+            color: #05051a;
+            border: 2px solid #00ffff;
+        }
+        
+        #resetButton:hover {
+            background-color: #cc00cc;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
+        }
+        
+        .instructions {
+            background-color: #10102a;
+            border: 2px solid #00ffff;
+        }
+        
+        .instructions h3 {
+            color: #00ffff;
+        }
+        
+        .instructions p {
+            color: #ffffff;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            }
+        }
+        
+        .pulse {
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes foodGlow {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+            }
+        }
+        
+        .food-glow {
+            animation: foodGlow 0.8s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🐍 霓虹贪吃蛇 - 现代版 🐍</h1>
+        <div class="scoreboard">
+            <div class="score-item">
+                <span>得分:</span>
+                <span id="score">0</span>
+            </div>
+            <div class="score-item">
+                <span>长度:</span>
+                <span id="length">1</span>
+            </div>
+            <div class="score-item">
+                <span>速度:</span>
+                <span id="speed">3</span>
+            </div>
+        </div>
+        <div class="game-area">
+            <canvas id="gameCanvas" width="600" height="600"></canvas>
+        </div>
+        <div class="controls">
+            <div class="control-group">
+                <label for="difficulty">难度:</label>
+                <input type="range" id="difficulty" min="1" max="5" value="3">
+                <span id="difficultyValue">中等</span>
+            </div>
+            <button id="startButton">开始游戏</button>
+            <button id="resetButton">重置</button>
+        </div>
+        <div class="instructions">
+            <h3>游戏说明:</h3>
+            <p>1. 使用 ← → ↑ ↓ 方向键控制蛇的移动</p>
+            <p>2. 吃掉红色食物增加长度和分数</p>
+            <p>3. 撞到墙壁或自己的身体游戏结束</p>
+            <p>4. 难度越高，蛇的移动速度越快</p>
+            <p>5. 每吃10个食物进入下一级别</p>
+        </div>
+    </div>
+    <script src="snake-game.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<view class="login-container">
+  <view class="custom-nav-bar">
+    <view class="nav-bar-content">
+      <view class="nav-bar-back" bindtap="navigateToHome">
+        <custom-icon name="arrow-left" size="24px" color="#fff" />
+      </view>
+      <text class="nav-bar-title">Login</text>
+    </view>
+  </view>
+  
+  <view class="logo-section">
+    <custom-icon name="shopping-cart-o" size="80px" color="#FF6B4A" class="logo-icon" />
+    <text class="app-name">Overseas Mall</text>
+    <text class="app-slogan">Global Shopping, Local Delivery</text>
+  </view>
+
+  <view class="form-section">
+    <view class="input-group">
+      <input 
+        class="input-field {{accountError ? 'error' : ''}}" 
+        type="text" 
+        placeholder="Phone Number / Email"
+        value="{{account}}"
+        bindinput="onAccountInput"
+      />
+      <text class="error-text" wx:if="{{accountError}}">{{accountError}}</text>
+    </view>
+
+    <view class="input-group" wx:if="{{loginType === 'password'}}">
+      <input 
+        class="input-field" 
+        type="password" 
+        placeholder="Password"
+        value="{{password}}"
+        bindinput="onPasswordInput"
+      />
+    </view>
+
+    <view class="input-group code-group" wx:if="{{loginType === 'code'}}">
+      <input 
+        class="input-field" 
+        type="number" 
+        placeholder="Verification Code"
+        value="{{code}}"
+        bindinput="onCodeInput"
+      />
+      <button 
+        class="code-btn {{countdown > 0 ? 'disabled' : ''}}" 
+        bindtap="sendCode"
+        disabled="{{countdown > 0}}"
+      >
+        {{countdown > 0 ? countdown + 's' : 'Get Code'}}
+      </button>
+    </view>
+
+    <button class="login-btn" bindtap="handleLogin">Login</button>
+
+    <view class="switch-type" bindtap="switchLoginType">
+      {{loginType === 'password' ? 'Login with Code' : 'Login with Password'}}
+    </view>
+
+    <view class="divider">
+      <view class="divider-line"></view>
+      <text>OR</text>
+      <view class="divider-line"></view>
+    </view>
+
+    <view class="social-login">
+      <view class="social-item" bindtap="handleWechatLogin">
+        <view class="social-icon wechat">
+          <custom-icon name="wechat" size="28px" color="#fff" />
+        </view>
+        <text>WeChat</text>
+      </view>
+      <view class="social-item" bindtap="handleGoogleLogin">
+        <view class="social-icon google">
+          <custom-icon name="google" size="28px" color="#fff" />
+        </view>
+        <text>Google</text>
+      </view>
+      <view class="social-item" bindtap="handleFacebookLogin">
+        <view class="social-icon facebook">
+          <custom-icon name="facebook" size="28px" color="#fff" />
+        </view>
+        <text>Facebook</text>
+      </view>
+    </view>
+
+    <view class="agreement">
+      <checkbox checked="{{agreed}}" bindtap="toggleAgreement" color="#FF6B4A" />
+      <text class="agreement-text">Agree to the </text>
+      <text class="link" bindtap="viewTerms">Terms of Service</text>
+      <text class="agreement-text"> and </text>
+      <text class="link" bindtap="viewPrivacy">Privacy Policy</text>
+    </view>
+  </view>
+
+  <view class="footer-links">
+    <text bindtap="navigateToRegister">Create Account</text>
+    <text bindtap="forgotPassword">Forgot Password?</text>
+  </view>
+</view>

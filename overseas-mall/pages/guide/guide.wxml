@@ -1,0 +1,30 @@
+<view class="guide-container">
+  <swiper class="guide-swiper" current="{{currentPage}}" bindchange="onSwiperChange" indicator-dots="{{false}}">
+    <swiper-item wx:for="{{guidePages}}" wx:key="id">
+      <view class="guide-page" style="background: linear-gradient(135deg, {{item.color}} 0%, {{item.color}}dd 100%);">
+        <view class="guide-content">
+          <image class="guide-image" src="{{item.image}}" mode="aspectFit" />
+          <text class="guide-title">{{item.title}}</text>
+          <text class="guide-description">{{item.description}}</text>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <view class="guide-footer">
+    <view class="dots-container">
+      <view 
+        class="dot {{currentPage === index ? 'active' : ''}}" 
+        wx:for="{{guidePages}}" 
+        wx:key="id"
+        data-index="{{index}}"
+      ></view>
+    </view>
+
+    <view class="action-buttons">
+      <button wx:if="{{currentPage < guidePages.length - 1}}" class="skip-btn" bindtap="skipGuide">跳过</button>
+      <button wx:if="{{currentPage < guidePages.length - 1}}" class="next-btn" bindtap="goToNext">下一步</button>
+      <button wx:if="{{currentPage === guidePages.length - 1}}" class="start-btn" bindtap="startUsing">开始使用</button>
+    </view>
+  </view>
+</view>

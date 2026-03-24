@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "Apply Refund",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "custom-icon": "/components/icon/icon"
+  }
+}

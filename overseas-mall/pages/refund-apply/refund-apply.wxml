@@ -1,0 +1,110 @@
+<view class="refund-apply-container">
+  <scroll-view class="main-content" scroll-y="{{true}}">
+    <view class="order-info-section">
+      <view class="section-title">Order Information</view>
+      <view class="order-info">
+        <text class="order-no">Order: {{orderInfo.orderNo}}</text>
+        <text class="order-time">Time: {{orderInfo.createTime}}</text>
+      </view>
+    </view>
+
+    <view class="goods-section">
+      <view class="section-title">Refund Items</view>
+      <view class="goods-list">
+        <view class="goods-item" wx:for="{{orderInfo.goods}}" wx:key="id">
+          <image class="goods-image" src="{{item.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+          <view class="goods-info">
+            <text class="goods-name">{{item.name}}</text>
+            <text class="goods-spec" wx:if="{{item.spec}}">{{item.spec}}</text>
+            <view class="price-row">
+              <text class="price">${{item.price}}</text>
+              <text class="quantity">x{{item.quantity}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="refund-type-section">
+      <view class="section-title">Refund Type</view>
+      <view class="type-list">
+        <view class="type-item {{refundType === 'refund' ? 'active' : ''}}" bindtap="selectRefundType" data-type="refund">
+          <view class="type-icon">
+            <custom-icon name="refund" size="28px" color="{{refundType === 'refund' ? '#FF6B4A' : '#999'}}" />
+          </view>
+          <view class="type-info">
+            <text class="type-title">Refund Only</text>
+            <text class="type-desc">Get refund without returning goods</text>
+          </view>
+          <view class="type-check">
+            <custom-icon name="{{refundType === 'refund' ? 'success-circle' : 'circle'}}" size="24px" color="{{refundType === 'refund' ? '#FF6B4A' : '#ddd'}}" />
+          </view>
+        </view>
+        <view class="type-item {{refundType === 'return' ? 'active' : ''}}" bindtap="selectRefundType" data-type="return">
+          <view class="type-icon">
+            <custom-icon name="return" size="28px" color="{{refundType === 'return' ? '#FF6B4A' : '#999'}}" />
+          </view>
+          <view class="type-info">
+            <text class="type-title">Return & Refund</text>
+            <text class="type-desc">Return goods and get refund</text>
+          </view>
+          <view class="type-check">
+            <custom-icon name="{{refundType === 'return' ? 'success-circle' : 'circle'}}" size="24px" color="{{refundType === 'return' ? '#FF6B4A' : '#ddd'}}" />
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="reason-section">
+      <view class="section-title">Refund Reason</view>
+      <view class="reason-list">
+        <view class="reason-item {{selectedReason === index ? 'active' : ''}}" wx:for="{{refundReasons}}" wx:key="index" bindtap="selectReason" data-index="{{index}}">
+          <text>{{item}}</text>
+          <custom-icon name="{{selectedReason === index ? 'success' : ''}}" size="20px" color="#FF6B4A" />
+        </view>
+      </view>
+    </view>
+
+    <view class="amount-section">
+      <view class="section-title">Refund Amount</view>
+      <view class="amount-input-box">
+        <text class="currency">$</text>
+        <input class="amount-input" type="digit" placeholder="0.00" value="{{refundAmount}}" bindinput="onAmountInput" maxlength="10" />
+      </view>
+      <text class="amount-tip">Maximum refund: ${{maxRefundAmount}}</text>
+    </view>
+
+    <view class="desc-section">
+      <view class="section-title">Description (Optional)</view>
+      <textarea class="desc-input" placeholder="Please describe your problem..." value="{{refundDesc}}" bindinput="onDescInput" maxlength="500" />
+      <text class="char-count">{{refundDesc.length}}/500</text>
+    </view>
+
+    <view class="images-section">
+      <view class="section-title">
+        <text>Upload Images</text>
+        <text class="image-count">{{uploadImages.length}}/6</text>
+      </view>
+      <view class="image-list">
+        <view class="image-item" wx:for="{{uploadImages}}" wx:key="index">
+          <image class="image" src="{{item}}" mode="aspectFill" />
+          <view class="delete-btn" bindtap="deleteImage" data-index="{{index}}">
+            <custom-icon name="cross" size="16px" color="#fff" />
+          </view>
+        </view>
+        <view class="upload-btn" wx:if="{{uploadImages.length < 6}}" bindtap="chooseImage">
+          <custom-icon name="camera" size="40px" color="#ddd" />
+          <text>Add Image</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="bottom-bar">
+    <view class="refund-summary">
+      <text class="refund-label">Total Refund:</text>
+      <text class="refund-amount">${{refundAmount || '0.00'}}</text>
+    </view>
+    <button class="submit-btn" bindtap="submitRefund" disabled="{{!canSubmit}}">Submit Application</button>
+  </view>
+</view>

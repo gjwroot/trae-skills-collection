@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISION CHAT :: 视觉对话智能体</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="grid-overlay"></div>
+    <div class="noise-overlay"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-tr"></div>
+            
+            <div class="logo-section">
+                <div class="logo-container">
+                    <span class="logo-icon glitch-text">◆</span>
+                    <div class="logo-text-container">
+                        <h1 class="logo-text neon-text-cyan">VISION CHAT</h1>
+                        <span class="logo-subtitle">NEURAL INTERFACE v3.0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="status-panel">
+                <div class="status-indicator">
+                    <div class="status-dot-container">
+                        <span class="status-dot"></span>
+                        <span class="status-dot-ring"></span>
+                    </div>
+                    <div class="status-info">
+                        <span class="status-label">SYSTEM</span>
+                        <span class="status-value neon-text-green">ONLINE</span>
+                    </div>
+                </div>
+                
+                <div class="data-streams">
+                    <div class="data-stream">
+                        <span class="data-label">FPS</span>
+                        <span class="data-value">60</span>
+                    </div>
+                    <div class="data-stream">
+                        <span class="data-label">LAT</span>
+                        <span class="data-value">12ms</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message assistant-message">
+                    <div class="message-avatar">
+                        <div class="avatar-ring"></div>
+                        <span class="avatar-icon">◎</span>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-sender neon-text-cyan">NEURAL AGENT</span>
+                            <span class="message-timestamp" id="initialTime"></span>
+                        </div>
+                        <div class="message-text">
+                            <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
+                            <p>▸ 视觉对话系统已激活</p>
+                            <p>▸ 神经网络就绪</p>
+                            <p>▸ 图像分析模块待命</p>
+                            <p></p>
+                            <p class="neon-text-pink">上传图像 + 文本指令 = 视觉对话</p>
+                            <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-preview" id="imagePreview" style="display: none;">
+                <div class="preview-container cyber-border">
+                    <div class="corner-decoration corner-tl"></div>
+                    <div class="corner-decoration corner-tr"></div>
+                    <div class="corner-decoration corner-bl"></div>
+                    <div class="corner-decoration corner-br"></div>
+                    <div class="preview-header">
+                        <span class="preview-label">IMAGE ANALYSIS :: 图像分析</span>
+                        <span class="preview-status neon-text-green">READY</span>
+                    </div>
+                    <img id="previewImage" src="" alt="预览">
+                    <button class="remove-image" id="removeImage">
+                        <span class="remove-icon">✕</span>
+                        <span class="remove-text">清除</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="input-area">
+            <div class="input-container cyber-border">
+                <div class="corner-decoration corner-tl"></div>
+                <div class="corner-decoration corner-tr"></div>
+                <div class="corner-decoration corner-bl"></div>
+                <div class="corner-decoration corner-br"></div>
+                
+                <div class="action-buttons">
+                    <button class="upload-btn cyber-button" id="uploadBtn">
+                        <span class="btn-icon">⬚</span>
+                        <span class="btn-text">UPLOAD</span>
+                        <span class="btn-glow"></span>
+                    </button>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+                
+                <div class="input-wrapper">
+                    <div class="input-label">
+                        <span class="label-text">INPUT COMMAND</span>
+                        <span class="label-line"></span>
+                    </div>
+                    <textarea 
+                        id="messageInput" 
+                        placeholder="＞ 输入视觉查询指令..."
+                        rows="1"
+                    ></textarea>
+                    <div class="input-cursor"></div>
+                </div>
+                
+                <button class="send-btn cyber-button" id="sendBtn">
+                    <span class="btn-icon">⟩⟩</span>
+                    <span class="btn-text">TRANSMIT</span>
+                    <span class="btn-glow"></span>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

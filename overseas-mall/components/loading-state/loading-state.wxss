@@ -1,0 +1,68 @@
+.loading-state-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400rpx;
+  padding: 60rpx 30rpx;
+}
+
+.loading-wrapper,
+.error-wrapper,
+.empty-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid #f0f0f0;
+  border-top-color: #FF6B4A;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.error-title,
+.empty-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-top: 20rpx;
+}
+
+.error-desc,
+.empty-desc {
+  font-size: 26rpx;
+  color: #999;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.retry-btn,
+.action-btn {
+  margin-top: 30rpx;
+  padding: 20rpx 50rpx;
+  background: #FF6B4A;
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 40rpx;
+  border: none;
+}
+
+.retry-btn::after,
+.action-btn::after {
+  border: none;
+}

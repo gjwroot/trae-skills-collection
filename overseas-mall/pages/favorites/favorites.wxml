@@ -1,0 +1,94 @@
+<view class="favorites-container">
+  <view class="header">
+    <view class="tabs">
+      <view class="tab-item {{activeTab === 'goods' ? 'active' : ''}}" bindtap="onTabChange" data-tab="goods">Goods</view>
+      <view class="tab-item {{activeTab === 'shops' ? 'active' : ''}}" bindtap="onTabChange" data-tab="shops">Shops</view>
+    </view>
+    <view class="edit-btn" wx:if="{{activeTab === 'goods' && goodsList.length > 0}}" bindtap="toggleEditMode">
+      <text>{{isEditMode ? 'Done' : 'Edit'}}</text>
+    </view>
+  </view>
+
+  <scroll-view class="content {{isEditMode ? 'edit-mode' : ''}}" scroll-y="{{true}}" bindscrolltolower="loadMore" wx:if="{{activeTab === 'goods'}}">
+    <view class="goods-grid" wx:if="{{goodsList.length > 0}}">
+      <view class="goods-card {{selectedIds.includes(item.id) ? 'selected' : ''}}" wx:for="{{goodsList}}" wx:key="id" bindtap="navigateToDetail" data-id="{{item.id}}">
+        <view class="select-checkbox" wx:if="{{isEditMode}}" catchtap="toggleSelect" data-id="{{item.id}}">
+          <view class="checkbox-inner {{selectedIds.includes(item.id) ? 'checked' : ''}}">
+            <custom-icon wx:if="{{selectedIds.includes(item.id)}}" name="success" size="16px" color="#fff" />
+          </view>
+        </view>
+        <view class="goods-image-wrap">
+          <image class="goods-image" lazy-load="{{true}}" src="{{item.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+          <view class="remove-btn" wx:if="{{!isEditMode}}" catchtap="removeFavorite" data-id="{{item.id}}">
+            <custom-icon name="delete-o" size="18px" color="#fff" />
+          </view>
+        </view>
+        <view class="goods-info">
+          <text class="goods-name">{{item.name}}</text>
+          <view class="price-row">
+            <text class="current-price">${{item.price}}</text>
+            <text class="original-price" wx:if="{{item.originalPrice}}">${{item.originalPrice}}</text>
+          </view>
+          <text class="sales">{{item.sales}} sold</text>
+        </view>
+      </view>
+    </view>
+
+    <empty-state 
+      wx:if="{{goodsList.length === 0 && !loading}}"
+      icon="star-o"
+      title="No favorites yet"
+      desc="Save items you love and find them easily here"
+      btnText="Start Browsing"
+      btnIcon="shop-o"
+      bind:btntap="goShopping"
+    />
+
+    <view class="load-more" wx:if="{{loading}}">
+      <view class="loading-spinner"></view>
+      <text>Loading...</text>
+    </view>
+  </scroll-view>
+
+  <view class="batch-action-bar" wx:if="{{isEditMode}}">
+    <view class="select-all" bindtap="toggleSelectAll">
+      <view class="checkbox-inner {{selectAll ? 'checked' : ''}}">
+        <custom-icon wx:if="{{selectAll}}" name="success" size="16px" color="#fff" />
+      </view>
+      <text>Select All</text>
+    </view>
+    <view class="action-buttons">
+      <button class="action-btn delete" bindtap="batchDelete">
+        Delete ({{selectedIds.length}})
+      </button>
+    </view>
+  </view>
+
+  <scroll-view class="content" scroll-y="{{true}}" wx:if="{{activeTab === 'shops'}}">
+    <view class="shop-list" wx:if="{{shopList.length > 0}}">
+      <view class="shop-card" wx:for="{{shopList}}" wx:key="id" bindtap="navigateToShop" data-id="{{item.id}}">
+        <view class="shop-logo-box">
+          <custom-icon name="shop-o" size="32px" color="#FF6B4A" />
+        </view>
+        <view class="shop-info">
+          <text class="shop-name">{{item.name}}</text>
+          <view class="shop-stats">
+            <text>{{item.productCount}} Products</text>
+            <text>{{item.followerCount}} Followers</text>
+          </view>
+        </view>
+        <button class="unfollow-btn" catchtap="unfollowShop" data-id="{{item.id}}">Following</button>
+      </view>
+    </view>
+
+    <empty-state 
+      wx:if="{{shopList.length === 0 && !loading}}"
+      icon="shop-o"
+      title="No followed shops"
+      desc="Follow your favorite shops and never miss their updates"
+      btnText="Explore Shops"
+      btnIcon="shop-o"
+      bind:btntap="goShopping"
+    />
+  </scroll-view>
+</view>

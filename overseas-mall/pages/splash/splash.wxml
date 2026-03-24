@@ -1,0 +1,18 @@
+<view class="splash-container">
+  <view class="splash-content">
+    <view class="logo-section {{showLogo ? 'show' : ''}}">
+      <view class="logo">
+        <text class="logo-text">OM</text>
+      </view>
+      <text class="app-name">Overseas Mall</text>
+      <text class="app-slogan">全球购物，品质首选</text>
+    </view>
+    
+    <view class="progress-section">
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{progress}}%"></view>
+      </view>
+      <text class="progress-text">{{progress}}%</text>
+    </view>
+  </view>
+</view>

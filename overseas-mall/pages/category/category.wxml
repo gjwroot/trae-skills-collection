@@ -1,0 +1,99 @@
+<view class="category-container">
+  <view class="search-bar" bindtap="navigateToSearch">
+    <custom-icon name="search" size="18px" color="#999" />
+    <text class="search-placeholder">Search products...</text>
+  </view>
+
+  <view class="category-content">
+    <scroll-view class="category-sidebar" scroll-y="{{true}}">
+      <view 
+        class="category-item {{currentCategory === item.id ? 'active' : ''}}" 
+        wx:for="{{categories}}" 
+        wx:key="id"
+        bindtap="selectCategory"
+        data-id="{{item.id}}"
+      >
+        <text>{{item.name}}</text>
+      </view>
+    </scroll-view>
+
+    <scroll-view 
+      class="category-main" 
+      scroll-y="{{true}}"
+      bindscrolltolower="loadMoreGoods"
+    >
+      <view class="sub-categories" wx:if="{{subCategories.length > 0}}">
+        <view 
+          class="sub-category-item {{currentSubCategory === item.id ? 'active' : ''}}" 
+          wx:for="{{subCategories}}" 
+          wx:key="id"
+          bindtap="selectSubCategory"
+          data-id="{{item.id}}"
+        >
+          <view class="sub-category-icon-box">
+            <custom-icon name="{{item.icon || 'apps-o'}}" size="18px" color="{{currentSubCategory === item.id ? '#FF6B4A' : '#999'}}" />
+          </view>
+          <text class="sub-category-name">{{item.name}}</text>
+        </view>
+      </view>
+
+      <view class="goods-header">
+        <text class="goods-count">{{totalGoods}} products</text>
+        <view class="sort-options">
+          <text 
+            class="sort-item {{sortType === 'default' ? 'active' : ''}}" 
+            bindtap="changeSort"
+            data-sort="default"
+          >Default</text>
+          <text 
+            class="sort-item {{sortType === 'sales' ? 'active' : ''}}" 
+            bindtap="changeSort"
+            data-sort="sales"
+          >Sales</text>
+          <text 
+            class="sort-item {{sortType === 'price' ? 'active' : ''}}" 
+            bindtap="changeSort"
+            data-sort="price"
+          >Price<text class="arrow-icon">{{sortOrder === 'asc' ? '↑' : '↓'}}</text></text>
+        </view>
+      </view>
+
+      <view class="goods-grid">
+        <view 
+          class="goods-card" 
+          wx:for="{{goodsList}}" 
+          wx:key="id"
+          bindtap="navigateToDetail"
+          data-id="{{item.id}}"
+        >
+          <image class="goods-image" lazy-load="{{true}}" src="{{item.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+          <view class="goods-info">
+            <text class="goods-name">{{item.name}}</text>
+            <view class="price-row">
+              <text class="current-price">${{item.price}}</text>
+              <text class="original-price" wx:if="{{item.originalPrice}}">${{item.originalPrice}}</text>
+            </view>
+            <text class="sales">{{item.sales}} sold</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="load-more" wx:if="{{loading}}">
+        <view class="loading-spinner"></view>
+        <text>Loading...</text>
+      </view>
+      
+      <view class="no-more" wx:if="{{noMore && goodsList.length > 0}}">
+        <text>No more products</text>
+      </view>
+
+      <empty-state 
+        wx:if="{{goodsList.length === 0 && !loading}}"
+        icon="apps-o"
+        title="No products found"
+        desc="Check back later for new products"
+        showBtn="{{false}}"
+      />
+    </scroll-view>
+  </view>
+</view>

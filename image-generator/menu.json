@@ -1,0 +1,54 @@
+{
+  "button": [
+    {
+      "name": "关于我",
+      "sub_button": [
+        {
+          "type": "click",
+          "name": "自我介绍",
+          "key": "about_me"
+        },
+        {
+          "type": "click",
+          "name": "联系我",
+          "key": "contact_me"
+        }
+      ]
+    },
+    {
+      "name": "内容合集",
+      "sub_button": [
+        {
+          "type": "click",
+          "name": "技术笔记",
+          "key": "tech_notes"
+        },
+        {
+          "type": "click",
+          "name": "生活记录",
+          "key": "life_notes"
+        },
+        {
+          "type": "click",
+          "name": "减肥日记",
+          "key": "weight_loss"
+        }
+      ]
+    },
+    {
+      "name": "工具",
+      "sub_button": [
+        {
+          "type": "click",
+          "name": "生图工具",
+          "key": "image_tool"
+        },
+        {
+          "type": "click",
+          "name": "配置指南",
+          "key": "setup_guide"
+        }
+      ]
+    }
+  ]
+}

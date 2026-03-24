@@ -1,0 +1,36 @@
+.agreement-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.content {
+  height: 100vh;
+  padding: 30rpx;
+}
+
+.section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.section-text {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 12rpx;
+}
+
+.footer-space {
+  height: 40rpx;
+}

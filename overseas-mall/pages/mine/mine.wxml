@@ -1,0 +1,213 @@
+<view class="mine-container">
+  <view class="user-header">
+    <view class="header-actions">
+      <view class="message-icon" bindtap="navigateToMessages">
+        <custom-icon name="chat-o" size="24px" color="#fff" />
+        <view class="message-badge" wx:if="{{unreadCount > 0}}">{{unreadCount}}</view>
+      </view>
+    </view>
+    <view class="user-info" bindtap="navigateToProfile">
+      <view class="avatar-box">
+        <image class="avatar-image" src="/assets/images/default-avatar.png" mode="aspectFill" />
+      </view>
+      <view class="user-text">
+        <view class="username-row">
+          <text class="username">{{userInfo.nickname || 'Login / Register'}}</text>
+          <view class="vip-badge" wx:if="{{userInfo.id && userInfo.vipLevel}}" style="background-color: {{memberInfo.levelColor}}">
+            <text>{{memberInfo.levelIcon}}</text>
+            <text>{{memberInfo.levelName}}</text>
+          </view>
+        </view>
+        <text class="user-id" wx:if="{{userInfo.id}}">ID: {{userInfo.id}}</text>
+        <view class="points-row" wx:if="{{userInfo.id}}">
+          <custom-icon name="gem-o" size="16px" color="#FF6B4A" />
+          <text class="points-text">{{userInfo.points || 0}} Points</text>
+        </view>
+        <view class="vip-progress" wx:if="{{userInfo.id && memberInfo.nextLevel}}">
+          <view class="progress-bar">
+            <view class="progress-fill" style="width: {{memberInfo.progress}}%"></view>
+          </view>
+          <text class="progress-text">{{memberInfo.remaining}} points to {{memberInfo.nextLevelName}}</text>
+        </view>
+      </view>
+      <custom-icon name="arrow" size="16px" color="rgba(255,255,255,0.8)" />
+    </view>
+  </view>
+
+  <view class="stats-section" wx:if="{{userInfo.id}}">
+    <view class="stats-card">
+      <view class="stat-item">
+        <text class="stat-value">${{statsData.totalSpent}}</text>
+        <text class="stat-label">Total Spent</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value">{{statsData.totalOrders}}</text>
+        <text class="stat-label">Orders</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value">{{statsData.totalFavorites}}</text>
+        <text class="stat-label">Favorites</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value">{{statsData.totalCoupons}}</text>
+        <text class="stat-label">Coupons</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="quick-actions" wx:if="{{userInfo.id}}">
+    <view class="action-item" bindtap="navigateToSignIn">
+      <view class="action-icon sign-in">
+        <custom-icon name="calendar-o" size="28px" color="#fff" />
+      </view>
+      <text class="action-label">Check In</text>
+      <view class="action-badge" wx:if="{{!hasCheckedIn}}">New</view>
+    </view>
+    <view class="action-item" bindtap="navigateToCouponCenter">
+      <view class="action-icon coupon">
+        <custom-icon name="orders-o" size="28px" color="#fff" />
+      </view>
+      <text class="action-label">Coupons</text>
+    </view>
+    <view class="action-item" bindtap="navigateToFlashSale">
+      <view class="action-icon flash">
+        <custom-icon name="fire-o" size="28px" color="#fff" />
+      </view>
+      <text class="action-label">Flash Sale</text>
+    </view>
+    <view class="action-item" bindtap="navigateToVipBenefits">
+      <view class="action-icon vip">
+        <custom-icon name="gem-o" size="28px" color="#fff" />
+      </view>
+      <text class="action-label">VIP</text>
+    </view>
+    <view class="action-item" bindtap="navigateToMemberActivity">
+      <view class="action-icon activity">
+        <custom-icon name="gift-o" size="28px" color="#fff" />
+      </view>
+      <text class="action-label">Activities</text>
+    </view>
+  </view>
+
+  <view class="order-section">
+    <view class="section-header">
+      <text class="section-title">My Orders</text>
+      <view class="view-all" bindtap="navigateToOrderList">
+        <text>View All</text>
+        <custom-icon name="arrow" size="12px" color="#999" />
+      </view>
+    </view>
+
+    <view class="order-nav">
+      <view class="order-item" bindtap="navigateToOrderList" data-status="pending">
+        <view class="order-icon-box">
+          <custom-icon name="paid" size="22px" color="#FF6B4A" />
+          <view class="custom-badge" wx:if="{{orderCounts.pending > 0}}">{{orderCounts.pending}}</view>
+        </view>
+        <text>Pending</text>
+      </view>
+      <view class="order-item" bindtap="navigateToOrderList" data-status="paid">
+        <view class="order-icon-box">
+          <custom-icon name="orders-o" size="22px" color="#FF6B4A" />
+          <view class="custom-badge" wx:if="{{orderCounts.paid > 0}}">{{orderCounts.paid}}</view>
+        </view>
+        <text>Paid</text>
+      </view>
+      <view class="order-item" bindtap="navigateToOrderList" data-status="shipped">
+        <view class="order-icon-box">
+          <custom-icon name="logistics" size="22px" color="#FF6B4A" />
+          <view class="custom-badge" wx:if="{{orderCounts.shipped > 0}}">{{orderCounts.shipped}}</view>
+        </view>
+        <text>Shipped</text>
+      </view>
+      <view class="order-item" bindtap="navigateToOrderList" data-status="completed">
+        <view class="order-icon-box">
+          <custom-icon name="success" size="22px" color="#FF6B4A" />
+          <view class="custom-badge" wx:if="{{orderCounts.completed > 0}}">{{orderCounts.completed}}</view>
+        </view>
+        <text>Completed</text>
+      </view>
+      <view class="order-item" bindtap="navigateToRefundList">
+        <view class="order-icon-box">
+          <custom-icon name="delete-o" size="22px" color="#FF6B4A" />
+          <view class="custom-badge" wx:if="{{refundCount > 0}}">{{refundCount}}</view>
+        </view>
+        <text>Refund</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="service-section">
+    <view class="section-title">My Services</view>
+    <view class="menu-list">
+      <view class="menu-item" bindtap="navigateToFavorites">
+        <custom-icon name="star-o" size="20px" color="#FF6B4A" />
+        <text class="menu-text">My Favorites</text>
+        <custom-icon name="arrow" size="12px" color="#ccc" />
+      </view>
+      <view class="menu-item" bindtap="navigateToWishlist">
+        <custom-icon name="heart-o" size="20px" color="#FF6B4A" />
+        <text class="menu-text">My Wishlist</text>
+        <custom-icon name="arrow" size="12px" color="#ccc" />
+      </view>
+      <view class="menu-item" bindtap="navigateToHistory">
+        <custom-icon name="clock-o" size="20px" color="#FF6B4A" />
+        <text class="menu-text">Browse History</text>
+        <custom-icon name="arrow" size="12px" color="#ccc" />
+      </view>
+      <view class="menu-item" bindtap="navigateToCoupons">
+        <custom-icon name="orders-o" size="20px" color="#FF6B4A" />
+        <text class="menu-text">My Coupons</text>
+        <custom-icon name="arrow" size="12px" color="#ccc" />
+      </view>
+      <view class="menu-item" bindtap="navigateToVipBenefits">
+        <custom-icon name="gem-o" size="20px" color="#FFD700" />
+        <text class="menu-text">VIP Benefits</text>
+        <custom-icon name="arrow" size="12px" color="#ccc" />
+      </view>
+      <view class="menu-item" bindtap="navigateToPoints">
+        <custom-icon name="gem-o" size="20px" color="#FF6B4A" />
+        <text class="menu-text">My Points</text>
+        <custom-icon name="arrow" size="12px" color="#ccc" />
+      </view>
+    </view>
+  </view>
+
+  <view class="settings-section">
+    <view class="section-title">Settings</view>
+    <view class="menu-list">
+      <view class="menu-item" bindtap="navigateToAddress">
+        <custom-icon name="location-o" size="20px" color="#FF6B4A" />
+        <text class="menu-text">Shipping Address</text>
+        <custom-icon name="arrow" size="12px" color="#ccc" />
+      </view>
+      <view class="menu-item" bindtap="navigateToPayment">
+        <custom-icon name="paid" size="20px" color="#FF6B4A" />
+        <text class="menu-text">Payment Methods</text>
+        <custom-icon name="arrow" size="12px" color="#ccc" />
+      </view>
+      <view class="menu-item" bindtap="navigateToSettings">
+        <custom-icon name="exchange" size="20px" color="#FF6B4A" />
+        <text class="menu-text">Language / Currency</text>
+        <custom-icon name="arrow" size="12px" color="#ccc" />
+      </view>
+      <view class="menu-item" bindtap="navigateToHelp">
+        <custom-icon name="question-o" size="20px" color="#FF6B4A" />
+        <text class="menu-text">Help Center</text>
+        <custom-icon name="arrow" size="12px" color="#ccc" />
+      </view>
+      <view class="menu-item" bindtap="navigateToSettings">
+        <custom-icon name="setting-o" size="20px" color="#FF6B4A" />
+        <text class="menu-text">Settings</text>
+        <custom-icon name="arrow" size="12px" color="#ccc" />
+      </view>
+    </view>
+  </view>
+
+  <view class="logout-section" wx:if="{{userInfo.id}}">
+    <button class="logout-btn" bindtap="handleLogout">Logout</button>
+  </view>
+</view>

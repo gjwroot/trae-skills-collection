@@ -1,0 +1,85 @@
+<view class="container">
+  <!-- 菜品图片 -->
+  <view class="image-section">
+    <image class="food-image" src="{{item.image}}" mode="aspectFill"/>
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">‹</text>
+    </view>
+  </view>
+
+  <!-- 菜品信息 -->
+  <view class="info-section">
+    <view class="info-header">
+      <text class="food-name">{{item.name}}</text>
+      <view class="favorite-btn" bindtap="toggleFavorite">
+        <image wx:if="{{isFavorite}}" class="favorite-icon-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI2ZmNDc1NyIgZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+"/>
+        <image wx:else class="favorite-icon-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiIGQ9Ik0xMiAyMS4zNWwtMS40NS0xLjMyQzUuNCAxNS4zNiAyIDEyLjI4IDIgOC41IDIgNS40MiA0LjQyIDMgNy41IDNjMS43NCAwIDMuNDEuODEgNC41IDIuMDlDMTMuMDkgMy44MSAxNC43NiAzIDE2LjUgMyAxOS41OCAzIDIyIDUuNDIgMjIgOC41YzAgMy43OC0zLjQgNi44Ni04LjU1IDExLjU0TDEyIDIxLjM1eiIvPjwvc3ZnPg=="/>
+      </view>
+    </view>
+    
+    <view class="food-tags">
+      <text class="tag">{{item.category}}</text>
+      <text class="tag hot" wx:if="{{item.isHot}}">热销</text>
+    </view>
+
+    <text class="food-desc">{{item.description}}</text>
+
+    <view class="food-price-row">
+      <view class="price-wrapper">
+        <text class="price-symbol">¥</text>
+        <text class="price-value">{{item.price}}</text>
+      </view>
+      <view class="sales">月售 {{item.sales || 99}}+</view>
+    </view>
+  </view>
+
+  <!-- 分隔线 -->
+  <view class="divider"></view>
+
+  <!-- 营养信息 -->
+  <view class="nutrition-section">
+    <text class="section-title">营养信息</text>
+    <view class="nutrition-grid">
+      <view class="nutrition-item">
+        <text class="nutrition-value">{{nutrition.calories}}</text>
+        <text class="nutrition-label">卡路里</text>
+      </view>
+      <view class="nutrition-item">
+        <text class="nutrition-value">{{nutrition.protein}}g</text>
+        <text class="nutrition-label">蛋白质</text>
+      </view>
+      <view class="nutrition-item">
+        <text class="nutrition-value">{{nutrition.fat}}g</text>
+        <text class="nutrition-label">脂肪</text>
+      </view>
+      <view class="nutrition-item">
+        <text class="nutrition-value">{{nutrition.carbs}}g</text>
+        <text class="nutrition-label">碳水化合物</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 分隔线 -->
+  <view class="divider"></view>
+
+  <!-- 食材清单 -->
+  <view class="ingredients-section">
+    <text class="section-title">主要食材</text>
+    <view class="ingredients-list">
+      <text class="ingredient-tag" wx:for="{{ingredients}}" wx:key="*this">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="quantity-section">
+      <view class="qty-btn" bindtap="decreaseQuantity">−</view>
+      <text class="qty-value">{{quantity}}</text>
+      <view class="qty-btn" bindtap="increaseQuantity">+</view>
+    </view>
+    <view class="add-cart-btn" bindtap="addToCart">
+      <text class="btn-text">加入购物车</text>
+      <text class="btn-price">¥{{totalPrice}}</text>
+    </view>
+  </view>
+</view>

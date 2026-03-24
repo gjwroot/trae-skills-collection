@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>牛马快跑 - 休闲跑酷游戏</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- 开始界面 -->
+        <div id="start-screen" class="screen">
+            <h1>🐄🐎 牛马快跑 🐎🐄</h1>
+            <p>控制你的牛马角色，躲避障碍物，收集金币！</p>
+            <p class="high-score-display">🏆 最高分: <span id="high-score">0</span></p>
+            <div class="instructions">
+                <h3>🎮 操作说明</h3>
+                <p>⬆️ 空格/上方向键 - 跳跃</p>
+                <p>⬇️ 下方向键 - 下蹲</p>
+                <p>📱 触摸屏幕上半部分跳跃，下半部分下蹲</p>
+            </div>
+            <div class="powerups-info">
+                <h3>✨ 道具说明</h3>
+                <p>⭐ 无敌 - 短暂无敌，撞碎障碍物</p>
+                <p>⚡ 加速 - 游戏速度加快，得分更快</p>
+                <p>🧲 磁铁 - 自动吸引附近金币</p>
+            </div>
+            <button id="start-btn" class="btn">开始游戏</button>
+        </div>
+        
+        <!-- 游戏界面 -->
+        <div id="game-screen" class="screen hidden">
+            <div class="game-header">
+                <div class="score">分数: <span id="score">0</span></div>
+                <div class="high-score">🏆 最高: <span id="high-score-display">0</span></div>
+                <div class="lives">❤️ 生命: <span id="lives">3</span></div>
+            </div>
+            <canvas id="game-canvas" width="800" height="400"></canvas>
+            <div class="game-controls">
+                <button id="jump-btn" class="btn jump-btn">⬆️ 跳跃</button>
+                <button id="duck-btn" class="btn duck-btn">⬇️ 下蹲</button>
+            </div>
+        </div>
+        
+        <!-- 游戏结束界面 -->
+        <div id="game-over-screen" class="screen hidden">
+            <h2>游戏结束</h2>
+            <p>最终分数: <span id="final-score">0</span></p>
+            <p class="high-score-display">🏆 最高分: <span id="high-score-end">0</span></p>
+            <p id="new-record" class="new-record hidden">🎉 新纪录！</p>
+            <button id="restart-btn" class="btn">再玩一次</button>
+        </div>
+    </div>
+    
+    <script src="js/game.js"></script>
+</body>
+</html>

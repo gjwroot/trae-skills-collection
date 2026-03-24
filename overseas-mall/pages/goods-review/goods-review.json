@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "Write Review",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "custom-icon": "/components/icon/icon"
+  }
+}

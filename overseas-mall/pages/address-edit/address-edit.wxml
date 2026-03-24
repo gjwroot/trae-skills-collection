@@ -1,0 +1,66 @@
+<view class="address-edit-container">
+  <view class="mode-toggle">
+    <text class="mode-text">{{showSmartInput ? '智能识别' : '手动输入'}}</text>
+    <view class="toggle-btn" bindtap="toggleInputMode">
+      <custom-icon name="{{showSmartInput ? 'edit' : 'scan'}}" size="18px" color="#FF6B4A" />
+    </view>
+  </view>
+
+  <view class="smart-section" wx:if="{{showSmartInput}}">
+    <view class="smart-tips">
+      <text class="tips-text">粘贴包含姓名、电话、地址的文本，一键自动识别</text>
+    </view>
+    <view class="smart-input-box">
+      <textarea 
+        class="smart-textarea" 
+        placeholder="例如：张三 13800138000 北京市朝阳区建国路88号"
+        value="{{smartInput}}"
+        bindinput="onSmartInputChange"
+        maxlength="200"
+        auto-height
+      />
+      <view class="smart-actions">
+        <text class="char-count">{{smartInput.length}}/200</text>
+        <button class="parse-btn" bindtap="parseAddress">智能解析</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-section">
+    <view class="form-item">
+      <text class="form-label">Name</text>
+      <input class="form-input" placeholder="Recipient name" value="{{address.name}}" bindinput="onNameInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">Phone</text>
+      <input class="form-input" type="number" placeholder="Phone number" value="{{address.phone}}" bindinput="onPhoneInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">Region</text>
+      <picker mode="region" value="{{address.region}}" bindchange="onRegionChange">
+        <view class="form-picker">
+          <text class="{{address.region ? 'picker-value' : 'picker-placeholder'}}">
+            {{address.region ? address.region.join(' ') : 'Select region'}}
+          </text>
+          <custom-icon name="arrow" size="14px" color="#999" />
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">Address</text>
+      <input class="form-input" placeholder="Detailed address" value="{{address.detail}}" bindinput="onDetailInput" />
+    </view>
+
+    <view class="form-item switch-item">
+      <text class="form-label">Set as Default</text>
+      <switch checked="{{address.isDefault}}" color="#FF6B4A" bindchange="onDefaultChange" />
+    </view>
+  </view>
+
+  <button class="save-btn" bindtap="saveAddress">Save Address</button>
+
+  <button class="delete-btn" wx:if="{{addressId}}" bindtap="deleteAddress">Delete Address</button>
+</view>

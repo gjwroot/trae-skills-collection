@@ -1,0 +1,84 @@
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: #ffffff;
+  display: flex;
+  border-top: 1rpx solid #e5e5e5;
+  z-index: 99999;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.tab-bar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8rpx;
+  height: 120rpx;
+}
+
+.icon-wrapper {
+  position: relative;
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.icon {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.text-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tab-text {
+  font-size: 20rpx;
+  color: #666666;
+  margin-top: 2rpx;
+}
+
+.badge {
+  position: absolute;
+  background: #FF6B4A;
+  color: #fff;
+  font-size: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  z-index: 10;
+}
+
+.badge-cart {
+  top: -8rpx;
+  right: -16rpx;
+  min-width: 32rpx;
+  height: 32rpx;
+  border-radius: 16rpx;
+  padding: 0 6rpx;
+}
+
+.badge-text {
+  line-height: 1;
+  color: #fff;
+}
+
+.badge-dot {
+  position: absolute;
+  top: -8rpx;
+  right: -4rpx;
+  width: 16rpx;
+  height: 16rpx;
+  background: #FF6B4A;
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: 0 0 0 2rpx #fff;
+}

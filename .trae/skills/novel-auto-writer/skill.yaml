@@ -1,0 +1,239 @@
+name: "novel-auto-writer"
+version: "5.0.0"
+description: "小说自动化写作技能 v5.0，支持20维度质量评估（增强梗含量/潮流热度/新鲜感）、AI味道检测、剧情紧凑度、反套路设计、 meme数据库、月度更新机制"
+author: "AI Assistant"
+tags:
+  - "novel"
+  - "writing"
+  - "automation"
+  - "quality-evaluation"
+  - "multi-platform"
+  - "ai-detection"
+  - "plot-twist"
+  - "meme"
+  - "trending"
+  - "meme-database"
+  - "monthly-update"
+trigger_keywords:
+  - "写小说"
+  - "小说创作"
+  - "自动化写作"
+  - "生成章节"
+  - "网文写作"
+  - "小说投稿"
+  - "优化小说"
+skills:
+  - name: "交互式执行"
+    description: "一章节一执行，显示进度和状态"
+  - name: "质量评估"
+    description: "20维度打分 v5.0：字数、剧情、人物、文笔、幽默、情感、世界观、创新、单元剧、连贯性、AI味道、有趣度、紧凑度、信息密度、反转、作者评价、读者评价、梗含量、潮流热度、新鲜感"
+  - name: "AI味道检测"
+    description: "检测11种AI特征模式，降低AI痕迹"
+  - name: "有趣度评估"
+    description: "评估8种幽默手法：意外反转、括号吐槽、反问，事与愿违、转折、直白，真诚、坦白"
+  - name: "剧情紧凑度"
+    description: "基于关键节点词和短句比例评估节奏"
+  - name: "信息量密度"
+    description: "基于小概率事件和具体细节评估信息量"
+  - name: "剧情反转设计"
+    description: "评估5种反转类型：身份反转、局势突变、预期打破、隐藏真相、正邪逆转"
+  - name: "梗含量评估"
+    description: "评估新梗热梗密度，内置meme数据库，检测网红金句、弹幕吐槽风格，支持热度等级(A/B/C/D)"
+  - name: "潮流热度评估"
+    description: "评估热门元素组合（重生+系统、穿书+病娇等），含60+潮流元素库"
+  - name: "新鲜感评估"
+    description: "评估反套路设计，检测本以为...却、谁知...偏偏、打脸，真香、反转再反转"
+  - name: "自动修改"
+    description: "评分低于7分时自动反馈修改，含创新类问题和基础类问题定向优化"
+  - name: "进度追踪"
+    description: "记录已完成章节和评分历史"
+  - name: "平台适配"
+    description: "支持6大平台：起点、晋江、番茄、纵横、七猫、飞卢"
+  - name: "Meme数据库"
+    description: "内置meme资源库，支持热度等级追踪、过期检测、替代建议，月度更新"
+  - name: "月度更新"
+    description: "每月扫描热门梗，自动调整热度等级，标记过期内容，推荐替代品"
+meme_database:
+  path: "resources/meme/"
+  schema_file: "resources/meme/_schema.md"
+  categories:
+    - "anime_jojo"
+    - "anime_db"
+    - "anime_attack"
+    - "anime_diga"
+    - "anime_other"
+    - "game_lol"
+    - "game_genshin"
+    - "game_other"
+    - "internet_trending"
+    - "internet_pun"
+    - "tv_drama"
+    - "tv_novel"
+  trending_levels:
+    A:
+      name: "Top Meme"
+      lifespan: "3-6 months"
+      description: "全网爆火，必须使用"
+    B:
+      name: "Hot Meme"
+      lifespan: "6-12 months"
+      description: "圈内流行"
+    C:
+      name: "Common Meme"
+      lifespan: "1-2 years"
+      description: "经典常用"
+    D:
+      name: "Classic Meme"
+      lifespan: "unlimited"
+      description: "永不过时"
+  progressive_loading:
+    L1:
+      description: "Classic(D) + Common(C) + Top 10 A-level"
+      load_time: "on_startup"
+    L2:
+      description: "By category (on-demand)"
+      load_time: "during_writing"
+    L3:
+      description: "Archived expired memes"
+      load_time: "on_explicit_reference"
+  lifecycle:
+    update_frequency: "monthly"
+    expiry_criteria:
+      - condition: "expire_date < today"
+        action: "demote_or_archive"
+      - condition: "Level_D + 0 uses > 1 year"
+        action: "archive"
+      - condition: "user_feedback_outdated"
+        action: "demote + add_alternatives"
+      - condition: "new_alternative_appears"
+        action: "add_alternatives"
+evaluation_dimensions:
+  word_count:
+    weight: 0.05
+    name: "字数要求"
+    description: "每章4000±500字，平台自适应"
+  plot_appeal:
+    weight: 0.08
+    name: "剧情吸引力"
+    description: "悬念+冲突+节奏"
+  character:
+    weight: 0.05
+    name: "人物塑造"
+    description: "对话+心理描写"
+  writing_flow:
+    weight: 0.05
+    name: "文笔流畅度"
+    description: "句式+段落结构"
+  humor:
+    weight: 0.05
+    name: "幽默风趣度"
+    description: "基础幽默词频"
+  emotion:
+    weight: 0.05
+    name: "情感共鸣"
+    description: "情感词+细节"
+  world_building:
+    weight: 0.04
+    name: "世界观构建"
+    description: "设定词+修炼体系"
+  innovation:
+    weight: 0.06
+    name: "创新程度"
+    description: "创新词+独特设定"
+  standalone_quality:
+    weight: 0.06
+    name: "单元剧质量"
+    description: "本章剧情完整性"
+  continuity:
+    weight: 0.06
+    name: "剧情连贯性"
+    description: "前后章节关联"
+  ai_flavor:
+    weight: 0.03
+    name: "AI味道(低为好)"
+    description: "越低越好，11种AI模式检测"
+  fun:
+    weight: 0.03
+    name: "有趣度"
+    description: "意想不到的幽默，8种手法"
+  plot_pacing:
+    weight: 0.05
+    name: "剧情紧凑度"
+    description: "节奏控制，短句+关键节点"
+  information_density:
+    weight: 0.03
+    name: "信息量密度"
+    description: "小概率事件密度"
+  plot_twist:
+    weight: 0.05
+    name: "剧情反转"
+    description: "5种反转类型设计"
+  author_eval:
+    weight: 0.03
+    name: "作者评价"
+    description: "专业作者视角"
+  reader_eval:
+    weight: 0.03
+    name: "读者评价"
+    description: "读者体验视角"
+  meme_level:
+    weight: 0.08
+    name: "梗含量"
+    description: "新梗热梗密度，70+梗词库，含网红金句、弹幕吐槽"
+  trend_level:
+    weight: 0.06
+    name: "潮流热度"
+    description: "热门元素组合，60+潮流元素库"
+  freshness:
+    weight: 0.06
+    name: "新鲜感"
+    description: "反套路设计，打脸/真香/反转"
+config:
+  word_count_target: 4000
+  word_count_min: 3000
+  word_count_max: 4500
+  quality_threshold: 7.0
+  max_revision_attempts: 3
+platforms:
+  qidian:
+    name: "起点中文网"
+    min_chapter_words: 3000
+    target_chapter_words: 4000
+    daily_update_min: 3000
+    sign_threshold_words: 30000
+    category_focus: ["玄幻", "修真", "都市", "科幻"]
+  jinjiang:
+    name: "晋江文学城"
+    min_chapter_words: 3000
+    target_chapter_words: 3500
+    daily_update_min: 3000
+    sign_threshold_words: 10000
+    category_focus: ["言情", "纯爱", "衍生", "同人"]
+  fanqie:
+    name: "番茄小说"
+    min_chapter_words: 4000
+    target_chapter_words: 4000
+    daily_update_min: 4000
+    sign_threshold_words: 20000
+    category_focus: ["都市", "玄幻", "言情", "穿越"]
+  zongheng:
+    name: "纵横中文网"
+    min_chapter_words: 3000
+    target_chapter_words: 4000
+    daily_update_min: 3000
+    sign_threshold_words: 30000
+    category_focus: ["玄幻", "都市", "游戏", "历史"]
+  qimao:
+    name: "七猫小说"
+    min_chapter_words: 4000
+    target_chapter_words: 4000
+    daily_update_min: 4000
+    sign_threshold_words: 50000
+    category_focus: ["现言", "古言", "玄幻", "都市"]
+  faloo:
+    name: "飞卢小说"
+    min_chapter_words: 4000
+    target_chapter_words: 5000
+    daily_update_min: 6000
+    sign_threshold_words: 30000
+    category_focus: ["同人", "都市", "玄幻", "游戏"]

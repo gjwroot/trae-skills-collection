@@ -1,0 +1,121 @@
+<view class="wishlist-page">
+  <view class="page-header">
+    <view class="header-title">Wishlist</view>
+    <view class="header-actions">
+      <view class="action-btn" wx:if="{{activeTab === 'wishlist' && !batchMode && wishlist.length > 0}}" bindtap="toggleBatchMode">
+        <text>编辑</text>
+      </view>
+      <view class="action-btn" wx:if="{{activeTab === 'wishlist' && batchMode}}" bindtap="toggleBatchMode">
+        <text>取消</text>
+      </view>
+    </view>
+  </view>
+  
+  <view class="tabs">
+    <view class="tab-item {{activeTab === 'wishlist' ? 'active' : ''}}" data-tab="wishlist" bindtap="switchTab">
+      <text>心愿单</text>
+    </view>
+    <view class="tab-item {{activeTab === 'alerts' ? 'active' : ''}}" data-tab="alerts" bindtap="switchTab">
+      <text>价格提醒</text>
+    </view>
+  </view>
+
+  <view class="wishlist-content">
+    <view wx:if="{{loading}}" class="loading-state">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">Loading...</text>
+    </view>
+
+    <view wx:elif="{{activeTab === 'wishlist' && wishlist.length === 0}}" class="empty-state">
+      <view class="empty-icon">💝</view>
+      <text class="empty-title">Your wishlist is empty</text>
+      <text class="empty-desc">Add items you love to your wishlist</text>
+      <view class="empty-action" bindtap="goToHome">
+        <text>Start Shopping</text>
+      </view>
+    </view>
+
+    <view wx:elif="{{activeTab === 'alerts' && priceAlerts.length === 0}}" class="empty-state">
+      <view class="empty-icon">🔔</view>
+      <text class="empty-title">No price alerts</text>
+      <text class="empty-desc">Set price alerts for items you want</text>
+      <view class="empty-action" bindtap="goToHome">
+        <text>Start Shopping</text>
+      </view>
+    </view>
+
+    <view wx:elif="{{activeTab === 'wishlist'}}" class="wishlist-list">
+      <view class="wishlist-item" wx:for="{{wishlist}}" wx:key="id" data-id="{{item.id}}" bindtap="goToDetail">
+        <view wx:if="{{batchMode}}" class="checkbox-wrapper" catchtap="selectItem" data-id="{{item.id}}">
+          <view class="checkbox {{selectedItems.has(item.id) ? 'checked' : ''}}">
+            <text wx:if="{{selectedItems.has(item.id)}}" class="check-icon">✓</text>
+          </view>
+        </view>
+
+        <image class="item-image" src="{{item.image}}" mode="aspectFill" />
+
+        <view class="item-info">
+          <view class="item-name">{{item.name}}</view>
+          <view class="item-price">
+            <text class="price-current">${{item.price}}</text>
+            <text wx:if="{{item.originalPrice && item.originalPrice > item.price}}" class="price-original">${{item.originalPrice}}</text>
+          </view>
+          <view wx:if="{{item.addedAt}}" class="item-added">
+            Added {{formatDate(item.addedAt)}}
+          </view>
+        </view>
+
+        <view wx:if="{{!batchMode}}" class="item-actions">
+          <view class="action-btn-small" catchtap="setPriceAlert" data-goods="{{item}}">
+            <text>🔔</text>
+          </view>
+          <view class="action-btn-small" catchtap="addToCart" data-goods="{{item}}">
+            <text>🛒</text>
+          </view>
+          <view class="action-btn-small delete" catchtap="removeFromWishlist" data-id="{{item.id}}">
+            <text>×</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view wx:elif="{{activeTab === 'alerts'}}" class="alerts-list">
+      <view class="alert-item" wx:for="{{priceAlerts}}" wx:key="id">
+        <image class="alert-image" src="{{item.goodsImage}}" mode="aspectFill" />
+        <view class="alert-info">
+          <view class="alert-name">{{item.goodsName}}</view>
+          <view class="alert-prices">
+            <text class="price-target">目标: ${{item.targetPrice}}</text>
+            <text class="price-current">当前: ${{item.currentPrice}}</text>
+          </view>
+          <view class="alert-time">
+            {{formatDate(item.createdAt)}}
+          </view>
+        </view>
+        <view class="alert-action">
+          <view class="action-btn-small delete" catchtap="removePriceAlert" data-id="{{item.id}}">
+            <text>×</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{batchMode && wishlist.length > 0}}" class="batch-footer">
+    <view class="select-all-wrapper" bindtap="toggleSelectAll">
+      <view class="checkbox {{selectAll ? 'checked' : ''}}">
+        <text wx:if="{{selectAll}}" class="check-icon">✓</text>
+      </view>
+      <text class="select-all-text">{{selectAll ? '取消全选' : '全选'}}</text>
+    </view>
+    <view class="batch-actions">
+      <view class="batch-btn delete" bindtap="deleteSelected" wx:if="{{selectedItems.size > 0}}">
+        删除 ({{selectedItems.size}})
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{activeTab === 'wishlist' && !batchMode && wishlist.length > 0}}" class="clear-all-btn" bindtap="clearAll">
+    <text>清空心愿单</text>
+  </view>
+</view>

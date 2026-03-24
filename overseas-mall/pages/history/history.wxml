@@ -1,0 +1,120 @@
+<view class="history-container">
+  <view class="analysis-section" wx:if="{{showAnalysis && viewStats}}">
+    <view class="analysis-header" bindtap="toggleAnalysis">
+      <text class="analysis-title">Browse Analysis</text>
+      <custom-icon name="arrow-up" size="16px" color="#999" />
+    </view>
+
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-value">{{viewStats.totalViews}}</text>
+        <text class="stat-label">Total Views</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{viewStats.todayViews}}</text>
+        <text class="stat-label">Today</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{viewStats.weekViews}}</text>
+        <text class="stat-label">This Week</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{viewStats.monthViews}}</text>
+        <text class="stat-label">This Month</text>
+      </view>
+    </view>
+
+    <view class="analysis-card" wx:if="{{topCategories.length > 0}}">
+      <view class="card-title">Top Categories</view>
+      <view class="category-list">
+        <view class="category-item" wx:for="{{topCategories}}" wx:key="name">
+          <text class="category-name">{{item.name}}</text>
+          <view class="category-bar">
+            <view class="category-progress" style="width: {{(item.count / viewStats.totalViews * 100)}}%"></view>
+          </view>
+          <text class="category-count">{{item.count}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="analysis-card" wx:if="{{viewStats.priceRange.avg > 0}}">
+      <view class="card-title">Price Preferences</view>
+      <view class="price-stats">
+        <view class="price-stat">
+          <text class="price-label">Avg</text>
+          <text class="price-value">${{viewStats.priceRange.avg}}</text>
+        </view>
+        <view class="price-stat">
+          <text class="price-label">Min</text>
+          <text class="price-value">${{viewStats.priceRange.min}}</text>
+        </view>
+        <view class="price-stat">
+          <text class="price-label">Max</text>
+          <text class="price-value">${{viewStats.priceRange.max}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="analysis-card">
+      <view class="card-title">View Time</view>
+      <view class="time-distribution">
+        <view class="time-item">
+          <custom-icon name="sun-o" size="20px" color="#FFB800" />
+          <text class="time-label">Morning</text>
+          <text class="time-count">{{viewStats.viewTimeDistribution.morning}}</text>
+        </view>
+        <view class="time-item">
+          <custom-icon name="sun" size="20px" color="#FF8C00" />
+          <text class="time-label">Afternoon</text>
+          <text class="time-count">{{viewStats.viewTimeDistribution.afternoon}}</text>
+        </view>
+        <view class="time-item">
+          <custom-icon name="moon-o" size="20px" color="#4A90D9" />
+          <text class="time-label">Evening</text>
+          <text class="time-count">{{viewStats.viewTimeDistribution.evening}}</text>
+        </view>
+        <view class="time-item">
+          <custom-icon name="moon" size="20px" color="#1E3A5F" />
+          <text class="time-label">Night</text>
+          <text class="time-count">{{viewStats.viewTimeDistribution.night}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="analysis-toggle" wx:if="{{!showAnalysis}}" bindtap="toggleAnalysis">
+    <custom-icon name="chart-bar" size="20px" color="#FF6B4A" />
+    <text>View Analysis</text>
+    <custom-icon name="arrow-down" size="16px" color="#999" />
+  </view>
+
+  <view class="header" wx:if="{{historyList.length > 0}}">
+    <text class="count">{{historyList.length}} items</text>
+    <text class="clear-btn" bindtap="clearHistory">Clear All</text>
+  </view>
+
+  <scroll-view class="content" scroll-y="{{true}}">
+    <view class="goods-grid" wx:if="{{historyList.length > 0}}">
+      <view class="goods-card" wx:for="{{historyList}}" wx:key="id" bindtap="navigateToDetail" data-id="{{item.id}}">
+        <image class="goods-image" lazy-load="{{true}}" src="{{item.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+        <view class="goods-info">
+          <text class="goods-name">{{item.name}}</text>
+          <view class="price-row">
+            <text class="current-price">${{item.price}}</text>
+            <text class="original-price" wx:if="{{item.originalPrice}}">${{item.originalPrice}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <empty-state 
+      wx:if="{{historyList.length === 0}}"
+      icon="clock-o"
+      title="No browse history"
+      desc="Start exploring our amazing products"
+      btnText="Go Shopping"
+      btnIcon="shop-o"
+      bind:btntap="goShopping"
+    />
+  </scroll-view>
+</view>

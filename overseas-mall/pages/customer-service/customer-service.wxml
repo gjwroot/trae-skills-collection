@@ -1,0 +1,78 @@
+<view class="customer-service-page">
+  <scroll-view 
+    class="message-list" 
+    scroll-y="{{true}}" 
+    scroll-top="{{scrollTop}}"
+    scroll-into-view="{{scrollIntoView}}"
+  >
+    <view wx:for="{{messageList}}" wx:key="id" class="message-item {{item.isSelf ? 'self' : 'other'}}">
+      <view wx:if="{{!item.isSelf}}" class="avatar">
+        <view class="avatar-placeholder">CS</view>
+      </view>
+      
+      <view class="message-content-wrapper">
+        <view wx:if="{{item.type === 'text'}}" class="message-bubble {{item.isSelf ? 'self' : 'other'}}">
+          <text class="message-text">{{item.content}}</text>
+        </view>
+        
+        <view wx:if="{{item.type === 'quick-questions'}}" class="quick-questions">
+          <view class="quick-title">常见问题</view>
+          <view class="quick-list">
+            <view 
+              wx:for="{{getQuickQuestions()}}" 
+              wx:for-item="question"
+              wx:key="*this"
+              class="quick-item"
+              bindtap="onQuickQuestionTap"
+              data-question="{{question}}"
+            >
+              {{question}}
+            </view>
+          </view>
+        </view>
+        
+        <view wx:if="{{item.time}}" class="message-time">{{item.time}}</view>
+      </view>
+      
+      <view wx:if="{{item.isSelf}}" class="avatar">
+        <view class="avatar-placeholder self">Me</view>
+      </view>
+    </view>
+    
+    <view wx:if="{{isTyping}}" class="typing-indicator">
+      <view class="typing-dot"></view>
+      <view class="typing-dot"></view>
+      <view class="typing-dot"></view>
+    </view>
+    
+    <view id="bottom-anchor"></view>
+  </scroll-view>
+  
+  <view class="input-area">
+    <view class="input-tools">
+      <view class="tool-btn" bindtap="onVoiceTap">
+        <text class="tool-icon">🎤</text>
+      </view>
+    </view>
+    
+    <view class="input-wrapper">
+      <input 
+        class="message-input" 
+        placeholder="输入消息..." 
+        value="{{inputText}}"
+        bindinput="onInput"
+        confirm-type="send"
+        bindconfirm="onSendTap"
+      />
+    </view>
+    
+    <view class="input-tools">
+      <view class="tool-btn" bindtap="onImageTap">
+        <text class="tool-icon">📷</text>
+      </view>
+      <view class="send-btn {{inputText ? 'active' : ''}}" bindtap="onSendTap">
+        <text>发送</text>
+      </view>
+    </view>
+  </view>
+</view>

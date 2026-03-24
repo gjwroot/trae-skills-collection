@@ -1,0 +1,20 @@
+
+&lt;scroll-view 
+  class="virtual-list" 
+  scroll-y 
+  style="height: {{containerHeight}}rpx;"
+  bindscroll="onScroll"
+&gt;
+  &lt;view class="virtual-list-inner" style="height: {{list.length * itemHeight}}rpx;"&gt;
+    &lt;view 
+      class="virtual-list-item" 
+      style="transform: translateY({{translateY}}rpx);"
+      wx:for="{{visibleData}}" 
+      wx:key="index"
+      wx:for-item="item"
+      wx:for-index="idx"
+    &gt;
+      &lt;slot name="item" data-item="{{item}}" data-index="{{startIndex + idx}}"&gt;&lt;/slot&gt;
+    &lt;/view&gt;
+  &lt;/view&gt;
+&lt;/scroll-view&gt;

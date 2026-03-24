@@ -1,0 +1,56 @@
+<view class="container">
+  <view class="search-header">
+    <view class="search-input-box">
+      <text class="search-icon">🔍</text>
+      <input class="search-input" 
+             placeholder="搜索菜品名称..." 
+             value="{{searchText}}"
+             bindinput="onSearchInput"
+             confirm-type="search"
+             bindconfirm="onSearch"
+             focus="{{true}}"></input>
+      <text wx:if="{{searchText}}" class="clear-btn" bindtap="clearSearch">✕</text>
+    </view>
+  </view>
+
+  <view wx:if="{{searchText === ''}}" class="hot-search">
+    <text class="hot-title">热门搜索</text>
+    <view class="hot-tags">
+      <view class="hot-tag" wx:for="{{hotTags}}" wx:key="*this" bindtap="searchTag" data-tag="{{item}}">
+        {{item}}
+      </view>
+    </view>
+  </view>
+
+  <view wx:elif="{{searchResults.length === 0}}" class="no-result">
+    <view class="no-result-icon">🔍</view>
+    <text class="no-result-text">没有找到相关菜品</text>
+  </view>
+
+  <view wx:else class="search-results">
+    <view class="menu-item" wx:for="{{searchResults}}" wx:key="id">
+      <view class="item-header">
+        <image class="item-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="favorite-btn" bindtap="toggleFavorite" data-item="{{item}}">
+          <text wx:if="{{isFavorites[item.id]}}">❤️</text>
+          <text wx:else>🤍</text>
+        </view>
+      </view>
+      <view class="item-info">
+        <view class="item-name">{{item.name}}</view>
+        <view class="item-desc">{{item.description}}</view>
+        <view class="item-bottom">
+          <view class="item-price">¥{{item.price}}</view>
+          <view wx:if="{{!itemQuantities[item.id] || itemQuantities[item.id] === 0}}" class="add-cart-btn" bindtap="addToCart" data-item="{{item}}">
+            加入购物车
+          </view>
+          <view wx:else class="quantity-control">
+            <view class="quantity-btn" bindtap="decreaseQuantity" data-id="{{item.id}}">-</view>
+            <view class="quantity">{{itemQuantities[item.id]}}</view>
+            <view class="quantity-btn" bindtap="increaseQuantity" data-id="{{item.id}}">+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

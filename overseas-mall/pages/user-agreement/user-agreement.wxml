@@ -1,0 +1,88 @@
+<view class="agreement-container">
+  <scroll-view class="content" scroll-y="{{true}}">
+    <view class="section">
+      <text class="section-title">1. Acceptance of Terms</text>
+      <text class="section-text">By accessing and using Overseas Mall, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">2. Account Registration</text>
+      <text class="section-text">• You must provide accurate and complete information when creating an account</text>
+      <text class="section-text">• You are responsible for maintaining the security of your account</text>
+      <text class="section-text">• You are responsible for all activities under your account</text>
+      <text class="section-text">• Notify us immediately of any unauthorized account use</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">3. Purchasing and Payments</text>
+      <text class="section-text">• All prices are listed in the specified currency</text>
+      <text class="section-text">• We reserve the right to change prices without notice</text>
+      <text class="section-text">• You agree to pay all charges incurred under your account</text>
+      <text class="section-text">• We are not responsible for payment processing errors from third parties</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">4. Shipping and Delivery</text>
+      <text class="section-text">• Delivery times are estimates and not guaranteed</text>
+      <text class="section-text">• We are not responsible for delays caused by shipping carriers</text>
+      <text class="section-text">• Risk of loss transfers to you upon delivery</text>
+      <text class="section-text">• International shipping may be subject to customs duties</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">5. Returns and Refunds</text>
+      <text class="section-text">• Items may be returned within 30 days of delivery</text>
+      <text class="section-text">• Returned items must be in original condition</text>
+      <text class="section-text">• Refunds will be processed to the original payment method</text>
+      <text class="section-text">• Shipping costs for returns are the customer's responsibility</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">6. User Conduct</text>
+      <text class="section-text">You agree not to:</text>
+      <text class="section-text">• Violate any applicable laws or regulations</text>
+      <text class="section-text">• Infringe on intellectual property rights</text>
+      <text class="section-text">• Upload harmful or malicious content</text>
+      <text class="section-text">• Interfere with the operation of our services</text>
+      <text class="section-text">• Collect personal information of other users</text>
+      <text class="section-text">• Use our services for any illegal purpose</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">7. Intellectual Property</text>
+      <text class="section-text">All content on Overseas Mall, including but not limited to text, graphics, logos, and images, is the property of Overseas Mall and is protected by copyright laws.</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">8. Disclaimer of Warranties</text>
+      <text class="section-text">Our services are provided "as is" without any warranties, express or implied. We do not warrant that our services will be uninterrupted or error-free.</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">9. Limitation of Liability</text>
+      <text class="section-text">Overseas Mall shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of our services.</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">10. Termination</text>
+      <text class="section-text">We reserve the right to suspend or terminate your account at our sole discretion for violations of these Terms of Service.</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">11. Governing Law</text>
+      <text class="section-text">These Terms of Service shall be governed by the laws of the jurisdiction in which Overseas Mall is registered.</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">12. Changes to Terms</text>
+      <text class="section-text">We may modify these Terms of Service from time to time. Your continued use of our services constitutes acceptance of the modified terms.</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">13. Contact Us</text>
+      <text class="section-text">If you have any questions about these Terms of Service, please contact us at: support@overseasmall.com</text>
+    </view>
+
+    <view class="footer-space"></view>
+  </scroll-view>
+</view>

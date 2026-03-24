@@ -1,0 +1,98 @@
+name: forum-automation
+version: "5.3.0"
+description: 论坛自动化定时技能 v5.3 - 修复版，使用integrated_browser MCP服务器，支持点赞/取消赞状态切换功能，直接执行核心功能，支持完整流程执行或任选其一执行（统计类/点赞/浏览），自动浏览、点赞、截图监控，提升论坛活跃度和排名。
+
+features:
+  - auto_browse: true
+  - auto_like: true
+  - statistics_collection: true
+  - screenshot_monitor: true
+  - daily_schedule: true
+  - rank_tracking: true
+  - flexible_execution: true
+  - no_python_dependency: true
+  - direct_execution: true
+  - use_integrated_browser: true
+
+dependencies: []
+
+tools:
+  - integrated_browser:
+    - browser_navigate
+    - browser_snapshot
+    - browser_take_screenshot
+    - browser_wait_for
+    - browser_scroll
+    - browser_click
+    - browser_tabs
+
+triggers:
+  - "论坛技能"
+  - "执行论坛技能"
+  - "论坛自动化"
+  - "自动发帖"
+  - "点赞"
+  - "截图"
+  - "forum"
+  - "排名"
+  - "统计"
+  - "浏览"
+  - "完整流程"
+  - "仅统计"
+  - "仅自动"
+  - "仅用户"
+  - "第一大类"
+  - "第二大类"
+  - "第三大类"
+  - "给帖子点赞"
+  - "给话题点赞"
+  - "修复点赞"
+
+category: "automation"
+tags:
+  - "forum"
+  - "automation"
+  - "browser"
+  - "screenshot"
+  - "ranking"
+  - "flexible"
+  - "no-python"
+  - "direct-execution"
+  - "integrated-browser"
+
+schedule:
+  enabled: true
+  frequency: "daily"
+  preferred_time: "09:00"
+
+config:
+  forum_url: "https://forum.trae.cn"
+  screenshot_dir: "./forum_screenshots"
+  data_dir: "./forum_data"
+  max_likes_per_run: 50
+  max_browse_per_run: 10
+  max_topics_to_check: 50
+  wait_between_actions: 3
+  min_wait_between_actions: 2
+  max_wait_between_actions: 5
+  browse_stay_min: 5
+  browse_stay_max: 10
+  topic_url_format: "/t/topic/{id}"
+  comment_url_format: "/t/topic/{id}/{post_number}"
+  error_retry_count: 3
+  timeout_seconds: 30
+  like_button_selector: ".toggle-like"
+  like_button_text: "点赞"
+  unlike_button_text: "取消赞"
+  has_like_class: "has-like"
+  excluded_regions:
+    - ".topic-map"
+    - ".topic-footer-buttons"
+  comment_post_numbers: [50, 100, 150, 200, 250, 300, 350, 400, 450, 500]
+
+execution_modes:
+  full: "完整流程：执行三大类任务依次执行"
+  statistics: "仅第一大类：统计类、收集类型的任务"
+  auto: "仅第二大类：技能自动做的（包括浏览和点赞）"
+  user: "仅第三大类：要我做的（用户手动任务指引）"
+  like_topic: "给指定话题点赞：给单个话题的所有未点赞按钮点赞"

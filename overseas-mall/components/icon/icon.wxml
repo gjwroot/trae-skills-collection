@@ -1,0 +1,3 @@
+<view class="icon {{className}}" style="font-size: {{size}}; width: {{size}}; height: {{size}};">
+  <image class="icon-image" src="{{iconSrc}}" mode="aspectFit" style="width: 100%; height: 100%;" />
+</view>

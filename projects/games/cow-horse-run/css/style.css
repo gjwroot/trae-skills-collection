@@ -1,0 +1,255 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 游戏容器 */
+.game-container {
+    width: 100%;
+    max-width: 800px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+/* 屏幕样式 */
+.screen {
+    padding: 40px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.screen.hidden {
+    display: none;
+}
+
+/* 标题样式 */
+h1 {
+    font-size: 3rem;
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: #4ecdc4;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* 说明区域 */
+.instructions, .powerups-info {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 500px;
+}
+
+.instructions p, .powerups-info p {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+/* 段落样式 */
+p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.high-score-display {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #f39c12;
+}
+
+.new-record {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #e74c3c;
+    animation: pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+}
+
+/* 按钮样式 */
+.btn {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(78, 205, 196, 0.5);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+.jump-btn {
+    background: linear-gradient(45deg, #f093fb, #f5576c);
+    box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+}
+
+.jump-btn:hover {
+    box-shadow: 0 8px 25px rgba(245, 87, 108, 0.5);
+}
+
+.duck-btn {
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+}
+
+.duck-btn:hover {
+    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.5);
+}
+
+/* 游戏界面 */
+#game-screen {
+    padding: 20px;
+}
+
+/* 游戏头部 */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px 25px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.score, .high-score, .lives {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+}
+
+.score span, .high-score span, .lives span {
+    color: #ffd700;
+}
+
+/* 游戏画布 */
+#game-canvas {
+    background: linear-gradient(180deg, #87CEEB 0%, #f0f8ff 100%);
+    border: 3px solid #4ecdc4;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 游戏控制 */
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* 游戏结束界面 */
+#game-over-screen {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+#final-score {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .game-container {
+        margin: 10px;
+        border-radius: 15px;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    .screen {
+        padding: 25px;
+    }
+    
+    .game-header {
+        padding: 10px 15px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .score, .high-score, .lives {
+        font-size: 1rem;
+    }
+    
+    #game-canvas {
+        width: 100%;
+        height: auto;
+    }
+    
+    .btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+    
+    .instructions, .powerups-info {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .game-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        margin: 5px 0;
+        width: 180px;
+    }
+}

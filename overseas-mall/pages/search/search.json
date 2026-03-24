@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "custom-icon": "/components/icon/icon",
+    "empty-state": "/components/empty-state/empty-state",
+    "custom-nav": "/components/custom-nav/custom-nav"
+  }
+}

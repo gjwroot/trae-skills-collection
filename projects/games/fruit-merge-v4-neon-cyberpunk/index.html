@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>合成大西瓜 | 赛博朋克版</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    <div class="scanline"></div>
+    
+    <div class="game-wrapper">
+        <div class="header">
+            <h1 class="title glitch" data-text="FRUIT MERGE">FRUIT MERGE</h1>
+            <div class="subtitle">// 合成大西瓜 v2.0 //</div>
+            
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-label">SCORE</div>
+                    <div class="stat-value" id="score">0</div>
+                    <div class="stat-bar"></div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">HIGH SCORE</div>
+                    <div class="stat-value" id="best-score">0</div>
+                    <div class="stat-bar"></div>
+                </div>
+                <div class="stat-box next-box">
+                    <div class="stat-label">NEXT</div>
+                    <div class="next-fruit" id="next-fruit"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-area" id="game-area">
+            <div class="game-border">
+                <canvas id="game-canvas"></canvas>
+                <div class="danger-line">
+                    <span class="danger-text">⚠ DANGER ZONE ⚠</span>
+                </div>
+                <div class="corner corner-tl"></div>
+                <div class="corner corner-tr"></div>
+                <div class="corner corner-bl"></div>
+                <div class="corner corner-br"></div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="restart-btn" class="btn-restart">
+                <span class="btn-text">[ RESTART ]</span>
+                <div class="btn-glitch"></div>
+            </button>
+        </div>
+        
+        <div class="fruit-guide">
+            <div class="guide-header">EVOLUTION CHAIN</div>
+            <div class="fruit-chain">
+                <span class="fruit-item">🍇</span>
+                <span class="arrow">▶</span>
+                <span class="fruit-item">🍒</span>
+                <span class="arrow">▶</span>
+                <span class="fruit-item">🍊</span>
+                <span class="arrow">▶</span>
+                <span class="fruit-item">🍋</span>
+                <span class="arrow">▶</span>
+                <span class="fruit-item">🍎</span>
+                <span class="arrow">▶</span>
+                <span class="fruit-item">🍐</span>
+                <span class="arrow">▶</span>
+                <span class="fruit-item">🍑</span>
+                <span class="arrow">▶</span>
+                <span class="fruit-item">🍍</span>
+                <span class="arrow">▶</span>
+                <span class="fruit-item highlight">🍉</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">☠</div>
+                <h2 class="modal-title">GAME OVER</h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-label">FINAL SCORE</div>
+                <div class="modal-score" id="final-score">0</div>
+            </div>
+            <button id="play-again-btn" class="btn-play">
+                <span class="btn-text">[ PLAY AGAIN ]</span>
+            </button>
+        </div>
+    </div>
+    
+    <script src="js/game.js"></script>
+</body>
+</html>

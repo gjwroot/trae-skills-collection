@@ -1,0 +1,228 @@
+<view class="goods-detail-container">
+  <custom-nav title="Product Details" showBack="{{true}}" />
+  <scroll-view class="main-content" scroll-y="{{true}}">
+    <view class="goods-images">
+      <swiper class="swiper" indicator-dots="{{true}}" autoplay="{{true}}" circular="{{true}}" indicator-color="rgba(255, 255, 255, 0.5)" indicator-active-color="#FF6B4A">
+        <swiper-item wx:for="{{goodsImages}}" wx:key="index" bindtap="previewImage" data-current="{{index}}">
+          <image class="swiper-image" src="{{item || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+        </swiper-item>
+      </swiper>
+    </view>
+
+    <view class="goods-info">
+      <view class="price-row">
+        <text class="current-price">${{goodsInfo.price}}</text>
+        <text class="original-price" wx:if="{{goodsInfo.originalPrice}}">${{goodsInfo.originalPrice}}</text>
+        <view class="discount-tag" wx:if="{{goodsInfo.discount}}">-{{goodsInfo.discount}}%</view>
+      </view>
+
+      <text class="goods-name">{{goodsInfo.name}}</text>
+      <text class="goods-desc">{{goodsInfo.description}}</text>
+
+      <view class="sales-info">
+        <text>{{goodsInfo.sales}} sold</text>
+        <text>{{goodsInfo.stock}} in stock</text>
+      </view>
+
+      <view class="coupon-prompt" bindtap="navigateToCouponCenter">
+        <custom-icon name="coupon" size="18px" color="#FF6B4A" />
+        <text class="coupon-text">Get up to $20 off</text>
+        <custom-icon name="arrow" size="12px" color="#999" />
+      </view>
+    </view>
+
+    <view class="specs-section" bindtap="showSpecsPopup">
+      <view class="cell">
+        <text class="cell-title">Select Specifications</text>
+        <view class="cell-value">
+          <text class="selected-specs">{{selectedSpecsText || 'Please select'}}</text>
+          <custom-icon name="arrow" size="14px" color="#999" />
+        </view>
+      </view>
+    </view>
+
+    <view class="service-section">
+      <view class="cell">
+        <view class="cell-title-with-icon">
+          <custom-icon name="service-o" size="20px" color="#FF6B4A" />
+          <text>Services</text>
+        </view>
+        <view class="service-tags">
+          <text class="service-tag">Free Shipping</text>
+          <text class="service-tag">7-Day Return</text>
+          <text class="service-tag">Quality Guarantee</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="shop-section">
+      <view class="shop-info">
+        <view class="shop-logo-box">
+          <custom-icon name="shop-o" size="24px" color="#FF6B4A" />
+        </view>
+        <view class="shop-text">
+          <text class="shop-name">{{shopInfo.name}}</text>
+          <view class="shop-stats">
+            <text>Products: {{shopInfo.productCount}}</text>
+            <text>Followers: {{shopInfo.followerCount}}</text>
+          </view>
+        </view>
+        <button class="follow-btn {{isFollowedShop ? 'followed' : ''}}" bindtap="followShop">{{isFollowedShop ? 'Followed' : 'Follow'}}</button>
+      </view>
+    </view>
+
+    <view class="detail-section">
+      <view class="section-title">Product Details</view>
+      <view class="detail-content">
+        <rich-text nodes="{{goodsInfo.detail}}"></rich-text>
+      </view>
+    </view>
+
+    <view class="qna-section">
+      <view class="section-header" bindtap="navigateToQnA">
+        <text class="section-title">Q&A ({{qnaCount}})</text>
+        <view class="header-actions">
+          <text class="view-all">View All</text>
+        </view>
+      </view>
+      <view class="qna-empty">
+        <text class="qna-hint">Ask questions about this product</text>
+        <text class="qna-action" bindtap="navigateToQnA">Ask Now</text>
+      </view>
+    </view>
+
+    <view class="reviews-section">
+      <view class="section-header">
+        <text class="section-title">Reviews ({{reviewCount}})</text>
+        <view class="header-actions">
+          <text class="write-review" bindtap="writeReview">Write Review</text>
+          <text class="view-all" bindtap="viewAllReviews">View All</text>
+        </view>
+      </view>
+
+      <view class="review-list">
+        <view class="review-item" wx:for="{{reviews}}" wx:key="id">
+          <view class="review-header">
+            <view class="user-info">
+              <view class="user-avatar-box">
+                <custom-icon name="user-o" size="16px" color="#FF6B4A" />
+              </view>
+              <text class="user-name">{{item.userName}}</text>
+            </view>
+            <view class="rating">
+              <custom-icon wx:for="{{5}}" wx:key="index" wx:for-item="star" name="{{star < item.rating ? 'star' : 'star-o'}}" size="14px" color="{{star < item.rating ? '#FF6B4A' : '#ddd'}}" />
+            </view>
+          </view>
+          <text class="review-content">{{item.content}}</text>
+          <text class="review-time">{{item.time}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="recommend-section" wx:if="{{recommendGoods.length > 0}}">
+      <view class="section-title">You May Also Like</view>
+      <view class="recommend-grid">
+        <view class="recommend-item" wx:for="{{recommendGoods}}" wx:key="id" bindtap="navigateToRecommendDetail" data-id="{{item.id}}">
+          <image class="recommend-image" src="{{item.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+          <text class="recommend-name">{{item.name}}</text>
+          <view class="recommend-price">
+            <text class="current">${{item.price}}</text>
+            <text class="original" wx:if="{{item.originalPrice}}">${{item.originalPrice}}</text>
+          </view>
+          <view class="recommend-tag" wx:if="{{item.isHot}}">Hot</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="bottom-bar">
+    <view class="action-icons">
+      <view class="action-item" bindtap="navigateToShop">
+        <custom-icon name="shop-o" size="24px" color="#666" />
+        <text>Shop</text>
+      </view>
+      <view class="action-item" bindtap="navigateToChat">
+        <custom-icon name="chat-o" size="24px" color="#666" />
+        <text>Chat</text>
+      </view>
+      <view class="action-item" bindtap="toggleFavorite">
+        <custom-icon name="{{isFavorite ? 'star' : 'star-o'}}" size="24px" color="{{isFavorite ? '#FF6B4A' : '#666'}}" />
+        <text>{{isFavorite ? 'Saved' : 'Save'}}</text>
+      </view>
+      <view class="action-item" bindtap="toggleWishlist">
+        <custom-icon name="{{isInWishlist ? 'heart' : 'heart-o'}}" size="24px" color="{{isInWishlist ? '#FF6B4A' : '#666'}}" />
+        <text>{{isInWishlist ? 'Wishlisted' : 'Wishlist'}}</text>
+      </view>
+      <view class="action-item" bindtap="toggleCompare">
+        <custom-icon name="{{isInCompare ? 'compare' : 'compare-o'}}" size="24px" color="{{isInCompare ? '#FF6B4A' : '#666'}}" />
+        <text>{{isInCompare ? 'Compared' : 'Compare'}}</text>
+      </view>
+      <view class="action-item" open-type="share">
+        <custom-icon name="share-o" size="24px" color="#666" />
+        <text>Share</text>
+      </view>
+    </view>
+
+    <view class="action-buttons">
+      <button class="add-cart-btn" bindtap="addToCart">Add to Cart</button>
+      <button class="buy-now-btn" bindtap="buyNow">Buy Now</button>
+    </view>
+  </view>
+
+  <view class="specs-popup {{showSpecs ? 'show' : ''}}" bindtap="hideSpecsPopup">
+    <view class="specs-popup-content" catchtap="preventBubble">
+      <view class="popup-header">
+        <view class="popup-product-info">
+          <image class="popup-product-image" src="{{goodsImages[0] || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+          <view class="popup-product-text">
+            <text class="popup-product-price">${{goodsInfo.price}}</text>
+            <text class="popup-product-stock">{{goodsInfo.stock}} in stock</text>
+          </view>
+        </view>
+        <view class="close-btn" bindtap="hideSpecsPopup">
+          <custom-icon name="cross" size="20px" color="#999" />
+        </view>
+      </view>
+
+      <view class="specs-content">
+        <view class="specs-item" wx:for="{{specList}}" wx:key="id">
+          <text class="specs-label">{{item.name}}</text>
+          <view class="specs-options">
+            <view class="spec-option {{selectedSpecs[item.id] === option.id ? 'active' : ''}}" wx:for="{{item.options}}" wx:key="id" wx:for-item="option" bindtap="selectSpec" data-spec-id="{{item.id}}" data-option-id="{{option.id}}">
+              {{option.name}}
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="quantity-section">
+        <text>Quantity</text>
+        <view class="quick-quantities">
+          <view 
+            class="quick-quantity {{quantity === item ? 'active' : ''}} {{item > goodsInfo.stock ? 'disabled' : ''}}" 
+            wx:for="{{quickQuantities}}" 
+            wx:key="*this"
+            data-quantity="{{item}}"
+            bindtap="selectQuantity"
+          >
+            {{item}}
+          </view>
+        </view>
+        <view class="quantity-control">
+          <view class="minus {{quantity <= 1 ? 'disabled' : ''}}" bindtap="decreaseQuantity">
+            <custom-icon name="minus" size="14px" color="{{quantity <= 1 ? '#ccc' : '#333'}}" />
+          </view>
+          <text class="quantity">{{quantity}}</text>
+          <view class="plus {{quantity >= goodsInfo.stock ? 'disabled' : ''}}" bindtap="increaseQuantity">
+            <custom-icon name="plus" size="14px" color="{{quantity >= goodsInfo.stock ? '#ccc' : '#333'}}" />
+          </view>
+        </view>
+      </view>
+
+      <view class="popup-buttons">
+        <button class="popup-btn cancel-btn" bindtap="hideSpecsPopup">Cancel</button>
+        <button class="popup-btn confirm-btn" bindtap="confirmAddToCart">Add to Cart</button>
+      </view>
+    </view>
+  </view>
+</view>

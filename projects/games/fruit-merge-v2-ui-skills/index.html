@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>合成大西瓜 | 设计师版</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-wrapper">
+        <div class="header">
+            <div class="logo">
+                <span class="logo-icon">🍉</span>
+                <h1 class="logo-text">Fruit Merge</h1>
+            </div>
+            <div class="score-cards">
+                <div class="score-card">
+                    <div class="score-card-icon">⭐</div>
+                    <div class="score-card-content">
+                        <span class="score-card-label">当前分数</span>
+                        <span class="score-card-value" id="score">0</span>
+                    </div>
+                </div>
+                <div class="score-card">
+                    <div class="score-card-icon">🏆</div>
+                    <div class="score-card-content">
+                        <span class="score-card-label">最高记录</span>
+                        <span class="score-card-value" id="best-score">0</span>
+                    </div>
+                </div>
+                <div class="score-card next-card">
+                    <div class="score-card-icon">🎯</div>
+                    <div class="score-card-content">
+                        <span class="score-card-label">下一个</span>
+                        <div class="next-fruit" id="next-fruit"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-area" id="game-area">
+            <canvas id="game-canvas"></canvas>
+            <div class="danger-line">
+                <span class="danger-label">⚠️ 危险区域</span>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="restart-btn" class="btn-restart">
+                <span class="btn-icon">🔄</span>
+                <span class="btn-text">重新开始</span>
+            </button>
+        </div>
+        
+        <div class="fruit-guide">
+            <h3 class="guide-title">✨ 水果进化之路</h3>
+            <div class="fruit-chain">
+                <span class="fruit-item">🍇</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍒</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍊</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍋</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍎</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍐</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍑</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍍</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item highlight">🍉</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-emoji">😢</span>
+                <h2 class="modal-title">游戏结束</h2>
+            </div>
+            <div class="modal-body">
+                <p class="modal-label">最终得分</p>
+                <div class="modal-score" id="final-score">0</div>
+            </div>
+            <button id="play-again-btn" class="btn-play-again">
+                <span class="btn-icon">🎮</span>
+                <span class="btn-text">再来一局</span>
+            </button>
+        </div>
+    </div>
+    
+    <script src="js/game.js"></script>
+</body>
+</html>

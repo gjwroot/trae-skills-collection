@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时兴小游戏 - 清爽跑酷</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- 游戏标题 -->
+        <div class="game-header">
+            <h1>清爽跑酷</h1>
+            <div class="game-info">
+                <div class="score">分数: <span id="score">0</span></div>
+                <div class="level">关卡: <span id="level">1</span></div>
+                <div class="lives">生命: <span id="lives">3</span></div>
+            </div>
+        </div>
+        
+        <!-- 游戏画布 -->
+        <div class="game-canvas">
+            <canvas id="gameCanvas" width="800" height="400"></canvas>
+        </div>
+        
+        <!-- 游戏控制 -->
+        <div class="game-controls">
+            <button id="startBtn" class="btn-primary">开始游戏</button>
+            <button id="pauseBtn" class="btn-secondary" disabled>暂停</button>
+            <button id="restartBtn" class="btn-secondary" disabled>重新开始</button>
+        </div>
+        
+        <!-- 游戏说明 -->
+        <div class="game-instructions">
+            <h3>游戏说明</h3>
+            <p>使用 <strong>空格键</strong> 跳跃，<strong>下箭头</strong> 下蹲，躲避障碍物并收集金币！</p>
+        </div>
+    </div>
+    
+    <script src="js/game.js"></script>
+</body>
+</html>

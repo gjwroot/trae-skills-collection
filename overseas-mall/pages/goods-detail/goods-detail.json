@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "custom-icon": "/components/icon/icon",
+    "custom-nav": "/components/custom-nav/custom-nav"
+  }
+}

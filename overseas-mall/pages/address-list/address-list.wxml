@@ -1,0 +1,47 @@
+<view class="address-list-container">
+  <scroll-view class="content" scroll-y="{{true}}">
+    <view class="address-list" wx:if="{{addressList.length > 0}}">
+      <view class="address-item" wx:for="{{addressList}}" wx:key="id" bindtap="selectAddress" data-id="{{item.id}}">
+        <view class="address-content">
+          <view class="address-header">
+            <text class="address-name">{{item.name}}</text>
+            <text class="address-phone">{{item.phone}}</text>
+            <view class="default-tag" wx:if="{{item.isDefault}}">Default</view>
+          </view>
+          <text class="address-detail">{{item.province}} {{item.city}} {{item.district}} {{item.detail}}</text>
+        </view>
+        <view class="address-actions">
+          <view class="action-btn" catchtap="setDefault" data-id="{{item.id}}" data-is-default="{{item.isDefault}}">
+            <custom-icon name="{{item.isDefault ? 'passed' : 'circle'}}" size="18px" color="{{item.isDefault ? '#FF6B4A' : '#999'}}" />
+            <text>Default</text>
+          </view>
+          <view class="action-btn" catchtap="editAddress" data-id="{{item.id}}">
+            <custom-icon name="edit" size="18px" color="#999" />
+            <text>Edit</text>
+          </view>
+          <view class="action-btn delete" catchtap="deleteAddress" data-id="{{item.id}}">
+            <custom-icon name="delete-o" size="18px" color="#FF6B4A" />
+            <text>Delete</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <empty-state 
+      wx:if="{{addressList.length === 0}}"
+      icon="location-o"
+      title="No addresses yet"
+      desc="Add your first shipping address"
+      btnText="Add Address"
+      btnIcon="plus"
+      bind:btntap="addAddress"
+    />
+  </scroll-view>
+
+  <view class="bottom-bar">
+    <button class="add-btn" bindtap="addAddress">
+      <custom-icon name="plus" size="18px" color="#fff" />
+      <text>Add New Address</text>
+    </button>
+  </view>
+</view>

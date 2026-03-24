@@ -1,0 +1,58 @@
+<view class="container">
+  <view class="hero-section">
+    <view class="hero-content">
+      <text class="hero-title">快速制作</text>
+      <text class="hero-subtitle">30分钟内享美食，无需等待</text>
+    </view>
+  </view>
+
+  <view class="recipes-section">
+    <view class="section-title">
+      <text class="title">热门菜谱</text>
+    </view>
+    
+    <view class="recipe-list">
+      <view class="recipe-card" wx:for="{{recipes}}" wx:key="id">
+        <image class="recipe-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="recipe-info">
+          <view class="recipe-name">{{item.name}}</view>
+          <view class="recipe-meta">
+            <view class="meta-item">
+              <image class="meta-icon" src="{{icons.clock}}"></image>
+              <text class="meta-text">{{item.time}}</text>
+            </view>
+            <view class="meta-item">
+              <image class="meta-icon" src="{{icons.lightning}}"></image>
+              <text class="meta-text">{{item.level}}</text>
+            </view>
+          </view>
+          <view class="recipe-desc">{{item.desc}}</view>
+          <view class="recipe-bottom">
+            <view class="recipe-price">¥{{item.price}}</view>
+            <view class="quantity-control" catchtap="preventBubble">
+              <view class="quantity-btn minus" wx:if="{{item.quantity > 0}}" catchtap="decreaseQuantity" data-id="{{item.id}}">−</view>
+              <text class="quantity" wx:if="{{item.quantity > 0}}">{{item.quantity}}</text>
+              <view class="quantity-btn plus" catchtap="orderRecipe" data-id="{{item.id}}">+</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="tips-section">
+    <view class="tips-title">快速烹饪技巧</view>
+    <view class="tips-list">
+      <view class="tip-item" wx:for="{{tips}}" wx:key="id">
+        <view class="tip-icon-wrapper {{item.icon === 'lightning' ? 'lightning-bg' : 'fire-bg'}}">
+          <image class="tip-icon" wx:if="{{item.icon === 'lightning'}}" src="{{icons.lightning}}"></image>
+          <image class="tip-icon" wx:if="{{item.icon === 'fire'}}" src="{{icons.fire}}"></image>
+        </view>
+        <view class="tip-content">
+          <text class="tip-title">{{item.title}}</text>
+          <text class="tip-text">{{item.text}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

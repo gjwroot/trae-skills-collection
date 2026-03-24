@@ -1,0 +1,86 @@
+<view class="sign-in-container">
+  <view class="header-section">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <view class="check-in-card">
+        <view class="card-header">
+          <text class="card-title">Daily Check-in</text>
+          <view class="continuous-badge">
+            <custom-icon name="fire-o" size="16px" color="#FF6B4A" />
+            <text>{{continuousDays}} days</text>
+          </view>
+        </view>
+        
+        <view class="check-in-button-wrapper">
+          <button 
+            class="check-in-btn {{checkedIn ? 'checked' : ''}}" 
+            bindtap="handleCheckIn"
+            disabled="{{checkedIn}}"
+          >
+            <view class="btn-content">
+              <text wx:if="{{!checkedIn}}">Check In</text>
+              <text wx:else>Checked In ✓</text>
+              <view class="points-badge" wx:if="{{!checkedIn}}">
+                +{{todayPoints}}
+              </view>
+            </view>
+          </button>
+        </view>
+
+        <view class="stats-row">
+          <view class="stat-item">
+            <text class="stat-value">{{stats.totalCheckIns}}</text>
+            <text class="stat-label">Total</text>
+          </view>
+          <view class="stat-divider"></view>
+          <view class="stat-item">
+            <text class="stat-value">{{stats.totalPoints}}</text>
+            <text class="stat-label">Points</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weekly-section">
+    <view class="section-title">Weekly Rewards</view>
+    <view class="weekly-rewards">
+      <view 
+        class="reward-item {{item.active ? 'active' : ''}} {{item.today ? 'today' : ''}}"
+        wx:for="{{weeklyRewards}}"
+        wx:key="day"
+      >
+        <view class="reward-day">Day {{item.day}}</view>
+        <view class="reward-icon">
+          <custom-icon 
+            name="{{item.active ? 'gem' : 'gem-o'}}" 
+            size="24px" 
+            color="{{item.active ? '#FFD700' : '#ccc'}}" 
+          />
+        </view>
+        <view class="reward-points">+{{item.points}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="calendar-section">
+    <view class="section-title">
+      <text>{{currentYear}}-{{currentMonth}}</text>
+    </view>
+    <view class="calendar">
+      <view class="week-header">
+        <view class="week-day" wx:for="{{weekDays}}" wx:key="*this">{{item}}</view>
+      </view>
+      <view class="calendar-days">
+        <view 
+          class="calendar-day {{item.empty ? 'empty' : ''}} {{item.checked ? 'checked' : ''}} {{item.today ? 'today' : ''}}"
+          wx:for="{{generateCalendarDays()}}"
+          wx:key="*this"
+        >
+          {{item.day}}
+          <view class="check-mark" wx:if="{{item.checked}}">✓</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

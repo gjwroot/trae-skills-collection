@@ -1,0 +1,77 @@
+{
+  "like": {
+    "last_topic_id": 62,
+    "current_topic_id": 62,
+    "next_topic_id": 63,
+    "total_topic_liked": 0,
+    "total_comment_liked": 3,
+    "history": [
+      {
+        "topic_id": 62,
+        "post_number": 95,
+        "timestamp": "2026-03-23T19:35:00.000000",
+        "status": "liked"
+      },
+      {
+        "topic_id": 62,
+        "post_number": 97,
+        "timestamp": "2026-03-23T19:36:00.000000",
+        "status": "liked"
+      },
+      {
+        "topic_id": 62,
+        "post_number": 145,
+        "timestamp": "2026-03-23T19:38:00.000000",
+        "status": "liked"
+      }
+    ]
+  },
+  "browse": {
+    "last_topic_id": 62,
+    "current_topic_id": 62,
+    "next_topic_id": 63,
+    "total_browsed": 3,
+    "history": [
+      {
+        "topic_id": 62,
+        "post_number": 50,
+        "timestamp": "2026-03-23T19:30:00.000000"
+      },
+      {
+        "topic_id": 62,
+        "post_number": 100,
+        "timestamp": "2026-03-23T19:33:00.000000"
+      },
+      {
+        "topic_id": 62,
+        "post_number": 150,
+        "timestamp": "2026-03-23T19:37:00.000000"
+      }
+    ]
+  },
+  "recommendation": {
+    "current_batch_start": 50,
+    "batch_size": 50,
+    "total_topics": 3126
+  },
+  "non_existent_topics": [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+    31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+    41, 42, 43, 44, 45, 46, 47, 48, 49, 50
+  ],
+  "last_updated": "2026-03-23T19:39:00.000000",
+  "last_execution_time": "2026-03-23T19:30:00.000000",
+  "execution_mode": "auto",
+  "direct_execution": true,
+  "fixes": {
+    "like_button_selector": "Updated to properly identify unliked buttons and exclude non-like regions",
+    "excluded_regions": [".topic-map", ".topic-footer-buttons"],
+    "like_button_text": "Updated to match actual button text: '点赞'",
+    "unlike_button_text": "Updated to match actual button text: '取消赞'",
+    "has_like_class": "Added detection for 'has-like' class",
+    "like_class": "Added detection for 'like' class (unliked state)",
+    "navigation_method": "Changed from scrolling to URL navigation (e.g., /t/topic/62/50)"
+  }
+}

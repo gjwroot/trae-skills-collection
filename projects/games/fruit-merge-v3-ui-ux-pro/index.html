@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>合成大西瓜 | 玻璃拟态版</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    
+    <div class="game-wrapper">
+        <div class="glass-card header">
+            <h1 class="title">🍉 合成大西瓜</h1>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-label">分数</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">最高</span>
+                    <span class="stat-value" id="best-score">0</span>
+                </div>
+                <div class="stat-box next-box">
+                    <span class="stat-label">下一个</span>
+                    <div class="next-fruit" id="next-fruit"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-area" id="game-area">
+            <canvas id="game-canvas"></canvas>
+            <div class="danger-line"></div>
+        </div>
+        
+        <div class="glass-card controls">
+            <button id="restart-btn" class="btn-restart">🔄 重新开始</button>
+        </div>
+        
+        <div class="glass-card fruit-guide">
+            <div class="fruit-chain">
+                <span class="fruit-item">🍇</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍒</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍊</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍋</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍎</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍐</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍑</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍍</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item highlight">🍉</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="game-over-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content glass-card">
+            <div class="modal-icon">😢</div>
+            <h2 class="modal-title">游戏结束</h2>
+            <div class="modal-score-box">
+                <span class="modal-label">最终得分</span>
+                <div class="modal-score" id="final-score">0</div>
+            </div>
+            <button id="play-again-btn" class="btn-play">再来一局 🎮</button>
+        </div>
+    </div>
+    
+    <script src="js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<view class="loading-state-container" wx:if="{{show}}">
+  <view class="loading-wrapper" wx:if="{{type === 'loading'}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">{{text || 'Loading...'}}</text>
+  </view>
+  
+  <view class="error-wrapper" wx:if="{{type === 'error'}}">
+    <custom-icon name="warning" size="64px" color="#ff6b6b" />
+    <text class="error-title">{{title || 'Oops!'}}</text>
+    <text class="error-desc">{{desc || 'Something went wrong'}}</text>
+    <button class="retry-btn" wx:if="{{showRetry}}" bindtap="onRetry">
+      {{retryText || 'Retry'}}
+    </button>
+  </view>
+  
+  <view class="empty-wrapper" wx:if="{{type === 'empty'}}">
+    <custom-icon name="{{icon || 'box'}}" size="80px" color="#ddd" />
+    <text class="empty-title">{{title || 'No Data'}}</text>
+    <text class="empty-desc" wx:if="{{desc}}">{{desc}}</text>
+    <button class="action-btn" wx:if="{{showAction}}" bindtap="onAction">
+      {{actionText || 'Action'}}
+    </button>
+  </view>
+</view>

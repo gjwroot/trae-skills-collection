@@ -1,0 +1,21 @@
+# 通用配置
+general:
+  timezone: "Asia/Shanghai"
+  cache_enabled: true
+  cache_ttl_hours: 24
+  timeout_seconds: 30
+
+# AI 配置
+ai:
+  scoring_enabled: true
+  score_threshold: 3.0
+
+# 输出配置
+output:
+  format: "markdown"
+  output_dir: "data/output"
+
+# 日志配置
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

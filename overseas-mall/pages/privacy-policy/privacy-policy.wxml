@@ -1,0 +1,66 @@
+<view class="privacy-container">
+  <scroll-view class="content" scroll-y="{{true}}">
+    <view class="section">
+      <text class="section-title">1. Introduction</text>
+      <text class="section-text">Welcome to Overseas Mall. This Privacy Policy explains how we collect, use, and protect your personal information when you use our app and services.</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">2. Information We Collect</text>
+      <text class="section-text">• Personal information: name, phone number, email address, delivery address</text>
+      <text class="section-text">• Account information: username, password, profile</text>
+      <text class="section-text">• Transaction information: order history, payment records, shopping preferences</text>
+      <text class="section-text">• Device information: device type, operating system, IP address</text>
+      <text class="section-text">• Usage information: browsing history, search records, click data</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">3. How We Use Your Information</text>
+      <text class="section-text">• To provide and improve our services</text>
+      <text class="section-text">• To process your orders and payments</text>
+      <text class="section-text">• To communicate with you about orders and promotions</text>
+      <text class="section-text">• To personalize your shopping experience</text>
+      <text class="section-text">• To detect and prevent fraud</text>
+      <text class="section-text">• To comply with legal obligations</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">4. Information Sharing</text>
+      <text class="section-text">We do not sell, trade, or rent your personal information to third parties except:</text>
+      <text class="section-text">• Service providers: logistics, payment processors, IT services</text>
+      <text class="section-text">• Legal requirements: court orders, government requests</text>
+      <text class="section-text">• Business transfers: mergers, acquisitions</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">5. Data Security</text>
+      <text class="section-text">We implement appropriate security measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction.</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">6. Your Rights</text>
+      <text class="section-text">• Access: Access your personal information</text>
+      <text class="section-text">• Correct: Update or correct your personal information</text>
+      <text class="section-text">• Delete: Request deletion of your personal information</text>
+      <text class="section-text">• Opt-out: Opt out of marketing communications</text>
+      <text class="section-text">• Withdraw consent: Withdraw your consent to data processing</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">7. Children's Privacy</text>
+      <text class="section-text">Our services are not intended for children under 13. We do not knowingly collect personal information from children under 13.</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">8. Changes to This Policy</text>
+      <text class="section-text">We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">9. Contact Us</text>
+      <text class="section-text">If you have any questions about this Privacy Policy, please contact us at: support@overseasmall.com</text>
+    </view>
+
+    <view class="footer-space"></view>
+  </scroll-view>
+</view>

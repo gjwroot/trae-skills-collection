@@ -1,0 +1,125 @@
+<view class="checkout-container">
+  <scroll-view class="main-content" scroll-y="{{true}}">
+    <view class="address-section" bindtap="selectAddress">
+      <view class="address-content" wx:if="{{address}}">
+        <view class="address-header">
+          <custom-icon name="location" size="20px" color="#FF6B4A" />
+          <text class="address-name">{{address.name}}</text>
+          <text class="address-phone">{{address.phone}}</text>
+        </view>
+        <text class="address-detail">{{address.province}} {{address.city}} {{address.district}} {{address.detail}}</text>
+      </view>
+      <view class="address-empty" wx:else>
+        <custom-icon name="location-o" size="20px" color="#999" />
+        <text>Please add shipping address</text>
+      </view>
+      <custom-icon name="arrow" size="14px" color="#999" />
+    </view>
+
+    <view class="goods-section">
+      <view class="section-title">Order Items</view>
+      <view class="goods-list">
+        <view class="goods-item" wx:for="{{goodsList}}" wx:key="id">
+          <image class="goods-image" lazy-load="{{true}}" src="{{item.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+          <view class="goods-info">
+            <text class="goods-name">{{item.name}}</text>
+            <text class="goods-spec" wx:if="{{item.spec}}">{{item.spec}}</text>
+            <view class="price-row">
+              <text class="price">${{item.price}}</text>
+              <text class="quantity">x{{item.quantity}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="coupon-section">
+      <view class="cell" bindtap="selectCoupon">
+        <text class="cell-title">Coupon</text>
+        <view class="cell-value">
+          <text class="coupon-value {{selectedCoupon ? 'active' : ''}}">{{selectedCoupon ? '-' + selectedCoupon.discount + ' USD' : 'Select coupon'}}</text>
+          <custom-icon name="arrow" size="14px" color="#999" />
+        </view>
+      </view>
+      <view class="remove-coupon" wx:if="{{selectedCoupon}}" bindtap="removeCoupon">
+        <custom-icon name="close" size="16px" color="#FF6B4A" />
+      </view>
+    </view>
+
+    <view class="remark-section">
+      <view class="cell">
+        <text class="cell-title">Order Note</text>
+        <input class="remark-input" placeholder="Leave a message to seller" value="{{remark}}" bindinput="onRemarkInput" />
+      </view>
+    </view>
+
+    <view class="payment-section">
+      <view class="section-title">Payment Method</view>
+      <view class="payment-list">
+        <view class="payment-item {{selectedPayment === 'wechat' ? 'active' : ''}}" bindtap="selectPayment" data-type="wechat">
+          <view class="payment-icon">
+            <custom-icon name="chat" size="32px" color="#07C160" />
+          </view>
+          <view class="payment-info">
+            <text class="payment-name">WeChat Pay</text>
+            <text class="payment-desc">Fast and secure</text>
+          </view>
+          <view class="payment-check">
+            <custom-icon name="{{selectedPayment === 'wechat' ? 'success' : ''}}" size="24px" color="#FF6B4A" />
+          </view>
+        </view>
+        <view class="payment-item {{selectedPayment === 'alipay' ? 'active' : ''}}" bindtap="selectPayment" data-type="alipay">
+          <view class="payment-icon">
+            <custom-icon name="wallet" size="32px" color="#1677FF" />
+          </view>
+          <view class="payment-info">
+            <text class="payment-name">Alipay</text>
+            <text class="payment-desc">Convenient payment</text>
+          </view>
+          <view class="payment-check">
+            <custom-icon name="{{selectedPayment === 'alipay' ? 'success' : ''}}" size="24px" color="#FF6B4A" />
+          </view>
+        </view>
+        <view class="payment-item {{selectedPayment === 'card' ? 'active' : ''}}" bindtap="selectPayment" data-type="card">
+          <view class="payment-icon">
+            <custom-icon name="card" size="32px" color="#666" />
+          </view>
+          <view class="payment-info">
+            <text class="payment-name">Credit Card</text>
+            <text class="payment-desc">Visa, Mastercard</text>
+          </view>
+          <view class="payment-check">
+            <custom-icon name="{{selectedPayment === 'card' ? 'success' : ''}}" size="24px" color="#FF6B4A" />
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="price-section">
+      <view class="price-row">
+        <text class="price-label">Subtotal</text>
+        <text class="price-value">${{subtotal}}</text>
+      </view>
+      <view class="price-row">
+        <text class="price-label">Shipping</text>
+        <text class="price-value">{{shipping > 0 ? '$' + shipping : 'Free'}}</text>
+      </view>
+      <view class="price-row" wx:if="{{selectedCoupon}}">
+        <text class="price-label">Coupon</text>
+        <text class="price-value discount">-${{selectedCoupon.discount}}</text>
+      </view>
+      <view class="price-row total">
+        <text class="price-label">Total</text>
+        <text class="price-value">${{totalPrice}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="bottom-bar">
+    <view class="total-info">
+      <text class="total-label">Total:</text>
+      <text class="total-price">${{totalPrice}}</text>
+    </view>
+    <button class="submit-btn" bindtap="submitOrder">Submit Order</button>
+  </view>
+</view>

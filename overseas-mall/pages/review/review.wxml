@@ -1,0 +1,52 @@
+<view class="review-container">
+  <view class="goods-section">
+    <view class="goods-item" wx:for="{{goodsList}}" wx:key="id">
+      <image class="goods-image" lazy-load="{{true}}" src="{{item.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+      <view class="goods-info">
+        <text class="goods-name">{{item.name}}</text>
+        <text class="goods-spec" wx:if="{{item.spec}}">{{item.spec}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="rating-section">
+    <text class="section-title">Overall Rating</text>
+    <view class="rating-stars">
+      <view class="star-item" wx:for="{{5}}" wx:key="index" bindtap="setRating" data-rating="{{index + 1}}">
+        <custom-icon name="{{rating > index ? 'star' : 'star-o'}}" size="32px" color="{{rating > index ? '#FF6B4A' : '#ddd'}}" />
+      </view>
+    </view>
+    <text class="rating-text">{{ratingText}}</text>
+  </view>
+
+  <view class="content-section">
+    <text class="section-title">Review Content</text>
+    <textarea class="review-textarea" placeholder="Share your experience with this product..." value="{{content}}" bindinput="onContentInput" maxlength="500" />
+    <text class="word-count">{{content.length}}/500</text>
+  </view>
+
+  <view class="image-section">
+    <text class="section-title">Add Photos (Optional)</text>
+    <view class="image-list">
+      <view class="image-item" wx:for="{{images}}" wx:key="index">
+        <image class="preview-image" src="{{item}}" mode="aspectFill" />
+        <view class="remove-btn" bindtap="removeImage" data-index="{{index}}">
+          <custom-icon name="cross" size="14px" color="#fff" />
+        </view>
+      </view>
+      <view class="add-image-btn" wx:if="{{images.length < 9}}" bindtap="addImage">
+        <custom-icon name="photo-o" size="32px" color="#ccc" />
+        <text>{{images.length}}/9</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="anonymous-section">
+    <view class="anonymous-toggle" bindtap="toggleAnonymous">
+      <custom-icon name="{{isAnonymous ? 'passed' : 'circle'}}" size="20px" color="{{isAnonymous ? '#FF6B4A' : '#999'}}" />
+      <text>Submit anonymously</text>
+    </view>
+  </view>
+
+  <button class="submit-btn" bindtap="submitReview">Submit Review</button>
+</view>

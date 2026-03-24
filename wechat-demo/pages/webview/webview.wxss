@@ -1,0 +1,31 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.warning-box {
+  background: #fffbe6;
+  border: 2rpx solid #ffe58f;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin: 20rpx;
+}
+
+.warning-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #d48806;
+  margin-bottom: 16rpx;
+}
+
+.warning-item {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.8;
+}
+
+web-view {
+  flex: 1;
+  width: 100%;
+}

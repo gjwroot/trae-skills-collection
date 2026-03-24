@@ -1,0 +1,54 @@
+<view class="container">
+  <view class="hero-section">
+    <view class="hero-content">
+      <text class="hero-title">家的味道</text>
+      <text class="hero-subtitle">妈妈的手艺，温暖你的胃</text>
+    </view>
+  </view>
+
+  <view class="homefoods-section">
+    <view class="section-title">
+      <text class="title">妈妈的拿手菜</text>
+    </view>
+    
+    <view class="homefood-list">
+      <view class="homefood-card" wx:for="{{homefoods}}" wx:key="id">
+        <image class="homefood-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="homefood-info">
+          <view class="homefood-name">{{item.name}}</view>
+          <view class="homefood-story">{{item.story}}</view>
+          <view class="homefood-bottom">
+            <view class="homefood-price">¥{{item.price}}</view>
+            <view class="quantity-control" catchtap="preventBubble">
+              <view class="quantity-btn minus" wx:if="{{item.quantity > 0}}" catchtap="decreaseHomeFoodQuantity" data-id="{{item.id}}">−</view>
+              <text class="quantity" wx:if="{{item.quantity > 0}}">{{item.quantity}}</text>
+              <view class="quantity-btn plus" catchtap="orderHomeFood" data-id="{{item.id}}">+</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="memory-section">
+    <view class="memory-title">小时候的回忆</view>
+    <view class="memory-list">
+      <view class="memory-item" wx:for="{{memories}}" wx:key="id">
+        <view class="memory-left">
+          <view class="memory-icon-wrapper">
+            <text class="memory-emoji">{{item.icon}}</text>
+          </view>
+          <view class="memory-info">
+            <text class="memory-name">{{item.name}}</text>
+            <text class="memory-price">¥{{item.price}}</text>
+          </view>
+        </view>
+        <view class="quantity-control" catchtap="preventBubble">
+          <view class="quantity-btn minus" wx:if="{{item.quantity > 0}}" catchtap="decreaseMemoryQuantity" data-id="{{item.id}}">−</view>
+          <text class="quantity" wx:if="{{item.quantity > 0}}">{{item.quantity}}</text>
+          <view class="quantity-btn plus" catchtap="orderMemory" data-id="{{item.id}}">+</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "Wishlist",
+  "navigationBarBackgroundColor": "#FF6B4A",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true
+}

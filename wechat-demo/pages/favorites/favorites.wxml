@@ -1,0 +1,28 @@
+<view class="container">
+  <view wx:if="{{favorites.length === 0}}" class="empty-section">
+    <view class="empty-icon">💔</view>
+    <view class="empty-text">还没有收藏的菜品</view>
+    <view class="go-menu-btn" bindtap="goToMenu">去菜单看看</view>
+  </view>
+
+  <view wx:else class="favorites-list">
+    <view class="menu-item" wx:for="{{favorites}}" wx:key="id">
+      <view class="item-header">
+        <image class="item-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="favorite-btn" bindtap="toggleFavorite" data-item="{{item}}">
+          <text>❤️</text>
+        </view>
+      </view>
+      <view class="item-info">
+        <view class="item-name">{{item.name}}</view>
+        <view class="item-desc">{{item.description}}</view>
+        <view class="item-bottom">
+          <view class="item-price">¥{{item.price}}</view>
+          <view class="add-cart-btn" bindtap="addToCart" data-item="{{item}}">
+            加入购物车
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

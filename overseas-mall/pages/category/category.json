@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "Category",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "custom-icon": "/components/icon/icon",
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}

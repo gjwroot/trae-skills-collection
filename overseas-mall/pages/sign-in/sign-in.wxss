@@ -1,0 +1,275 @@
+.sign-in-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.header-section {
+  position: relative;
+  padding-top: calc(20rpx + env(safe-area-inset-top));
+}
+
+.header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400rpx;
+  background: linear-gradient(135deg, #FF6B4A 0%, #FF8E6B 100%);
+  border-bottom-left-radius: 40rpx;
+  border-bottom-right-radius: 40rpx;
+}
+
+.header-content {
+  position: relative;
+  padding: 20rpx;
+}
+
+.check-in-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 40rpx 30rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+.card-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+.continuous-badge {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  padding: 8rpx 20rpx;
+  background: #FFF5F3;
+  border-radius: 30rpx;
+}
+
+.continuous-badge text {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #FF6B4A;
+}
+
+.check-in-button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40rpx;
+}
+
+.check-in-btn {
+  width: 280rpx;
+  height: 280rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF6B4A 0%, #FF8E6B 100%);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 74, 0.4);
+}
+
+.check-in-btn.checked {
+  background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+  box-shadow: 0 8rpx 24rpx rgba(76, 175, 80, 0.4);
+}
+
+.check-in-btn[disabled] {
+  opacity: 1;
+}
+
+.btn-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.btn-content text {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #fff;
+}
+
+.points-badge {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #fff;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 60rpx;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.stat-value {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #FF6B4A;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.stat-divider {
+  width: 1rpx;
+  height: 60rpx;
+  background: #f0f0f0;
+}
+
+.weekly-section,
+.calendar-section {
+  background: #fff;
+  margin: 20rpx;
+  border-radius: 20rpx;
+  padding: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 24rpx;
+}
+
+.weekly-rewards {
+  display: flex;
+  justify-content: space-between;
+}
+
+.reward-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+  padding: 20rpx 10rpx;
+  border-radius: 16rpx;
+  background: #f9f9f9;
+  flex: 1;
+  margin: 0 4rpx;
+}
+
+.reward-item.active {
+  background: linear-gradient(135deg, #FFF5F3 0%, #FFE8E3 100%);
+}
+
+.reward-item.today {
+  border: 2rpx solid #FF6B4A;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.reward-day {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.reward-item.active .reward-day {
+  color: #FF6B4A;
+  font-weight: 600;
+}
+
+.reward-icon {
+  margin: 8rpx 0;
+}
+
+.reward-points {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #666;
+}
+
+.reward-item.active .reward-points {
+  color: #FF6B4A;
+}
+
+.calendar {
+  margin-top: 20rpx;
+}
+
+.week-header {
+  display: flex;
+  margin-bottom: 16rpx;
+}
+
+.week-day {
+  flex: 1;
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+  font-weight: 500;
+  padding: 12rpx 0;
+}
+
+.calendar-days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.calendar-day {
+  width: calc(100% / 7);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  color: #333;
+  position: relative;
+  border-radius: 50%;
+}
+
+.calendar-day.empty {
+  visibility: hidden;
+}
+
+.calendar-day.checked {
+  background: linear-gradient(135deg, #FF6B4A 0%, #FF8E6B 100%);
+  color: #fff;
+  font-weight: 600;
+}
+
+.calendar-day.today {
+  border: 2rpx solid #FF6B4A;
+}
+
+.calendar-day.today.checked {
+  border: none;
+}
+
+.check-mark {
+  position: absolute;
+  font-size: 16rpx;
+  bottom: 8rpx;
+  right: 8rpx;
+}

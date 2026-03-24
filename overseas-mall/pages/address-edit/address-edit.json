@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "Edit Address",
+  "navigationBarBackgroundColor": "#FF6B4A",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "custom-icon": "/components/icon/icon"
+  }
+}

@@ -1,0 +1,58 @@
+<view class="compare-container">
+  <view class="compare-header">
+    <text class="title">商品对比</text>
+    <text class="sub-title">（最多对比{{maxCompareCount}}件）</text>
+    <text class="clear-btn" wx:if="{{compareList.length > 0}}" bindtap="clearCompareList">清空</text>
+  </view>
+
+  <view wx:if="{{compareList.length === 0}}" class="empty-state">
+    <custom-icon name="compare" size="80px" color="#ddd" />
+    <text class="empty-title">暂无对比商品</text>
+    <text class="empty-desc">去商品详情页添加商品开始对比吧</text>
+    <button class="go-btn" bindtap="goAddMore">去逛逛</button>
+  </view>
+
+  <scroll-view wx:else class="compare-scroll" scroll-x="{{true}}">
+    <view class="compare-table">
+      <view class="compare-row">
+        <view class="compare-cell compare-header-cell">商品</view>
+        <view class="compare-cell compare-item-cell" wx:for="{{compareList}}" wx:key="id">
+          <view class="item-card">
+            <image class="item-image" src="{{item.image}}" mode="aspectFill" />
+            <text class="item-name">{{item.name}}</text>
+            <view class="remove-btn" bindtap="removeFromCompare" data-id="{{item.id}}">
+              <custom-icon name="close" size="14px" color="#fff" />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="compare-row" wx:for="{{compareFeatures}}" wx:for-item="feature" wx:key="key">
+        <view class="compare-cell compare-header-cell">{{feature.label}}</view>
+        <view 
+          class="compare-cell compare-value-cell {{getBestValueIndex(feature.key) === index ? 'best-value' : ''}}" 
+          wx:for="{{compareList}}" 
+          wx:for-item="item" 
+          wx:for-index="index" 
+          wx:key="id"
+        >
+          <text wx:if="{{feature.key === 'price'}}" class="price-text">${{getFeatureValue(item, feature.key)}}</text>
+          <text wx:elif="{{feature.key === 'sales'}}" class="sales-text">{{getFeatureValue(item, feature.key)}}件已售</text>
+          <text wx:elif="{{feature.key === 'rating'}}" class="rating-text">{{getFeatureValue(item, feature.key)}}分</text>
+          <text wx:else>{{getFeatureValue(item, feature.key)}}</text>
+        </view>
+      </view>
+
+      <view class="compare-row">
+        <view class="compare-cell compare-header-cell">操作</view>
+        <view class="compare-cell compare-action-cell" wx:for="{{compareList}}" wx:key="id">
+          <button class="action-btn" bindtap="navigateToDetail" data-id="{{item.id}}">查看详情</button>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{compareList.length > 0 && compareList.length < maxCompareCount}}" class="add-more-tip">
+    <text>还可以添加{{maxCompareCount - compareList.length}}件商品进行对比</text>
+  </view>
+</view>

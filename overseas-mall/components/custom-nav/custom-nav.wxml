@@ -1,0 +1,18 @@
+<view class="custom-nav" style="background: {{background}}; padding-top: {{statusBarHeight}}px; {{showBorder ? 'border-bottom: 1rpx solid rgba(0,0,0,0.1)' : ''}}">
+  <view class="nav-bar" style="height: {{navBarHeight}}px;">
+    <view class="nav-left">
+      <view class="nav-btn" wx:if="{{showBack}}" bindtap="goBack">
+        <custom-icon name="arrow-left" size="20px" color="{{iconColor}}" />
+      </view>
+      <view class="nav-btn" wx:if="{{showHome}}" bindtap="goHome">
+        <custom-icon name="home-o" size="20px" color="{{iconColor}}" />
+      </view>
+    </view>
+    
+    <view class="nav-title" style="color: {{titleColor}};">
+      <text class="title-text">{{title}}</text>
+    </view>
+    
+    <view class="nav-right"></view>
+  </view>
+</view>

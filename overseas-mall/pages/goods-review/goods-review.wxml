@@ -1,0 +1,78 @@
+<view class="goods-review-container">
+  <scroll-view class="main-content" scroll-y="{{true}}">
+    <view class="goods-section">
+      <view class="section-title">Review Product</view>
+      <view class="goods-item">
+        <image class="goods-image" src="{{goodsInfo.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+        <view class="goods-info">
+          <text class="goods-name">{{goodsInfo.name}}</text>
+          <text class="goods-spec" wx:if="{{goodsInfo.spec}}">{{goodsInfo.spec}}</text>
+          <text class="goods-price">${{goodsInfo.price}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="rating-section">
+      <view class="section-title">Overall Rating</view>
+      <view class="rating-box">
+        <view class="rating-stars" bindtap="onRatingTap">
+          <view class="star-item" wx:for="{{5}}" wx:key="index" data-rating="{{index + 1}}" catchtap="selectRating">
+            <custom-icon name="{{index < rating ? 'star' : 'star-o'}}" size="48px" color="{{index < rating ? '#FFD700' : '#ddd'}}" />
+          </view>
+        </view>
+        <text class="rating-text">{{ratingText}}</text>
+      </view>
+    </view>
+
+    <view class="tags-section">
+      <view class="section-title">Tags (Optional)</view>
+      <view class="tags-list">
+        <view class="tag-item {{selectedTags.includes(index) ? 'active' : ''}}" wx:for="{{reviewTags}}" wx:key="index" bindtap="toggleTag" data-index="{{index}}">
+          {{item}}
+        </view>
+      </view>
+    </view>
+
+    <view class="content-section">
+      <view class="section-title">
+        <text>Review Content</text>
+        <text class="required">*</text>
+      </view>
+      <textarea class="review-input" placeholder="Share your experience with this product..." value="{{reviewContent}}" bindinput="onContentInput" maxlength="500" />
+      <text class="char-count">{{reviewContent.length}}/500</text>
+    </view>
+
+    <view class="images-section">
+      <view class="section-title">
+        <text>Upload Images</text>
+        <text class="image-count">{{uploadImages.length}}/6</text>
+      </view>
+      <view class="image-list">
+        <view class="image-item" wx:for="{{uploadImages}}" wx:key="index" bindtap="previewImage" data-index="{{index}}">
+          <image class="image" src="{{item}}" mode="aspectFill" />
+          <view class="delete-btn" catchtap="deleteImage" data-index="{{index}}">
+            <custom-icon name="cross" size="16px" color="#fff" />
+          </view>
+        </view>
+        <view class="upload-btn" wx:if="{{uploadImages.length < 6}}" bindtap="chooseImage">
+          <custom-icon name="camera" size="40px" color="#ddd" />
+          <text>Add Image</text>
+        </view>
+      </view>
+      <text class="upload-tip">Upload up to 6 photos to show product details</text>
+    </view>
+
+    <view class="anonymous-section">
+      <view class="anonymous-box">
+        <text class="anonymous-label">Post Anonymously</text>
+        <view class="switch-box {{isAnonymous ? 'active' : ''}}" bindtap="toggleAnonymous">
+          <view class="switch-dot"></view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="bottom-bar">
+    <button class="submit-btn" bindtap="submitReview" disabled="{{!canSubmit}}">Submit Review</button>
+  </view>
+</view>

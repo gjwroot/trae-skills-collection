@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新八骏图 - 1:1复刻现实马</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        canvas {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .info {
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>新八骏图 - 1:1复刻现实马</h1>
+        <canvas id="bajunCanvas" width="1200" height="800"></canvas>
+        <div class="controls">
+            <button onclick="drawHorses()">绘制八骏图</button>
+            <button onclick="clearCanvas()">清空画布</button>
+            <button onclick="saveImage()">保存图片</button>
+        </div>
+        <div class="info">
+            <p>使用Canvas技术绘制，力求真实还原现实马匹的形态和神韵</p>
+            <p>点击"绘制八骏图"按钮开始绘制，点击"保存图片"按钮保存绘制结果</p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('bajunCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // 马匹数据 - 八骏的位置和特征（优化版）
+        const horses = [
+            { name: '赤骥', x: 150, y: 220, color: '#8B4513', direction: 'right' },
+            { name: '盗骊', x: 350, y: 180, color: '#2F4F4F', direction: 'right' },
+            { name: '白义', x: 550, y: 220, color: '#F5F5F5', direction: 'right' },
+            { name: '逾轮', x: 750, y: 180, color: '#DAA520', direction: 'right' },
+            { name: '山子', x: 950, y: 220, color: '#32CD32', direction: 'right' },
+            { name: '渠黄', x: 250, y: 420, color: '#FFD700', direction: 'left' },
+            { name: '华骝', x: 450, y: 460, color: '#CD853F', direction: 'left' },
+            { name: '绿耳', x: 650, y: 420, color: '#228B22', direction: 'left' }
+        ];
+
+        // 绘制马匹（真实版 - 基于现代马 Equus caballus 特征）
+        function drawHorse(x, y, color, direction) {
+            ctx.save();
+            ctx.translate(x, y);
+            if (direction === 'left') {
+                ctx.scale(-1, 1);
+            }
+
+            // 身体 - 流线型身躯，肩背平直，胸廓深广
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.ellipse(0, 0, 70, 32, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 身体阴影，增加立体感
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            ctx.beginPath();
+            ctx.ellipse(10, 10, 70, 32, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 头部 - 长脸短耳，双眼间距宽
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.ellipse(90, -15, 30, 22, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 鼻子 - 长吻大鼻孔，便于奔跑时快速换气
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.ellipse(120, -12, 15, 18, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 鼻孔
+            ctx.fillStyle = '#333';
+            ctx.beginPath();
+            ctx.arc(130, -12, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 脖子 - 肌肉发达，肩颈肌群突出
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(40, -8);
+            ctx.bezierCurveTo(55, -25, 70, -30, 80, -25);
+            ctx.bezierCurveTo(75, -10, 65, 0, 50, 0);
+            ctx.closePath();
+            ctx.fill();
+
+            // 腿 - 修长单蹄，仅第三趾发达
+            const legPositions = [
+                { x: -45, y: 35, length: 90, angle: -0.1 },
+                { x: -20, y: 35, length: 90, angle: 0.1 },
+                { x: 25, y: 35, length: 90, angle: -0.1 },
+                { x: 45, y: 35, length: 90, angle: 0.1 }
+            ];
+
+            legPositions.forEach(leg => {
+                ctx.save();
+                ctx.translate(leg.x, leg.y);
+                ctx.rotate(leg.angle);
+                
+                // 大腿 - 肌肉发达
+                ctx.fillStyle = color;
+                ctx.fillRect(-6, 0, 12, leg.length * 0.6);
+                
+                // 小腿 - 修长
+                ctx.fillStyle = color;
+                ctx.fillRect(-5, leg.length * 0.6, 10, leg.length * 0.4);
+                
+                // 蹄子 - 单蹄结构，蹄质坚硬耐磨
+                ctx.fillStyle = '#333';
+                ctx.beginPath();
+                ctx.ellipse(0, leg.length, 8, 10, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // 夜眼（附蝉）- 四肢内侧常有
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+                ctx.beginPath();
+                ctx.ellipse(0, leg.length * 0.3, 3, 2, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.beginPath();
+                ctx.ellipse(0, leg.length * 0.6, 3, 2, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.restore();
+            });
+
+            // 尾巴 - 尾根至尾端有长毛
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(-60, 0);
+            ctx.bezierCurveTo(-80, -10, -100, 0, -110, 20);
+            ctx.bezierCurveTo(-100, 40, -90, 60, -80, 80);
+            ctx.bezierCurveTo(-70, 60, -60, 40, -60, 20);
+            ctx.closePath();
+            ctx.fill();
+
+            // 鬃毛 - 颈背有长鬃
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(30, -20);
+            ctx.bezierCurveTo(40, -40, 50, -45, 60, -40);
+            ctx.bezierCurveTo(70, -35, 80, -30, 90, -25);
+            ctx.bezierCurveTo(100, -20, 110, -15, 100, -10);
+            ctx.bezierCurveTo(90, -15, 80, -20, 70, -15);
+            ctx.bezierCurveTo(60, -20, 50, -25, 40, -20);
+            ctx.closePath();
+            ctx.fill();
+
+            // 眼睛 - 大而有神，双眼间距宽
+            ctx.fillStyle = '#fff';
+            ctx.beginPath();
+            ctx.arc(92, -18, 5, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = '#000';
+            ctx.beginPath();
+            ctx.arc(93, -18, 2.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 高光
+            ctx.fillStyle = '#fff';
+            ctx.beginPath();
+            ctx.arc(91, -19, 1.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 耳朵 - 短直立
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(85, -30);
+            ctx.lineTo(95, -45);
+            ctx.lineTo(88, -40);
+            ctx.closePath();
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.moveTo(95, -30);
+            ctx.lineTo(105, -45);
+            ctx.lineTo(98, -40);
+            ctx.closePath();
+            ctx.fill();
+
+            // 牙齿 - 高冠齿，适合磨碎干草
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(105, 0, 5, 3);
+
+            ctx.restore();
+        }
+
+        // 绘制背景（优化版）
+        function drawBackground() {
+            // 天空 - 更真实的天空渐变
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#4A90E2');
+            gradient.addColorStop(0.5, '#7ED321');
+            gradient.addColorStop(1, '#E0F7FA');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 远处的山 - 层次感
+            // 最远的山
+            ctx.fillStyle = '#708090';
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height - 200);
+            ctx.lineTo(200, canvas.height - 300);
+            ctx.lineTo(400, canvas.height - 250);
+            ctx.lineTo(600, canvas.height - 300);
+            ctx.lineTo(800, canvas.height - 250);
+            ctx.lineTo(1000, canvas.height - 300);
+            ctx.lineTo(1200, canvas.height - 250);
+            ctx.lineTo(1200, canvas.height - 50);
+            ctx.lineTo(0, canvas.height - 50);
+            ctx.closePath();
+            ctx.fill();
+
+            // 近处的山
+            ctx.fillStyle = '#8FBC8F';
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height - 150);
+            ctx.lineTo(200, canvas.height - 220);
+            ctx.lineTo(400, canvas.height - 180);
+            ctx.lineTo(600, canvas.height - 220);
+            ctx.lineTo(800, canvas.height - 180);
+            ctx.lineTo(1000, canvas.height - 220);
+            ctx.lineTo(1200, canvas.height - 180);
+            ctx.lineTo(1200, canvas.height - 50);
+            ctx.lineTo(0, canvas.height - 50);
+            ctx.closePath();
+            ctx.fill();
+
+            // 草地 - 渐变草地
+            const grassGradient = ctx.createLinearGradient(0, canvas.height - 50, 0, canvas.height);
+            grassGradient.addColorStop(0, '#228B22');
+            grassGradient.addColorStop(1, '#32CD32');
+            ctx.fillStyle = grassGradient;
+            ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
+
+            // 草地纹理
+            for (let i = 0; i < canvas.width; i += 20) {
+                ctx.fillStyle = 'rgba(0, 100, 0, 0.3)';
+                ctx.fillRect(i, canvas.height - 50, 10, 50);
+            }
+
+            // 云朵 - 更真实的云朵
+            drawCloud(100, 100, 1);
+            drawCloud(300, 80, 1.2);
+            drawCloud(500, 120, 0.9);
+            drawCloud(700, 90, 1.1);
+            drawCloud(900, 110, 0.8);
+            drawCloud(1100, 80, 1.3);
+
+            // 太阳
+            ctx.fillStyle = '#FFD700';
+            ctx.beginPath();
+            ctx.arc(100, 100, 40, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 阳光
+            for (let i = 0; i < 8; i++) {
+                const angle = (Math.PI * 2 / 8) * i;
+                const x1 = 100 + Math.cos(angle) * 40;
+                const y1 = 100 + Math.sin(angle) * 40;
+                const x2 = 100 + Math.cos(angle) * 60;
+                const y2 = 100 + Math.sin(angle) * 60;
+                
+                ctx.strokeStyle = '#FFD700';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+            }
+        }
+
+        // 绘制云朵
+        function drawCloud(x, y, scale = 1) {
+            ctx.fillStyle = '#FFFFFF';
+            ctx.beginPath();
+            ctx.arc(x, y, 30 * scale, 0, Math.PI * 2);
+            ctx.arc(x + 30 * scale, y, 25 * scale, 0, Math.PI * 2);
+            ctx.arc(x + 60 * scale, y, 30 * scale, 0, Math.PI * 2);
+            ctx.arc(x + 30 * scale, y - 15 * scale, 25 * scale, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // 绘制马的名字
+        function drawHorseNames() {
+            ctx.fillStyle = '#333';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+
+            horses.forEach(horse => {
+                ctx.fillText(horse.name, horse.x, horse.y + 120);
+            });
+        }
+
+        // 绘制八骏图
+        function drawHorses() {
+            clearCanvas();
+            drawBackground();
+            
+            horses.forEach(horse => {
+                drawHorse(horse.x, horse.y, horse.color, horse.direction);
+            });
+
+            drawHorseNames();
+
+            // 标题
+            ctx.fillStyle = '#333';
+            ctx.font = '30px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('新八骏图', canvas.width / 2, 50);
+        }
+
+        // 清空画布
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // 保存图片
+        function saveImage() {
+            const dataURL = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.href = dataURL;
+            link.download = '新八骏图.png';
+            link.click();
+        }
+
+        // 页面加载时绘制
+        window.onload = function() {
+            drawBackground();
+        };
+    </script>
+</body>
+</html>

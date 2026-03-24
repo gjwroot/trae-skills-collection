@@ -1,0 +1,145 @@
+<view class="search-container">
+  <custom-nav title="Search" showBack="{{true}}" />
+  <view class="search-header">
+    <view class="search-box">
+      <custom-icon name="search" size="18px" color="#999" />
+      <input class="search-input" type="text" placeholder="Search products, brands..." value="{{keyword}}" bindinput="onKeywordChange" confirm-type="search" bindconfirm="onSearch" />
+      <view class="clear-btn" wx:if="{{keyword}}" bindtap="onClear">
+        <custom-icon name="cross" size="16px" color="#999" />
+      </view>
+    </view>
+    <text class="search-btn" bindtap="onSearch">Search</text>
+  </view>
+
+  <view class="suggestions" wx:if="{{showSuggestions && !hasSearched}}">
+    <view class="suggestion-item" wx:for="{{suggestions}}" wx:key="index" bindtap="selectSuggestion" data-keyword="{{item}}">
+      <custom-icon name="search" size="14px" color="#999" />
+      <text>{{item}}</text>
+    </view>
+  </view>
+
+  <view class="search-content" wx:if="{{!hasSearched && !showSuggestions}}">
+    <view class="history-section" wx:if="{{searchHistory.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">Search History</text>
+        <view bindtap="clearHistory">
+          <custom-icon name="delete-o" size="18px" color="#999" />
+        </view>
+      </view>
+      <view class="tag-list">
+        <view class="tag-item" wx:for="{{searchHistory}}" wx:key="index" bindtap="searchByTag" data-keyword="{{item}}">{{item}}</view>
+      </view>
+    </view>
+
+    <view class="hot-section">
+      <view class="section-header">
+        <text class="section-title">Hot Searches</text>
+      </view>
+      <view class="hot-list">
+        <view class="hot-item {{index < 3 ? 'top' : ''}}" wx:for="{{hotKeywords}}" wx:key="index" bindtap="searchByTag" data-keyword="{{item}}">
+          <text class="rank">{{index + 1}}</text>
+          <text class="keyword">{{item}}</text>
+          <custom-icon wx:if="{{index === 0}}" name="fire" size="14px" color="#FF6B4A" />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view class="search-result" scroll-y="{{true}}" wx:if="{{hasSearched}}" bindscrolltolower="loadMore">
+    <view class="result-header" wx:if="{{goodsList.length > 0}}">
+      <text class="result-count">{{totalResults}} results found</text>
+      <view class="header-actions">
+        <view class="filter-btn" bindtap="toggleFilter">
+          <custom-icon name="filter" size="16px" color="#666" />
+          <text>Filter</text>
+        </view>
+        <view class="sort-options">
+          <text class="sort-item {{sortType === 'default' ? 'active' : ''}}" bindtap="changeSort" data-sort="default">Default</text>
+          <text class="sort-item {{sortType === 'sales' ? 'active' : ''}}" bindtap="changeSort" data-sort="sales">Sales</text>
+          <text class="sort-item {{sortType === 'price' ? 'active' : ''}}" bindtap="changeSort" data-sort="price">Price<text class="arrow-icon">{{sortOrder === 'asc' ? '↑' : '↓'}}</text></text>
+        </view>
+      </view>
+    </view>
+
+    <view class="goods-grid" wx:if="{{goodsList.length > 0}}">
+      <view class="goods-card" wx:for="{{goodsList}}" wx:key="id" bindtap="navigateToDetail" data-id="{{item.id}}">
+        <image class="goods-image" lazy-load="{{true}}" src="{{item.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+        <view class="goods-info">
+          <text class="goods-name">{{item.name}}</text>
+          <view class="price-row">
+            <text class="current-price">${{item.price}}</text>
+            <text class="original-price" wx:if="{{item.originalPrice}}">${{item.originalPrice}}</text>
+          </view>
+          <text class="sales">{{item.sales}} sold</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="load-more" wx:if="{{loading}}">
+      <view class="loading-spinner"></view>
+      <text>Loading...</text>
+    </view>
+
+    <view class="no-more" wx:if="{{noMore && goodsList.length > 0}}">
+      <text>No more products</text>
+    </view>
+
+    <empty-state 
+      wx:if="{{goodsList.length === 0 && !loading && hasSearched}}"
+      icon="search"
+      title="No results found"
+      desc="Try different keywords or check spelling"
+      showBtn="{{false}}"
+    />
+  </scroll-view>
+
+  <view class="filter-mask {{showFilter ? 'show' : ''}}" bindtap="toggleFilter"></view>
+  <view class="filter-panel {{showFilter ? 'show' : ''}}">
+    <view class="filter-header">
+      <text class="filter-title">Filters</text>
+      <view class="filter-reset" bindtap="resetFilters">Reset</view>
+    </view>
+
+    <scroll-view class="filter-content" scroll-y="{{true}}">
+      <view class="filter-section">
+        <view class="filter-section-title">Price Range</view>
+        <view class="price-range-list">
+          <view class="price-range-item {{!filters.priceRange ? 'active' : ''}}" bindtap="selectPriceRange" data-range="">
+            All
+          </view>
+          <view class="price-range-item {{filters.priceRange && filters.priceRange[0] === 0 && filters.priceRange[1] === 30 ? 'active' : ''}}" bindtap="selectPriceRange" data-range="[0,30]">
+            Under $30
+          </view>
+          <view class="price-range-item {{filters.priceRange && filters.priceRange[0] === 30 && filters.priceRange[1] === 60 ? 'active' : ''}}" bindtap="selectPriceRange" data-range="[30,60]">
+            $30 - $60
+          </view>
+          <view class="price-range-item {{filters.priceRange && filters.priceRange[0] === 60 && filters.priceRange[1] === 100 ? 'active' : ''}}" bindtap="selectPriceRange" data-range="[60,100]">
+            $60 - $100
+          </view>
+          <view class="price-range-item {{filters.priceRange && filters.priceRange[0] === 100 && filters.priceRange[1] === 1000 ? 'active' : ''}}" bindtap="selectPriceRange" data-range="[100,1000]">
+            Over $100
+          </view>
+        </view>
+      </view>
+
+      <view class="filter-section">
+        <view class="filter-section-title">Product Tags</view>
+        <view class="tag-list">
+          <view class="tag-item {{filters.isNew ? 'active' : ''}}" bindtap="toggleFilterOption" data-key="isNew">
+            New Arrival
+          </view>
+          <view class="tag-item {{filters.isHot ? 'active' : ''}}" bindtap="toggleFilterOption" data-key="isHot">
+            Hot Selling
+          </view>
+          <view class="tag-item {{filters.hasDiscount ? 'active' : ''}}" bindtap="toggleFilterOption" data-key="hasDiscount">
+            On Sale
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="filter-footer">
+      <button class="filter-apply-btn" bindtap="applyFilterAndSearch">Apply Filters</button>
+    </view>
+  </view>
+</view>

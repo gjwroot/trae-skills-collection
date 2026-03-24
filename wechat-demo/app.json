@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/menu/menu",
+    "pages/cart/cart",
+    "pages/mine/mine",
+    "pages/address/address",
+    "pages/address-edit/address-edit",
+    "pages/fresh/fresh",
+    "pages/fast/fast",
+    "pages/healthy/healthy",
+    "pages/home/home",
+    "pages/search/search",
+    "pages/favorites/favorites",
+    "pages/settings/settings",
+    "pages/profile/profile",
+    "pages/password/password",
+    "pages/detail/detail",
+    "pages/payment/payment",
+    "pages/permission/permission",
+    "pages/webview/webview"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "家庭点饭系统",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#b2bec3",
+    "selectedColor": "#ff6b4a",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/menu/menu",
+        "text": "菜单"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

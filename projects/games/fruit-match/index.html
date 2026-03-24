@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍎 水果消消乐 🍊</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- 开始界面 -->
+        <div id="start-screen" class="screen">
+            <h1>🍎 水果消消乐 🍊</h1>
+            <div class="game-info">
+                <p>🎮 交换相邻水果，消除 3 个或更多相同水果！</p>
+                <p>✨ 连击获得更多分数！</p>
+                <p>⏱️ 在时间内达到目标分数过关！</p>
+            </div>
+            <div class="high-score">🏆 最高分: <span id="high-score">0</span></div>
+            <button id="start-btn" class="btn">开始游戏</button>
+        </div>
+        
+        <!-- 游戏界面 -->
+        <div id="game-screen" class="screen hidden">
+            <div class="game-header">
+                <div class="score">🎯 分数: <span id="score">0</span></div>
+                <div class="level">📊 关卡: <span id="level">1</span></div>
+                <div class="target">🎯 目标: <span id="target">1000</span></div>
+                <div class="timer">⏱️ 时间: <span id="timer">60</span>s</div>
+            </div>
+            
+            <div id="game-board" class="game-board"></div>
+            
+            <div class="combo-display" id="combo-display"></div>
+            
+            <div class="game-controls">
+                <button id="pause-btn" class="btn small-btn">⏸️ 暂停</button>
+                <button id="restart-btn" class="btn small-btn">🔄 重玩</button>
+            </div>
+        </div>
+        
+        <!-- 关卡完成界面 -->
+        <div id="level-complete-screen" class="screen hidden">
+            <h2>🎉 关卡完成！</h2>
+            <p>得分: <span id="level-score">0</span></p>
+            <p>连击: <span id="level-combos">0</span>次</p>
+            <button id="next-level-btn" class="btn">下一关</button>
+        </div>
+        
+        <!-- 游戏结束界面 -->
+        <div id="game-over-screen" class="screen hidden">
+            <h2>游戏结束</h2>
+            <p>最终得分: <span id="final-score">0</span></p>
+            <p>到达关卡: <span id="final-level">1</span></p>
+            <p class="new-record" id="new-record">🎉 新纪录！</p>
+            <button id="play-again-btn" class="btn">再玩一次</button>
+        </div>
+    </div>
+    
+    <canvas id="particles-canvas"></canvas>
+    <script src="js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "accounts": {
+    "branch_life": {
+      "name": "分支人生",
+      "appid": "wx502a3f040c0be7a9",
+      "appsecret": "effa61ce6dfb91039207337bcd1b25ab",
+      "ip_whitelist": [
+        "223.104.43.57"
+      ],
+      "original_id": "gh_d4c0ef0f7872",
+      "wechat_id": "gh_19707886dbae",
+      "admin": "s156***59",
+      "auth_type": "个人",
+      "auth_status": "暂未认证"
+    }
+  },
+  "current_account": "branch_life"
+}

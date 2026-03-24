@@ -1,0 +1,222 @@
+.container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-bottom: 60rpx;
+}
+
+.hero-section {
+  background: linear-gradient(135deg, #ff6b4a 0%, #ff8a6d 100%);
+  padding: 80rpx 30rpx 60rpx;
+  border-radius: 0 0 40rpx 40rpx;
+}
+
+.hero-content {
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 44rpx;
+  color: white;
+  font-weight: 700;
+}
+
+.hero-subtitle {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 12rpx;
+  display: block;
+}
+
+/* 菜谱列表 */
+.recipes-section {
+  padding: 40rpx 0 20rpx;
+}
+
+.section-title {
+  padding: 0 30rpx 20rpx;
+}
+
+.title {
+  font-size: 32rpx;
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+.recipe-list {
+  padding: 0 30rpx;
+}
+
+.recipe-card {
+  background: white;
+  border-radius: 24rpx;
+  margin-bottom: 24rpx;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.recipe-image {
+  width: 200rpx;
+  height: 200rpx;
+  flex-shrink: 0;
+}
+
+.recipe-info {
+  flex: 1;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.recipe-name {
+  font-size: 30rpx;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.recipe-meta {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 8rpx;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.meta-icon {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.meta-text {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.recipe-desc {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 8rpx;
+}
+
+.recipe-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12rpx;
+}
+
+.recipe-price {
+  font-size: 32rpx;
+  color: #ff6b4a;
+  font-weight: 700;
+}
+
+/* 数量控制 */
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.quantity-btn {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.quantity-btn.minus {
+  background: #f8f9fa;
+  color: #666;
+}
+
+.quantity-btn.plus {
+  background: linear-gradient(135deg, #ff6b4a 0%, #ff8a6d 100%);
+  color: white;
+}
+
+.quantity {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  min-width: 40rpx;
+  text-align: center;
+}
+
+/* 技巧 */
+.tips-section {
+  margin: 40rpx 30rpx 0;
+  background: white;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.tips-title {
+  font-size: 28rpx;
+  color: #1a1a1a;
+  font-weight: 700;
+  margin-bottom: 20rpx;
+}
+
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.tip-item {
+  display: flex;
+  gap: 20rpx;
+  align-items: flex-start;
+}
+
+.tip-icon-wrapper {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tip-icon-wrapper.lightning-bg {
+  background: #fff8e1;
+}
+
+.tip-icon-wrapper.fire-bg {
+  background: #ffebee;
+}
+
+.tip-icon {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.tip-content {
+  flex: 1;
+}
+
+.tip-title {
+  font-size: 26rpx;
+  color: #1a1a1a;
+  font-weight: 600;
+  display: block;
+}
+
+.tip-text {
+  font-size: 22rpx;
+  color: #666;
+  margin-top: 6rpx;
+  display: block;
+}

@@ -1,0 +1,74 @@
+.container {
+  min-height: 100vh;
+  background: #fef7ed;
+  padding: 20rpx;
+  padding-bottom: 120rpx;
+}
+
+.form-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 20rpx 0;
+  box-shadow: 0 1rpx 3rpx rgba(0, 0, 0, 0.1);
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #fef3c7;
+}
+
+.form-item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  width: 160rpx;
+  font-size: 28rpx;
+  color: #333;
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.picker {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.textarea {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+  min-height: 120rpx;
+}
+
+.switch-item {
+  justify-content: space-between;
+}
+
+.btn-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 20rpx 30rpx;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  color: white;
+  text-align: center;
+  padding: 28rpx;
+  border-radius: 50rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+}

@@ -1,0 +1,7 @@
+{
+  "desc": "About this file",
+  "rules": [{
+    "action": "allow",
+    "page": "*"
+  }]
+}

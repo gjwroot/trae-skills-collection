@@ -1,0 +1,14 @@
+<view class="tab-bar">
+  <view wx:for="{{list}}" wx:key="pagePath" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
+    <view class="icon-wrapper">
+      <image class="icon" src="{{selected === index ? item.selectedIconPath : item.iconPath}}" />
+      <view wx:if="{{index === 2 && cartCount > 0}}" class="badge badge-cart">
+        <text class="badge-text">{{cartCount > 99 ? '99+' : cartCount}}</text>
+      </view>
+    </view>
+    <view class="text-wrapper">
+      <text class="tab-text" style="color: {{selected === index ? selectedColor : color}}">{{item.text}}</text>
+      <view wx:if="{{index === 3 && (messageCount > 0 || couponCount > 0 || orderCount > 0)}}" class="badge-dot"></view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,164 @@
+/* 全局样式 - 现代简约高级风格 */
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', 'Segoe UI', Roboto, sans-serif;
+  background: #f8f9fa;
+  color: #1a1a1a;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 主色调 - 高级珊瑚橙 */
+:root {
+  --primary: #ff6b4a;
+  --primary-light: #ff8a6d;
+  --primary-dark: #e55a3b;
+  --secondary: #2d3436;
+  --background: #f8f9fa;
+  --surface: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #636e72;
+  --text-tertiary: #b2bec3;
+  --border: #dfe6e9;
+  --success: #00b894;
+  --warning: #fdcb6e;
+  --error: #d63031;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 0 32rpx 40rpx;
+}
+
+/* 卡片 - 极简风格 */
+.card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+/* 主要按钮 */
+.btn-primary {
+  background: linear-gradient(135deg, #ff6b4a 0%, #ff8a6d 100%);
+  color: white;
+  border-radius: 16rpx;
+  font-weight: 600;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 74, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 4rpx 12rpx rgba(255, 107, 74, 0.2);
+}
+
+/* 次要按钮 */
+.btn-secondary {
+  background: #f8f9fa;
+  color: #ff6b4a;
+  border: 2rpx solid #ff6b4a;
+  border-radius: 16rpx;
+  font-weight: 600;
+}
+
+/* 文字颜色 */
+.text-primary {
+  color: #ff6b4a;
+}
+
+.text-secondary {
+  color: #636e72;
+}
+
+.text-tertiary {
+  color: #b2bec3;
+}
+
+.text-dark {
+  color: #1a1a1a;
+}
+
+/* 标签 */
+.tag {
+  background: #fff5f3;
+  color: #ff6b4a;
+  padding: 8rpx 20rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+/* 输入框 */
+.input {
+  background: #f8f9fa;
+  border: 2rpx solid #dfe6e9;
+  border-radius: 16rpx;
+  padding: 28rpx 32rpx;
+  font-size: 28rpx;
+  color: #1a1a1a;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  border-color: #ff6b4a;
+  background: #ffffff;
+}
+
+/* 分隔线 */
+.divider {
+  height: 2rpx;
+  background: #f1f3f4;
+  margin: 0;
+}
+
+/* 图标容器 */
+.icon-wrapper {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+}
+
+.icon-primary {
+  background: linear-gradient(135deg, #ff6b4a 0%, #ff8a6d 100%);
+  color: white;
+}
+
+.icon-secondary {
+  background: #f8f9fa;
+  color: #ff6b4a;
+}
+
+/* 列表项 */
+.list-item {
+  background: #ffffff;
+  padding: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 动画 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* 阴影层级 */
+.shadow-sm {
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+.shadow-md {
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.shadow-lg {
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+}

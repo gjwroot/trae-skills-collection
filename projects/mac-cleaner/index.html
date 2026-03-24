@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧹 Mac 清理助手</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">🧹 Mac 清理助手</h1>
+                <p class="subtitle">让你的 Mac 焕然一新</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="storage-section">
+                <div class="storage-card">
+                    <h2>💾 存储空间概览</h2>
+                    <div class="storage-visual">
+                        <div class="storage-bar">
+                            <div class="storage-used" id="storageUsed"></div>
+                        </div>
+                        <div class="storage-info">
+                            <span class="used-text" id="usedText">计算中...</span>
+                            <span class="total-text" id="totalText"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="categories-section">
+                <h2>📋 可清理项目</h2>
+                <div class="categories-grid" id="categoriesGrid">
+                </div>
+            </section>
+
+            <section class="selected-section" id="selectedSection">
+                <div class="selected-card">
+                    <h3>✅ 已选择清理</h3>
+                    <div class="selected-list" id="selectedList"></div>
+                    <div class="selected-summary">
+                        <p>预计可释放: <strong id="totalSavings">0 MB</strong></p>
+                    </div>
+                    <button class="clean-btn" id="cleanBtn" onclick="startCleaning()">
+                        🚀 开始清理
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal" id="cleaningModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🧼 正在清理中...</h2>
+            </div>
+            <div class="modal-body">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">准备中...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎉 清理完成！</h2>
+            </div>
+            <div class="modal-body">
+                <div class="success-icon">✨</div>
+                <p>你的 Mac 已经焕然一新！</p>
+                <p class="saved-space" id="savedSpace">已释放: 0 MB</p>
+            </div>
+            <div class="modal-footer">
+                <button class="close-btn" onclick="closeSuccessModal()">太棒了！</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

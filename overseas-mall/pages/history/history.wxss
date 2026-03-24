@@ -1,0 +1,292 @@
+.history-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background: #fff;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.count {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.clear-btn {
+  font-size: 26rpx;
+  color: #FF6B4A;
+}
+
+.content {
+  flex: 1;
+  padding: 20rpx;
+}
+
+.goods-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.goods-card {
+  width: calc(50% - 10rpx);
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.goods-image {
+  width: 100%;
+  height: 280rpx;
+  background: #f5f5f5;
+}
+
+.goods-info {
+  padding: 20rpx;
+}
+
+.goods-name {
+  font-size: 26rpx;
+  color: #333;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: 12rpx;
+}
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+  margin-bottom: 8rpx;
+}
+
+.current-price {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #FF6B4A;
+}
+
+.original-price {
+  font-size: 24rpx;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.view-time {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-btn {
+  background: linear-gradient(135deg, #FF6B4A 0%, #FF8E6B 100%);
+  color: #fff;
+  font-size: 28rpx;
+  padding: 20rpx 60rpx;
+  border-radius: 40rpx;
+  border: none;
+}
+
+.empty-btn::after {
+  border: none;
+}
+
+.analysis-section {
+  background: #fff;
+  margin: 20rpx;
+  border-radius: 16rpx;
+  padding: 30rpx;
+}
+
+.analysis-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.analysis-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 10rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+}
+
+.stat-value {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #FF6B4A;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: #666;
+}
+
+.analysis-card {
+  margin-bottom: 30rpx;
+}
+
+.analysis-card:last-child {
+  margin-bottom: 0;
+}
+
+.card-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.category-name {
+  width: 140rpx;
+  font-size: 24rpx;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.category-bar {
+  flex: 1;
+  height: 16rpx;
+  background: #f0f0f0;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.category-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B4A, #FF8E6B);
+  border-radius: 8rpx;
+  transition: width 0.3s ease;
+}
+
+.category-count {
+  width: 60rpx;
+  text-align: right;
+  font-size: 24rpx;
+  color: #999;
+  flex-shrink: 0;
+}
+
+.price-stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 20rpx;
+}
+
+.price-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  flex: 1;
+}
+
+.price-label {
+  font-size: 22rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.price-value {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #FF6B4A;
+}
+
+.time-distribution {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16rpx;
+}
+
+.time-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 10rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+}
+
+.time-label {
+  font-size: 22rpx;
+  color: #666;
+  margin-top: 8rpx;
+  margin-bottom: 4rpx;
+}
+
+.time-count {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.analysis-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  padding: 20rpx;
+  background: #fff;
+  margin: 20rpx;
+  border-radius: 12rpx;
+}
+
+.analysis-toggle text {
+  font-size: 28rpx;
+  color: #FF6B4A;
+}

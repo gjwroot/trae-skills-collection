@@ -1,0 +1,58 @@
+<view class="reviews-container">
+  <view class="goods-header" bindtap="navigateToDetail">
+    <image class="goods-image" lazy-load="{{true}}" src="{{goodsInfo.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+    <view class="goods-info">
+      <text class="goods-name">{{goodsInfo.name}}</text>
+      <text class="goods-price">${{goodsInfo.price}}</text>
+    </view>
+    <custom-icon name="arrow" size="16px" color="#999" />
+  </view>
+
+  <view class="review-summary">
+    <view class="rating-overall">
+      <text class="rating-number">{{reviewCount > 0 ? '4.5' : '0'}}</text>
+      <view class="rating-stars">
+        <custom-icon wx:for="{{5}}" wx:key="index" name="star" size="16px" color="#FF6B4A" />
+      </view>
+    </view>
+    <view class="summary-right">
+      <text class="review-count">{{reviewCount}} reviews</text>
+      <button class="write-review-btn" bindtap="writeReview">Write Review</button>
+    </view>
+  </view>
+
+  <scroll-view class="reviews-list" scroll-y="{{true}}" bindscrolltolower="loadMoreReviews">
+    <view class="review-item" wx:for="{{reviews}}" wx:key="id">
+      <view class="review-header">
+        <view class="user-info">
+          <view class="user-avatar-box">
+            <custom-icon name="user-o" size="16px" color="#FF6B4A" />
+          </view>
+          <text class="user-name">{{item.userName}}</text>
+        </view>
+        <view class="rating">
+          <custom-icon wx:for="{{5}}" wx:key="index" wx:for-item="star" name="{{star < item.rating ? 'star' : 'star-o'}}" size="14px" color="{{star < item.rating ? '#FF6B4A' : '#ddd'}}" />
+        </view>
+      </view>
+      <text class="review-content">{{item.content}}</text>
+      <view class="review-images" wx:if="{{item.images && item.images.length > 0}}">
+        <image class="review-image" wx:for="{{item.images}}" wx:key="index" src="{{item}}" mode="aspectFill" />
+      </view>
+      <text class="review-time">{{item.time}}</text>
+    </view>
+
+    <view class="load-more" wx:if="{{loading}}">
+      <view class="loading-spinner"></view>
+      <text>Loading...</text>
+    </view>
+    
+    <view class="no-more" wx:if="{{noMore && reviews.length > 0}}">
+      <text>No more reviews</text>
+    </view>
+
+    <view class="empty-state" wx:if="{{reviews.length === 0 && !loading}}">
+      <custom-icon name="circle" size="48px" color="#ddd" />
+      <text>No reviews yet</text>
+    </view>
+  </scroll-view>
+</view>

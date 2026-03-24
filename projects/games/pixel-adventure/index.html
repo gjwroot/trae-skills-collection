@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>像素冒险 - Pixel Adventure</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="crt-overlay"></div>
+        <div class="scanlines"></div>
+        
+        <div class="game-header">
+            <h1>🔷 像素冒险 PIXEL ADVENTURE 🔷</h1>
+            <div class="score-board">
+                <span class="score">得分: <span id="score">0</span></span>
+                <span class="lives">生命: <span id="lives">❤️❤️❤️</span></span>
+            </div>
+        </div>
+        
+        <canvas id="gameCanvas" width="800" height="480"></canvas>
+        
+        <div class="controls-info">
+            <div class="control-group">
+                <span class="key">←</span>
+                <span class="key">→</span>
+                <span>移动</span>
+            </div>
+            <div class="control-group">
+                <span class="key">↑</span>
+                <span class="key">SPACE</span>
+                <span>跳跃</span>
+            </div>
+            <div class="control-group">
+                <span class="key">R</span>
+                <span>重新开始</span>
+            </div>
+        </div>
+        
+        <div id="startScreen" class="screen start-screen">
+            <h2>🎮 准备好了吗？</h2>
+            <p>控制像素小人收集金币，避开敌人！</p>
+            <button id="startBtn" class="pixel-btn">开始游戏</button>
+        </div>
+        
+        <div id="gameOverScreen" class="screen game-over-screen hidden">
+            <h2>💀 游戏结束</h2>
+            <p>最终得分: <span id="finalScore">0</span></p>
+            <button id="restartBtn" class="pixel-btn">再玩一次</button>
+        </div>
+        
+        <div id="victoryScreen" class="screen victory-screen hidden">
+            <h2>🏆 恭喜通关！</h2>
+            <p>最终得分: <span id="victoryScore">0</span></p>
+            <button id="playAgainBtn" class="pixel-btn">再玩一次</button>
+        </div>
+    </div>
+    
+    <script src="js/game.js"></script>
+</body>
+</html>

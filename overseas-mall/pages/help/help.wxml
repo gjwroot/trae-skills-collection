@@ -1,0 +1,83 @@
+<view class="help-container">
+  <view class="search-section">
+    <view class="search-box">
+      <custom-icon name="search" size="18px" color="#999" />
+      <input class="search-input" placeholder="Search help topics..." bindinput="onSearch" />
+    </view>
+  </view>
+
+  <view class="quick-section">
+    <view class="section-title">Quick Help</view>
+    <view class="quick-grid">
+      <view class="quick-item" bindtap="showHelp" data-type="order">
+        <view class="quick-icon-box">
+          <custom-icon name="paid" size="24px" color="#FF6B4A" />
+        </view>
+        <text>Orders</text>
+      </view>
+      <view class="quick-item" bindtap="showHelp" data-type="payment">
+        <view class="quick-icon-box">
+          <custom-icon name="balance-pay" size="24px" color="#FF6B4A" />
+        </view>
+        <text>Payment</text>
+      </view>
+      <view class="quick-item" bindtap="showHelp" data-type="shipping">
+        <view class="quick-icon-box">
+          <custom-icon name="logistics" size="24px" color="#FF6B4A" />
+        </view>
+        <text>Shipping</text>
+      </view>
+      <view class="quick-item" bindtap="showHelp" data-type="return">
+        <view class="quick-icon-box">
+          <custom-icon name="refund-o" size="24px" color="#FF6B4A" />
+        </view>
+        <text>Returns</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="faq-section">
+    <view class="section-title">FAQ</view>
+    <view class="faq-list">
+      <view class="faq-item" wx:for="{{faqList}}" wx:key="id" bindtap="toggleFaq" data-id="{{item.id}}">
+        <view class="faq-question">
+          <text>{{item.question}}</text>
+          <custom-icon name="{{item.expanded ? 'arrow-up' : 'arrow-down'}}" size="14px" color="#999" />
+        </view>
+        <view class="faq-answer {{item.expanded ? 'show' : ''}}">
+          <text>{{item.answer}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="contact-section">
+    <view class="section-title">Contact Us</view>
+    <view class="contact-list">
+      <view class="contact-item" bindtap="contactCustomer">
+        <custom-icon name="chat-o" size="24px" color="#FF6B4A" />
+        <view class="contact-info">
+          <text class="contact-title">Online Chat</text>
+          <text class="contact-desc">Chat with our support team</text>
+        </view>
+        <custom-icon name="arrow" size="14px" color="#999" />
+      </view>
+      <view class="contact-item" bindtap="callPhone">
+        <custom-icon name="phone-o" size="24px" color="#FF6B4A" />
+        <view class="contact-info">
+          <text class="contact-title">Phone Support</text>
+          <text class="contact-desc">1-800-123-4567</text>
+        </view>
+        <custom-icon name="arrow" size="14px" color="#999" />
+      </view>
+      <view class="contact-item" bindtap="sendEmail">
+        <custom-icon name="service-o" size="24px" color="#FF6B4A" />
+        <view class="contact-info">
+          <text class="contact-title">Email</text>
+          <text class="contact-desc">support@overseasmall.com</text>
+        </view>
+        <custom-icon name="arrow" size="14px" color="#999" />
+      </view>
+    </view>
+  </view>
+</view>

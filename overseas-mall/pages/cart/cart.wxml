@@ -1,0 +1,90 @@
+<view class="cart-container">
+  <view class="merge-tip" wx:if="{{showMergeTip}}">
+    <custom-icon name="info-o" size="16px" color="#F59E0B" />
+    <text>发现可合并的商品，是否合并？</text>
+    <view class="merge-tip-btns">
+      <text class="merge-tip-btn merge-tip-btn-cancel" bindtap="dismissMergeTip">稍后</text>
+      <text class="merge-tip-btn merge-tip-btn-confirm" bindtap="mergeCart">合并</text>
+    </view>
+  </view>
+  
+  <view class="cart-actions" wx:if="{{cartList.length > 0}}">
+    <view class="action-btn" bindtap="mergeCart">
+      <custom-icon name="merge" size="14px" color="#FF6B4A" />
+      <text>合并购物车</text>
+    </view>
+    <view class="action-btn" bindtap="showBatchQuantityDialog" wx:if="{{selectedCount > 0}}">
+      <custom-icon name="batch" size="14px" color="#10B981" />
+      <text>批量设置</text>
+    </view>
+  </view>
+  
+  <view class="cart-header" wx:if="{{cartList.length > 0}}">
+    <view class="select-all" bindtap="toggleSelectAll">
+      <view class="checkbox {{allSelected ? 'checked' : ''}}">
+        <custom-icon wx:if="{{allSelected}}" name="success" size="14px" color="#fff" />
+      </view>
+      <text>Select All</text>
+    </view>
+    <text class="edit-btn" bindtap="toggleEdit">{{isEditing ? 'Done' : 'Edit'}}</text>
+  </view>
+
+  <scroll-view class="cart-list" scroll-y="{{true}}" wx:if="{{cartList.length > 0}}">
+    <view class="cart-item" wx:for="{{cartList}}" wx:key="id">
+      <view class="checkbox {{item.selected ? 'checked' : ''}}" bindtap="toggleSelect" data-id="{{item.id}}">
+        <custom-icon wx:if="{{item.selected}}" name="success" size="14px" color="#fff" />
+      </view>
+
+      <view class="goods-info" bindtap="navigateToDetail" data-id="{{item.goodsId}}">
+        <image class="goods-image" lazy-load="{{true}}" src="{{item.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+        <view class="goods-detail">
+          <text class="goods-name">{{item.name}}</text>
+          <text class="goods-spec" wx:if="{{item.spec}}">{{item.spec}}</text>
+          <view class="price-row">
+            <text class="current-price">${{item.price}}</text>
+            <text class="original-price" wx:if="{{item.originalPrice}}">${{item.originalPrice}}</text>
+          </view>
+          <view class="stock-warning" wx:if="{{item.stock !== undefined}}">
+            <text class="stock-text {{item.stock <= 5 ? 'low' : ''}}">
+              {{item.stock <= 5 ? 'Low stock: ' : 'Stock: '}}{{item.stock}} left
+            </text>
+          </view>
+        </view>
+      </view>
+
+      <view class="quantity-control">
+        <view class="minus {{item.quantity <= 1 ? 'disabled' : ''}}" bindtap="decreaseQuantity" data-id="{{item.id}}" data-quantity="{{item.quantity}}">
+          <custom-icon name="minus" size="16px" color="{{item.quantity <= 1 ? '#ccc' : '#333'}}" />
+        </view>
+        <text class="quantity {{animatingItemId === item.id ? (animationType === 'increase' ? 'animate-increase' : 'animate-decrease') : ''}}">{{item.quantity}}</text>
+        <view class="plus {{item.quantity >= 99 ? 'disabled' : ''}}" bindtap="increaseQuantity" data-id="{{item.id}}" data-quantity="{{item.quantity}}">
+          <custom-icon name="plus" size="16px" color="{{item.quantity >= 99 ? '#ccc' : '#333'}}" />
+        </view>
+      </view>
+
+      <view class="delete-btn" bindtap="onDelete" data-id="{{item.id}}">
+        <custom-icon name="delete-o" size="16px" color="#FF6B4A" />
+      </view>
+    </view>
+  </scroll-view>
+
+  <empty-state 
+    wx:if="{{cartList.length === 0}}"
+    icon="cart-o"
+    title="Your cart is empty"
+    desc="Discover amazing products and start shopping now!"
+    btnText="Start Shopping"
+    btnIcon="shop-o"
+    bind:btntap="goShopping"
+  />
+
+  <view class="cart-footer" wx:if="{{cartList.length > 0}}">
+    <view class="total-info">
+      <text class="total-label">Total:</text>
+      <text class="total-price">${{totalPrice}}</text>
+    </view>
+    <button class="checkout-btn {{selectedCount === 0 ? 'disabled' : ''}}" bindtap="checkout" disabled="{{selectedCount === 0}}">
+      Checkout ({{selectedCount}})
+    </button>
+  </view>
+</view>

@@ -1,0 +1,34 @@
+name: page-visual-inspector
+version: "1.0.0"
+description: AI页面视觉识别技能 - 让AI能够"看到"和分析网页界面。支持浏览器导航、截图、DOM快照、HTML获取和样式分析。
+
+category: "frontend"
+tags:
+  - "browser"
+  - "screenshot"
+  - "visual-analysis"
+  - "ui-inspection"
+  - "page-analysis"
+
+triggers:
+  - "看看页面"
+  - "分析界面"
+  - "页面样式"
+  - "截图看看"
+  - "查看页面"
+  - "inspect page"
+  - "analyze ui"
+  - "screenshot"
+
+required_mcp_servers:
+  - "integrated_browser"
+  - "mcp_Playwright"
+
+mcp_tools:
+  - browser_navigate
+  - browser_snapshot
+  - browser_take_screenshot
+  - browser_tabs
+  - playwright_navigate
+  - playwright_screenshot
+  - playwright_get_visible_html

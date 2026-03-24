@@ -1,0 +1,489 @@
+# RSS 源配置 - 按领域分类
+# 深度调研 GitHub 60+ 项目后总结：
+# - 参考项目：ai-news-aggregator (80+ 信源)、Horizon (全自动 AI 聚合)、RSSHub (万物皆可 RSS)
+# - 技术路线：RSS 为主 + RSSHub 镜像补充 + 爬虫备用
+
+
+# 1. 全球科技信源 (15 个)
+global_tech:
+  - name: "TechCrunch"
+    url: "https://techcrunch.com/feed"
+    enabled: true
+
+  - name: "The Verge"
+    url: "https://www.theverge.com/rss/index.xml"
+    enabled: true
+
+  - name: "Ars Technica"
+    url: "https://feeds.arstechnica.com/arstechnica/index"
+    enabled: true
+
+  - name: "Hacker News RSS"
+    url: "https://news.ycombinator.com/rss"
+    enabled: true
+
+  - name: "MIT Technology Review"
+    url: "https://www.technologyreview.com/feed/"
+    enabled: true
+
+  - name: "WIRED"
+    url: "https://www.wired.com/feed/rss"
+    enabled: true
+
+  - name: "Engadget"
+    url: "https://www.engadget.com/rss.xml"
+    enabled: true
+
+  - name: "Gizmodo"
+    url: "https://gizmodo.com/rss"
+    enabled: true
+
+  - name: "Slashdot"
+    url: "https://rss.slashdot.org/Slashdot/slashdotMain"
+    enabled: true
+
+  - name: "Dev.to"
+    url: "https://dev.to/feed"
+    enabled: true
+
+  - name: "FreeCodeCamp"
+    url: "https://www.freecodecamp.org/news/rss"
+    enabled: true
+
+  - name: "Stack Overflow Blog"
+    url: "https://stackoverflow.blog/feed"
+    enabled: true
+
+  - name: "GitHub Blog"
+    url: "https://github.blog/feed"
+    enabled: true
+
+  - name: "Google Developer News"
+    url: "https://developers.googleblog.com/feeds/posts/default"
+    enabled: true
+
+  - name: "AWS News"
+    url: "https://aws.amazon.com/blogs/aws/feed/"
+    enabled: true
+
+# 2. 国内科技信源
+china_tech:
+  - name: "36氪"
+    url: "https://36kr.com/feed"
+    enabled: true
+
+  - name: "虎嗅"
+    url: "https://www.huxiu.com/rss/0.xml"
+    enabled: true
+
+  - name: "钛媒体"
+    url: "https://www.tmtpost.com/rss"
+    enabled: true
+
+  - name: "爱范儿"
+    url: "https://www.ifanr.com/feed"
+    enabled: true
+
+  - name: "品玩"
+    url: "https://www.pingwest.com/feed"
+    enabled: false
+
+  - name: "腾讯科技"
+    url: "https://tech.qq.com/web/rss2018/index.xml"
+    enabled: false
+
+  - name: "网易科技"
+    url: "https://tech.163.com/special/00097UHL/tech_datalist.xml"
+    enabled: false
+
+  - name: "新浪科技"
+    url: "https://tech.sina.com.cn/rss/tech.xml"
+    enabled: false
+
+  - name: "搜狐科技"
+    url: "https://it.sohu.com/rss/index.xml"
+    enabled: false
+
+  - name: "凤凰科技"
+    url: "https://tech.ifeng.com/rss/index.xml"
+    enabled: false
+
+  - name: "CSDN"
+    url: "https://blog.csdn.net/rss.html"
+    enabled: false
+
+  - name: "InfoQ 中文"
+    url: "https://www.infoq.cn/rss"
+    enabled: false
+
+# 3. 金融财经信源
+finance:
+  - name: "BBC News"
+    url: "http://feeds.bbci.co.uk/news/rss.xml"
+    enabled: true
+
+  - name: "CNN"
+    url: "http://rss.cnn.com/rss/edition.rss"
+    enabled: true
+
+  - name: "路透社"
+    url: "https://cn.reuters.com/rssFeed/CNTopGenNews"
+    enabled: true
+
+  - name: "Reuters RSS"
+    url: "https://www.reutersagency.com/feed/"
+    enabled: true
+
+  - name: "Financial Times"
+    url: "https://www.ft.com/rss/home"
+    enabled: true
+
+  - name: "Bloomberg"
+    url: "https://feeds.bloomberg.com/markets/news.rss"
+    enabled: true
+
+  - name: "Wall Street Journal"
+    url: "https://feeds.a.dj.com/rss/RSSWorldNews.xml"
+    enabled: true
+
+  - name: "MarketWatch"
+    url: "https://feeds.marketwatch.com/marketwatch/topstories/"
+    enabled: true
+
+  - name: "Yahoo Finance"
+    url: "https://finance.yahoo.com/news/rssindex"
+    enabled: true
+
+  - name: "华尔街见闻"
+    url: "https://wallstreetcn.com/rss/information"
+    enabled: false
+
+  - name: "财新网"
+    url: "https://www.caixin.com/rss/finance.xml"
+    enabled: false
+
+  - name: "第一财经"
+    url: "https://www.yicai.com/rss"
+    enabled: false
+
+  - name: "界面新闻"
+    url: "https://www.jiemian.com/rss"
+    enabled: false
+
+  - name: "澎湃新闻"
+    url: "https://www.thepaper.cn/rss.xml"
+    enabled: false
+
+  - name: "21世纪经济报道"
+    url: "https://m.21jingji.com/rss/21finance.xml"
+    enabled: false
+
+  - name: "经济观察报"
+    url: "https://www.eeo.com.cn/rss/"
+    enabled: false
+
+  - name: "每日经济新闻"
+    url: "https://www.nbd.com.cn/rss"
+    enabled: false
+
+  - name: "证券时报"
+    url: "https://www.stcn.com/rss/"
+    enabled: false
+
+# 4. AI/ML 信源 (10 个)
+ai_ml:
+  - name: "Hugging Face Blog"
+    url: "https://huggingface.co/blog/feed.xml"
+    enabled: true
+
+  - name: "OpenAI Blog"
+    url: "https://openai.com/blog/rss.xml"
+    enabled: true
+
+  - name: "Anthropic Blog"
+    url: "https://www.anthropic.com/index.xml"
+    enabled: true
+
+  - name: "DeepMind Blog"
+    url: "https://deepmind.com/blog/feed/basic/"
+    enabled: true
+
+  - name: "Google AI Blog"
+    url: "https://ai.googleblog.com/feeds/posts/default"
+    enabled: true
+
+  - name: "NVIDIA Blog"
+    url: "https://developer.nvidia.com/blog/feed/"
+    enabled: true
+
+  - name: "Meta AI Blog"
+    url: "https://ai.meta.com/blog/feed/"
+    enabled: true
+
+  - name: "Towards Data Science"
+    url: "https://towardsdatascience.com/feed"
+    enabled: true
+
+  - name: "Machine Learning Mastery"
+    url: "https://machinelearningmastery.com/feed/"
+    enabled: true
+
+  - name: "Distill"
+    url: "https://distill.pub/rss.xml"
+    enabled: true
+
+# 5. 论文与学术信源 (10 个)
+research_papers:
+  - name: "arXiv CS.AI"
+    url: "http://export.arxiv.org/rss/cs.AI/recent"
+    enabled: true
+
+  - name: "arXiv CS.LG"
+    url: "http://export.arxiv.org/rss/cs.LG/recent"
+    enabled: true
+
+  - name: "arXiv CS.CL"
+    url: "http://export.arxiv.org/rss/cs.CL/recent"
+    enabled: true
+
+  - name: "arXiv CS.CV"
+    url: "http://export.arxiv.org/rss/cs.CV/recent"
+    enabled: true
+
+  - name: "arXiv CS.NE"
+    url: "http://export.arxiv.org/rss/cs.NE/recent"
+    enabled: true
+
+  - name: "arXiv stat.ML"
+    url: "http://export.arxiv.org/rss/stat.ML/recent"
+    enabled: true
+
+  - name: "MIT Press"
+    url: "https://direct.mit.edu/rss/journals/tacl"
+    enabled: true
+
+  - name: "Nature Machine Intelligence"
+    url: "https://www.nature.com/natmachintell.rss"
+    enabled: true
+
+  - name: "Science Robotics"
+    url: "https://www.science.org/rss/robotics"
+    enabled: true
+
+  - name: "IEEE Spectrum AI"
+    url: "https://spectrum.ieee.org/topic/ai/rss.xml"
+    enabled: true
+
+# 6. 体育娱乐信源 (10 个)
+sports_entertainment:
+  - name: "ESPN"
+    url: "https://www.espn.com/espn/rss/news"
+    enabled: true
+
+  - name: "Bleacher Report"
+    url: "https://bleacherreport.com/articles.rss"
+    enabled: true
+
+  - name: "BBC Sport"
+    url: "http://feeds.bbci.co.uk/sport/rss.xml"
+    enabled: true
+
+  - name: "TMZ"
+    url: "https://www.tmz.com/rss.xml"
+    enabled: true
+
+  - name: "Entertainment Weekly"
+    url: "https://ew.com/feed/"
+    enabled: true
+
+  - name: "Variety"
+    url: "https://variety.com/feed/"
+    enabled: true
+
+  - name: "Hollywood Reporter"
+    url: "https://www.hollywoodreporter.com/feed/"
+    enabled: true
+
+  - name: "新浪体育"
+    url: "https://sports.sina.com.cn/rss/sports.xml"
+    enabled: true
+
+  - name: "腾讯体育"
+    url: "https://sports.qq.com/web/rss2018/index.xml"
+    enabled: true
+
+  - name: "网易体育"
+    url: "https://sports.163.com/special/00051K9V/sports_datalist.xml"
+    enabled: true
+
+# 7. 社会热点信源 (RSSHub 提供)
+social_hot:
+  - name: "微博热搜"
+    url: "https://rsshub.app/weibo/hotsearch"
+    enabled: true
+
+  - name: "知乎热榜"
+    url: "https://rsshub.app/zhihu/hotlist"
+    enabled: true
+
+  - name: "今日头条"
+    url: "https://rsshub.app/toutiao/hot"
+    enabled: true
+
+  - name: "少数派"
+    url: "https://rsshub.app/sspai/index"
+    enabled: true
+
+  - name: "V2EX"
+    url: "https://rsshub.app/v2ex/hot"
+    enabled: true
+
+  - name: "澎湃新闻"
+    url: "https://www.thepaper.cn/rss.xml"
+    enabled: true
+
+  - name: "界面新闻"
+    url: "https://www.jiemian.com/rss"
+    enabled: true
+
+  - name: "新浪新闻"
+    url: "https://news.sina.com.cn/rss/2009/topnews.xml"
+    enabled: true
+
+  - name: "IT之家"
+    url: "https://rsshub.app/ithome"
+    enabled: true
+
+  - name: "知乎热榜"
+    url: "https://www.zhihu.com/rss"
+    enabled: false
+
+  - name: "抖音热点"
+    url: "https://rsshub.app/douyin/hot"
+    enabled: false
+
+  - name: "百度热搜"
+    url: "https://rsshub.app/baidu/trending"
+    enabled: false
+
+  - name: "36氪热榜"
+    url: "https://rsshub.app/36kr/hot"
+    enabled: false
+
+  - name: "虎嗅热榜"
+    url: "https://rsshub.app/huxiu/hot"
+    enabled: false
+
+  - name: "凤凰新闻"
+    url: "https://news.ifeng.com/rss/index.xml"
+    enabled: false
+
+  - name: "网易新闻"
+    url: "https://news.163.com/special/00011K6L/rss_newstop.xml"
+    enabled: false
+
+# 8. 编程领域信源 (~15 个)
+programming:
+  - name: "Go Blog"
+    url: "https://go.dev/blog/feed.atom"
+    enabled: true
+
+  - name: "Rust Blog"
+    url: "https://blog.rust-lang.org/feed.xml"
+    enabled: true
+
+  - name: "Python Insider"
+    url: "https://blog.python.org/feeds/posts/default"
+    enabled: true
+
+  - name: "JavaScript Weekly"
+    url: "https://javascriptweekly.com/rss"
+    enabled: true
+
+  - name: "Node.js Blog"
+    url: "https://nodejs.org/en/feed/blog.xml"
+    enabled: true
+
+  - name: "React Blog"
+    url: "https://react.dev/rss.xml"
+    enabled: true
+
+  - name: "Vue Blog"
+    url: "https://blog.vuejs.org/feed.rss"
+    enabled: true
+
+  - name: "Swift Blog"
+    url: "https://swift.org/atom.xml"
+    enabled: true
+
+  - name: "Kotlin Blog"
+    url: "https://blog.jetbrains.com/kotlin/feed/"
+    enabled: true
+
+  - name: "TypeScript Blog"
+    url: "https://devblogs.microsoft.com/typescript/feed/"
+    enabled: true
+
+  - name: "CSS Tricks"
+    url: "https://css-tricks.com/feed/"
+    enabled: true
+
+  - name: "Smashing Magazine"
+    url: "https://www.smashingmagazine.com/feed/"
+    enabled: true
+
+  - name: "Martin Fowler"
+    url: "https://martinfowler.com/feed.atom"
+    enabled: true
+
+  - name: "InfoQ"
+    url: "https://www.infoq.com/feed/"
+    enabled: true
+
+  - name: "The Pragmatic Engineer"
+    url: "https://blog.pragmaticengineer.com/rss/"
+    enabled: true
+
+# 9. 社交媒体/社区信源 (~8 个)
+community:
+  - name: "Reddit Programming"
+    url: "https://www.reddit.com/r/programming/.rss"
+    enabled: true
+
+  - name: "Reddit Technology"
+    url: "https://www.reddit.com/r/technology/.rss"
+    enabled: true
+
+  - name: "Reddit Machine Learning"
+    url: "https://www.reddit.com/r/MachineLearning/.rss"
+    enabled: true
+
+  - name: "Reddit Python"
+    url: "https://www.reddit.com/r/Python/.rss"
+    enabled: true
+
+  - name: "Reddit JavaScript"
+    url: "https://www.reddit.com/r/javascript/.rss"
+    enabled: true
+
+  - name: "Lobsters"
+    url: "https://lobste.rs/rss"
+    enabled: true
+
+  - name: "Product Hunt"
+    url: "https://rsshub.app/producthunt/today"
+    enabled: true
+
+  - name: "Hacker News Best"
+    url: "https://hnrss.org/best"
+    enabled: true
+
+# API 源配置
+apis:
+  hackernews:
+    enabled: true
+    top_stories: 30
+
+  producthunt:
+    enabled: false
+    api_key: "your_api_key_here"

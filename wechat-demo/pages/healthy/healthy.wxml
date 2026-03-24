@@ -1,0 +1,62 @@
+<view class="container">
+  <view class="hero-section">
+    <view class="hero-content">
+      <text class="hero-title">健康美味</text>
+      <text class="hero-subtitle">营养均衡，吃出健康</text>
+    </view>
+  </view>
+
+  <view class="foods-section">
+    <view class="section-title">
+      <text class="title">健康菜品推荐</text>
+    </view>
+    
+    <view class="food-list">
+      <view class="food-card" wx:for="{{foods}}" wx:key="id">
+        <image class="food-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="food-info">
+          <view class="food-name">{{item.name}}</view>
+          <view class="food-tags">
+            <text class="tag" wx:for="{{item.tags}}" wx:key="*this">{{item}}</text>
+          </view>
+          <view class="food-desc">{{item.desc}}</view>
+          <view class="food-bottom">
+            <view class="calories">
+              <image class="calories-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ff6b4a' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z'/%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z'/%3E%3C/svg%3E"></image>
+              <text>{{item.calories}} 卡路里</text>
+            </view>
+            <view class="quantity-control" catchtap="preventBubble">
+              <view class="quantity-btn minus" wx:if="{{item.quantity > 0}}" catchtap="decreaseQuantity" data-id="{{item.id}}">−</view>
+              <text class="quantity" wx:if="{{item.quantity > 0}}">{{item.quantity}}</text>
+              <view class="quantity-btn plus" catchtap="orderFood" data-id="{{item.id}}">+</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="nutrition-section">
+    <view class="nutrition-title">营养小贴士</view>
+    <view class="nutrition-list">
+      <view class="nutrition-item">
+        <view class="nutrition-icon-wrapper">
+          <image class="nutrition-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2343a047' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z'/%3E%3C/svg%3E"></image>
+        </view>
+        <text class="nutrition-text">多吃蔬菜，每天至少500克</text>
+      </view>
+      <view class="nutrition-item">
+        <view class="nutrition-icon-wrapper">
+          <image class="nutrition-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%232196f3' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4'/%3E%3C/svg%3E"></image>
+        </view>
+        <text class="nutrition-text">多喝水，每天8杯水</text>
+      </view>
+      <view class="nutrition-item">
+        <view class="nutrition-icon-wrapper">
+          <image class="nutrition-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ff9800' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M13 10V3L4 14h7v7l9-11h-7z'/%3E%3C/svg%3E"></image>
+        </view>
+        <text class="nutrition-text">适量运动，每周3-5次</text>
+      </view>
+    </view>
+  </view>
+</view>

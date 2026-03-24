@@ -1,0 +1,40 @@
+<view class="coupons-container">
+  <view class="tabs">
+    <view class="tab-item {{activeTab === 'available' ? 'active' : ''}}" bindtap="onTabChange" data-tab="available">Available</view>
+    <view class="tab-item {{activeTab === 'used' ? 'active' : ''}}" bindtap="onTabChange" data-tab="used">Used</view>
+    <view class="tab-item {{activeTab === 'expired' ? 'active' : ''}}" bindtap="onTabChange" data-tab="expired">Expired</view>
+  </view>
+
+  <scroll-view class="content" scroll-y="{{true}}">
+    <view class="coupon-list" wx:if="{{couponList.length > 0}}">
+      <view class="coupon-item {{activeTab !== 'available' ? 'disabled' : ''}} {{selectMode && checkoutSubtotal > 0 && item.minAmount > checkoutSubtotal ? 'not-eligible' : ''}}" wx:for="{{couponList}}" wx:key="id">
+        <view class="coupon-left">
+          <text class="coupon-symbol">$</text>
+          <text class="coupon-value">{{item.discount}}</text>
+        </view>
+        <view class="coupon-right">
+          <text class="coupon-name">{{item.name}}</text>
+          <text class="coupon-condition">Min. order ${{item.minAmount}}</text>
+          <text class="coupon-time">Valid: {{item.startTime}} - {{item.endTime}}</text>
+          <text class="coupon-not-eligible" wx:if="{{selectMode && checkoutSubtotal > 0 && item.minAmount > checkoutSubtotal}}">
+            Need ${{item.needMore}} more
+          </text>
+        </view>
+        <view class="coupon-status" wx:if="{{activeTab !== 'available'}}">
+          <text>{{activeTab === 'used' ? 'Used' : 'Expired'}}</text>
+        </view>
+        <view class="use-btn" wx:if="{{activeTab === 'available'}}" bindtap="selectCoupon" data-item="{{item}}" data-id="{{item.id}}">
+          {{selectMode ? 'Select' : 'Use Now'}}
+        </view>
+      </view>
+    </view>
+
+    <empty-state 
+      wx:if="{{couponList.length === 0 && !loading}}"
+      icon="coupon-o"
+      title="No coupons"
+      desc="Check back later for new offers"
+      showBtn="{{false}}"
+    />
+  </scroll-view>
+</view>

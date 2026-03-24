@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', monospace;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.game-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #0a0a0a;
+    border: 4px solid #4a4a4a;
+    border-radius: 8px;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.3),
+        inset 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+/* CRT 显示器效果 */
+.crt-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+    pointer-events: none;
+    z-index: 10;
+    border-radius: 4px;
+}
+
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.1) 2px,
+        rgba(0, 0, 0, 0.1) 4px
+    );
+    pointer-events: none;
+    z-index: 11;
+    border-radius: 4px;
+}
+
+.game-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #2d2d2d, #3d3d3d);
+    border: 2px solid #5a5a5a;
+    border-radius: 4px;
+}
+
+.game-header h1 {
+    font-size: 14px;
+    color: #00ffff;
+    text-shadow: 2px 2px 0 #0088aa;
+    letter-spacing: 2px;
+}
+
+.score-board {
+    display: flex;
+    gap: 30px;
+    font-size: 12px;
+}
+
+.score {
+    color: #ffd700;
+    text-shadow: 1px 1px 0 #b8860b;
+}
+
+.lives {
+    color: #ff6b6b;
+}
+
+#gameCanvas {
+    border: 4px solid #333;
+    border-radius: 4px;
+    background: #87CEEB;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.2),
+        0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.controls-info {
+    display: flex;
+    gap: 30px;
+    margin-top: 15px;
+    font-size: 10px;
+    color: #aaa;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.key {
+    display: inline-block;
+    padding: 4px 8px;
+    background: #3d3d3d;
+    border: 2px solid #5a5a5a;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 10px;
+    box-shadow: 0 2px 0 #222;
+}
+
+.key:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 #222;
+}
+
+/* 屏幕覆盖层 */
+.screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    border: 4px solid #4a4a4a;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    z-index: 20;
+    min-width: 300px;
+}
+
+.screen h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.screen p {
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 25px;
+    line-height: 1.8;
+}
+
+.start-screen h2 {
+    color: #00ffff;
+    text-shadow: 2px 2px 0 #0088aa;
+}
+
+.game-over-screen h2 {
+    color: #ff6b6b;
+    text-shadow: 2px 2px 0 #aa0000;
+}
+
+.victory-screen h2 {
+    color: #ffd700;
+    text-shadow: 2px 2px 0 #b8860b;
+}
+
+.pixel-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    padding: 15px 30px;
+    background: linear-gradient(180deg, #4a4a4a, #2a2a2a);
+    border: 3px solid #6a6a6a;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.1s;
+    text-transform: uppercase;
+    box-shadow: 0 4px 0 #1a1a1a;
+}
+
+.pixel-btn:hover {
+    background: linear-gradient(180deg, #5a5a5a, #3a3a3a);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #1a1a1a;
+}
+
+.pixel-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #1a1a1a;
+}
+
+.start-screen .pixel-btn {
+    background: linear-gradient(180deg, #00aaaa, #008888);
+    border-color: #00cccc;
+}
+
+.start-screen .pixel-btn:hover {
+    background: linear-gradient(180deg, #00cccc, #00aaaa);
+}
+
+.game-over-screen .pixel-btn {
+    background: linear-gradient(180deg, #aa4444, #882222);
+    border-color: #cc6666;
+}
+
+.game-over-screen .pixel-btn:hover {
+    background: linear-gradient(180deg, #cc6666, #aa4444);
+}
+
+.victory-screen .pixel-btn {
+    background: linear-gradient(180deg, #aaaa00, #888800);
+    border-color: #cccc00;
+}
+
+.victory-screen .pixel-btn:hover {
+    background: linear-gradient(180deg, #cccc00, #aaaa00);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 闪烁动画 */
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.5; }
+}
+
+.blink {
+    animation: blink 1s infinite;
+}
+
+/* 浮动动画 */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* 响应式设计 */
+@media (max-width: 900px) {
+    .game-container {
+        padding: 10px;
+        margin: 10px;
+    }
+    
+    #gameCanvas {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+    }
+    
+    .game-header h1 {
+        font-size: 10px;
+    }
+    
+    .score-board {
+        font-size: 10px;
+        gap: 15px;
+    }
+    
+    .controls-info {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+}

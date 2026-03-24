@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计数器应用</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: linear-gradient(135deg, #1a1d23 0%, #0f1115 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .counter-container {
+            background-color: #1a1d23;
+            border-radius: 20px;
+            padding: 3rem 4rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 1px solid #2d3139;
+        }
+
+        .counter-title {
+            font-size: 1.5rem;
+            color: #9ca3af;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .counter-display {
+            font-size: 6rem;
+            font-weight: 700;
+            color: #34d399;
+            margin: 1.5rem 0;
+            text-shadow: 0 0 30px rgba(52, 211, 153, 0.3);
+            transition: transform 0.15s ease;
+        }
+
+        .counter-display.bump {
+            transform: scale(1.1);
+        }
+
+        .counter-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .counter-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-decrease {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .btn-decrease:hover {
+            background-color: #dc2626;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+        }
+
+        .btn-decrease:active {
+            transform: scale(0.95);
+        }
+
+        .btn-reset {
+            background-color: #6b7280;
+            color: white;
+            font-size: 0.9rem;
+            width: 80px;
+            border-radius: 30px;
+        }
+
+        .btn-reset:hover {
+            background-color: #4b5563;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(107, 114, 128, 0.5);
+        }
+
+        .btn-reset:active {
+            transform: scale(0.95);
+        }
+
+        .btn-increase {
+            background-color: #34d399;
+            color: #0f1115;
+        }
+
+        .btn-increase:hover {
+            background-color: #10b981;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(52, 211, 153, 0.5);
+        }
+
+        .btn-increase:active {
+            transform: scale(0.95);
+        }
+
+        .counter-info {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #2d3139;
+        }
+
+        .counter-info p {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+
+        .counter-info span {
+            color: #34d399;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        function Counter() {
+            const [count, setCount] = useState(0);
+            const [isBumping, setIsBumping] = useState(false);
+            const [history, setHistory] = useState({ increases: 0, decreases: 0 });
+
+            useEffect(() => {
+                setIsBumping(true);
+                const timer = setTimeout(() => setIsBumping(false), 150);
+                return () => clearTimeout(timer);
+            }, [count]);
+
+            const increase = () => {
+                setCount(prev => prev + 1);
+                setHistory(prev => ({ ...prev, increases: prev.increases + 1 }));
+            };
+
+            const decrease = () => {
+                setCount(prev => prev - 1);
+                setHistory(prev => ({ ...prev, decreases: prev.decreases + 1 }));
+            };
+
+            const reset = () => {
+                setCount(0);
+                setHistory({ increases: 0, decreases: 0 });
+            };
+
+            return (
+                <div className="counter-container">
+                    <h2 className="counter-title">React 计数器</h2>
+                    
+                    <div className={`counter-display ${isBumping ? 'bump' : ''}`}>
+                        {count}
+                    </div>
+                    
+                    <div className="counter-buttons">
+                        <button className="counter-btn btn-decrease" onClick={decrease}>
+                            −
+                        </button>
+                        <button className="counter-btn btn-reset" onClick={reset}>
+                            Reset
+                        </button>
+                        <button className="counter-btn btn-increase" onClick={increase}>
+                            +
+                        </button>
+                    </div>
+                    
+                    <div className="counter-info">
+                        <p>增加次数: <span>{history.increases}</span></p>
+                        <p>减少次数: <span>{history.decreases}</span></p>
+                        <p>总操作次数: <span>{history.increases + history.decreases}</span></p>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<Counter />);
+    </script>
+</body>
+</html>

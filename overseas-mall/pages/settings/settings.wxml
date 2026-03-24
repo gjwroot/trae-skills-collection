@@ -1,0 +1,160 @@
+<view class="settings-container">
+  <view class="settings-section">
+    <view class="settings-item" bindtap="navigateTo" data-url="/pages/profile/profile">
+      <text class="item-label">Profile</text>
+      <view class="item-right">
+        <text class="item-value">{{userInfo.nickname || 'Not set'}}</text>
+        <custom-icon name="arrow" size="14px" color="#999" />
+      </view>
+    </view>
+
+    <view class="settings-item" bindtap="navigateTo" data-url="/pages/address-list/address-list">
+      <text class="item-label">Shipping Address</text>
+      <view class="item-right">
+        <custom-icon name="arrow" size="14px" color="#999" />
+      </view>
+    </view>
+
+    <view class="settings-item" bindtap="navigateTo" data-url="/pages/coupons/coupons">
+      <text class="item-label">My Coupons</text>
+      <view class="item-right">
+        <text class="item-value coupon-count">{{couponCount}} available</text>
+        <custom-icon name="arrow" size="14px" color="#999" />
+      </view>
+    </view>
+  </view>
+
+  <view class="settings-section">
+    <view class="settings-item" bindtap="toggleTheme">
+      <text class="item-label">Dark Mode</text>
+      <view class="item-right">
+        <text class="item-value">{{themeText}}</text>
+        <custom-icon name="arrow" size="14px" color="#999" />
+      </view>
+    </view>
+
+    <view class="settings-item" bindtap="showLanguagePicker">
+      <text class="item-label">Language</text>
+      <view class="item-right">
+        <text class="item-value">{{languageText}}</text>
+        <custom-icon name="arrow" size="14px" color="#999" />
+      </view>
+    </view>
+
+    <view class="settings-item" bindtap="showCurrencyPicker">
+      <text class="item-label">Currency</text>
+      <view class="item-right">
+        <text class="item-value">{{currencyText}}</text>
+        <custom-icon name="arrow" size="14px" color="#999" />
+      </view>
+    </view>
+  </view>
+
+  <view class="settings-section">
+    <view class="settings-item">
+      <text class="item-label">VoiceOver</text>
+      <switch checked="{{voiceOverEnabled}}" color="#FF6B4A" bindchange="toggleVoiceOver" />
+    </view>
+
+    <view class="settings-item">
+      <text class="item-label">Large Text</text>
+      <switch checked="{{largeTextEnabled}}" color="#FF6B4A" bindchange="toggleLargeText" />
+    </view>
+
+    <view class="settings-item">
+      <text class="item-label">High Contrast</text>
+      <switch checked="{{highContrastEnabled}}" color="#FF6B4A" bindchange="toggleHighContrast" />
+    </view>
+
+    <view class="settings-item">
+      <text class="item-label">Reduce Motion</text>
+      <switch checked="{{reduceMotionEnabled}}" color="#FF6B4A" bindchange="toggleReduceMotion" />
+    </view>
+  </view>
+
+  <view class="settings-section">
+    <view class="settings-item" bindtap="toggleNotification">
+      <text class="item-label">Push Notifications</text>
+      <switch checked="{{notificationEnabled}}" color="#FF6B4A" />
+    </view>
+
+    <view class="settings-item" bindtap="clearCache">
+      <text class="item-label">Clear Cache</text>
+      <view class="item-right">
+        <text class="item-value">{{cacheSize}}</text>
+        <custom-icon name="arrow" size="14px" color="#999" />
+      </view>
+    </view>
+  </view>
+
+  <view class="settings-section">
+    <view class="settings-item" bindtap="navigateTo" data-url="/pages/privacy-policy/privacy-policy">
+      <text class="item-label">Privacy Policy</text>
+      <view class="item-right">
+        <custom-icon name="arrow" size="14px" color="#999" />
+      </view>
+    </view>
+
+    <view class="settings-item" bindtap="navigateTo" data-url="/pages/user-agreement/user-agreement">
+      <text class="item-label">User Agreement</text>
+      <view class="item-right">
+        <custom-icon name="arrow" size="14px" color="#999" />
+      </view>
+    </view>
+  </view>
+
+  <view class="settings-section">
+    <view class="settings-item" bindtap="navigateTo" data-url="/pages/help/help">
+      <text class="item-label">Help Center</text>
+      <view class="item-right">
+        <custom-icon name="arrow" size="14px" color="#999" />
+      </view>
+    </view>
+
+    <view class="settings-item" bindtap="showAbout">
+      <text class="item-label">About</text>
+      <view class="item-right">
+        <text class="item-value">v1.0.0</text>
+        <custom-icon name="arrow" size="14px" color="#999" />
+      </view>
+    </view>
+  </view>
+
+  <button class="logout-btn" bindtap="handleLogout">Log Out</button>
+
+  <!-- Language Picker Popup -->
+  <view class="picker-popup {{showLanguagePicker ? 'show' : ''}}" bindtap="hideLanguagePicker">
+    <view class="picker-content" catchtap="preventBubble">
+      <view class="picker-header">
+        <text class="picker-title">Select Language</text>
+        <view class="close-btn" bindtap="hideLanguagePicker">
+          <custom-icon name="cross" size="20px" color="#999" />
+        </view>
+      </view>
+      <view class="picker-list">
+        <view class="picker-item {{language === item.code ? 'active' : ''}}" wx:for="{{languages}}" wx:key="code" bindtap="selectLanguage" data-code="{{item.code}}">
+          <text>{{item.name}}</text>
+          <custom-icon wx:if="{{language === item.code}}" name="success" size="20px" color="#FF6B4A" />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Currency Picker Popup -->
+  <view class="picker-popup {{showCurrencyPicker ? 'show' : ''}}" bindtap="hideCurrencyPicker">
+    <view class="picker-content" catchtap="preventBubble">
+      <view class="picker-header">
+        <text class="picker-title">Select Currency</text>
+        <view class="close-btn" bindtap="hideCurrencyPicker">
+          <custom-icon name="cross" size="20px" color="#999" />
+        </view>
+      </view>
+      <view class="picker-list">
+        <view class="picker-item {{currency === item.code ? 'active' : ''}}" wx:for="{{currencies}}" wx:key="code" bindtap="selectCurrency" data-code="{{item.code}}">
+          <text>{{item.name}}</text>
+          <custom-icon wx:if="{{currency === item.code}}" name="success" size="20px" color="#FF6B4A" />
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

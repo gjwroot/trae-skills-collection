@@ -1,0 +1,48 @@
+<view class="promotion-container">
+  <view class="promotion-header" wx:if="{{promotionInfo}}">
+    <image class="promotion-image" src="{{promotionInfo.image || '/assets/images/banner-1.jpg'}}" mode="aspectFill" />
+    <view class="promotion-overlay"></view>
+    <view class="promotion-info">
+      <text class="promotion-title">{{promotionInfo.title}}</text>
+      <text class="promotion-subtitle">{{promotionInfo.subtitle}}</text>
+      <text class="promotion-desc" wx:if="{{promotionInfo.description}}">{{promotionInfo.description}}</text>
+    </view>
+  </view>
+
+  <view class="goods-section">
+    <view class="section-header">
+      <text class="section-title">Hot Deals</text>
+    </view>
+    
+    <view class="goods-grid">
+      <view 
+        class="goods-card" 
+        wx:for="{{goodsList}}" 
+        wx:key="id"
+        bindtap="navigateToDetail"
+        data-id="{{item.id}}"
+      >
+        <image class="goods-image" lazy-load="{{true}}" src="{{item.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+        <view class="goods-info">
+          <text class="goods-name">{{item.name}}</text>
+          <view class="price-row">
+            <text class="current-price">${{item.price}}</text>
+            <text class="original-price" wx:if="{{item.originalPrice}}">${{item.originalPrice}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="loading" wx:if="{{loading}}">
+      <text>Loading...</text>
+    </view>
+    
+    <view class="no-more" wx:if="{{!loading && noMore && goodsList.length > 0}}">
+      <text>No more products</text>
+    </view>
+    
+    <view class="empty" wx:if="{{!loading && goodsList.length === 0}}">
+      <text>No products yet</text>
+    </view>
+  </view>
+</view>

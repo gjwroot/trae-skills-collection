@@ -1,0 +1,256 @@
+.container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-bottom: 140rpx;
+}
+
+/* 图片区域 */
+.image-section {
+  position: relative;
+  height: 500rpx;
+}
+
+.food-image {
+  width: 100%;
+  height: 100%;
+}
+
+.back-btn {
+  position: absolute;
+  top: 60rpx;
+  left: 32rpx;
+  width: 64rpx;
+  height: 64rpx;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-icon {
+  color: white;
+  font-size: 40rpx;
+  font-weight: 300;
+}
+
+/* 信息区域 */
+.info-section {
+  background: #ffffff;
+  border-radius: 32rpx 32rpx 0 0;
+  margin-top: -32rpx;
+  padding: 40rpx 32rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.food-name {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.favorite-btn {
+  width: 72rpx;
+  height: 72rpx;
+  background: #f8f9fa;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favorite-icon-img {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.food-tags {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.tag {
+  background: #f8f9fa;
+  color: #636e72;
+  padding: 8rpx 20rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+}
+
+.tag.hot {
+  background: #fff5f3;
+  color: #ff6b4a;
+}
+
+.food-desc {
+  font-size: 28rpx;
+  color: #636e72;
+  line-height: 1.6;
+  margin-bottom: 24rpx;
+}
+
+.food-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 4rpx;
+}
+
+.price-symbol {
+  font-size: 28rpx;
+  color: #ff6b4a;
+  font-weight: 600;
+}
+
+.price-value {
+  font-size: 48rpx;
+  color: #ff6b4a;
+  font-weight: 700;
+}
+
+.sales {
+  font-size: 26rpx;
+  color: #b2bec3;
+}
+
+/* 分隔线 */
+.divider {
+  height: 16rpx;
+  background: #f8f9fa;
+}
+
+/* 营养信息 */
+.nutrition-section {
+  background: #ffffff;
+  padding: 32rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 24rpx;
+}
+
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20rpx;
+}
+
+.nutrition-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+}
+
+.nutrition-value {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #ff6b4a;
+  margin-bottom: 8rpx;
+}
+
+.nutrition-label {
+  font-size: 24rpx;
+  color: #636e72;
+}
+
+/* 食材清单 */
+.ingredients-section {
+  background: #ffffff;
+  padding: 32rpx;
+}
+
+.ingredients-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.ingredient-tag {
+  background: #f8f9fa;
+  color: #636e72;
+  padding: 16rpx 28rpx;
+  border-radius: 32rpx;
+  font-size: 26rpx;
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  padding: 24rpx 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.quantity-section {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+}
+
+.qty-btn {
+  width: 56rpx;
+  height: 56rpx;
+  background: #f8f9fa;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.qty-value {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  min-width: 48rpx;
+  text-align: center;
+}
+
+.add-cart-btn {
+  background: linear-gradient(135deg, #ff6b4a 0%, #ff8a6d 100%);
+  padding: 24rpx 48rpx;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.btn-text {
+  color: white;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.btn-price {
+  color: white;
+  font-size: 32rpx;
+  font-weight: 700;
+}

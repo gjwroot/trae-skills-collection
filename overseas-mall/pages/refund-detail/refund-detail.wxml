@@ -1,0 +1,71 @@
+<view class="refund-detail-container">
+  <view class="status-section">
+    <view class="status-icon">
+      <custom-icon name="{{statusIcon}}" size="80px" color="#FF6B4A" />
+    </view>
+    <text class="status-text">{{refundInfo.statusText || 'Processing'}}</text>
+    <text class="status-desc">{{refundInfo.statusDesc || 'Your refund is being processed'}}</text>
+  </view>
+
+  <view class="refund-info">
+    <view class="info-card">
+      <view class="info-row">
+        <text class="info-label">Refund No.</text>
+        <text class="info-value">{{refundInfo.refundNo || 'RF123456789'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">Type</text>
+        <text class="info-value">{{refundInfo.typeText || 'Refund Only'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">Reason</text>
+        <text class="info-value">{{refundInfo.reason || 'Quality issues'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">Amount</text>
+        <text class="info-value price">${{refundInfo.amount || '59.99'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">Apply Time</text>
+        <text class="info-value">{{refundInfo.applyTime || '2026-03-08 10:30'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="goods-section">
+    <view class="section-title">Product Information</view>
+    <view class="goods-card">
+      <image class="goods-image" src="{{refundInfo.goodsImage || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+      <view class="goods-info">
+        <text class="goods-name">{{refundInfo.goodsName || 'Wireless Bluetooth Headphones'}}</text>
+        <text class="goods-spec">{{refundInfo.goodsSpec || 'Color: Black'}}</text>
+        <view class="price-row">
+          <text class="price">${{refundInfo.goodsPrice || '59.99'}}</text>
+          <text class="quantity">x{{refundInfo.quantity || 1}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="timeline-section">
+    <view class="section-title">Progress Timeline</view>
+    <view class="timeline">
+      <view class="timeline-item" wx:for="{{timeline}}" wx:key="index">
+        <view class="timeline-dot {{item.completed ? 'completed' : ''}}">
+          <custom-icon name="{{item.completed ? 'success' : 'circle'}}" size="{{item.completed ? '16px' : '12px'}}" color="{{item.completed ? '#FF6B4A' : '#ddd'}}" />
+        </view>
+        <view class="timeline-line {{item.completed ? 'completed' : ''}}"></view>
+        <view class="timeline-content">
+          <text class="timeline-title">{{item.title}}</text>
+          <text class="timeline-time">{{item.time}}</text>
+          <text class="timeline-desc" wx:if="{{item.desc}}">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="action-section">
+    <button class="view-all-btn" bindtap="viewAllRefunds">View All Refunds</button>
+    <button class="cancel-btn" wx:if="{{refundInfo.status === 'pending'}}" bindtap="cancelRefund">Cancel Application</button>
+  </view>
+</view>

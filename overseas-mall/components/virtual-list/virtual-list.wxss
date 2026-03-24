@@ -1,0 +1,17 @@
+
+.virtual-list {
+  width: 100%;
+  overflow: hidden;
+}
+
+.virtual-list-inner {
+  position: relative;
+  width: 100%;
+}
+
+.virtual-list-item {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

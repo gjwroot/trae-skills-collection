@@ -1,0 +1,88 @@
+<view class="qna-container">
+  <view class="page-header">
+    <view class="header-title">商品问答</view>
+    <view class="goods-name" wx:if="{{goodsName}}">{{goodsName}}</view>
+  </view>
+
+  <view class="ask-btn-wrapper">
+    <button class="ask-btn" bindtap="showAskModal">
+      <text class="ask-icon">💬</text>
+      我要提问
+    </button>
+  </view>
+
+  <view class="qna-content">
+    <view class="loading-state" wx:if="{{loading}}">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <view class="empty-state" wx:elif="{{qnaList.length === 0}}">
+      <view class="empty-icon">📝</view>
+      <text class="empty-text">暂无问答</text>
+      <text class="empty-hint">快来提问吧！</text>
+    </view>
+
+    <view class="qna-list" wx:else>
+      <view class="qna-item" wx:for="{{qnaList}}" wx:key="id">
+        <view class="question-section">
+          <view class="question-header">
+            <view class="user-info">
+              <view class="user-avatar">{{item.userName.slice(0,1)}}</view>
+              <view class="user-name">{{item.userName}}</view>
+            </view>
+            <view class="question-meta">
+              <text class="question-time">{{item.createdAt | formatTime}}</text>
+              <view class="answer-badge {{item.isAnswered ? 'answered' : 'unanswered'}}">
+                {{item.isAnswered ? '已回复' : '待回复'}}
+              </view>
+            </view>
+          </view>
+          <view class="question-content">{{item.content}}</view>
+          <view class="question-actions">
+            <view class="action-btn" bindtap="deleteQuestion" data-id="{{item.id}}">删除</view>
+          </view>
+        </view>
+
+        <view class="answer-section" wx:if="{{item.answers.length > 0}}">
+          <view class="answer-divider"></view>
+          <view class="answer-item" wx:for="{{item.answers}}" wx:for-item="answer" wx:key="id">
+            <view class="answer-header">
+              <view class="answer-user-info">
+                <view class="answer-avatar merchant-avatar">商</view>
+                <view class="answer-user-name merchant-name">{{answer.userName}}</view>
+                <view class="merchant-badge">官方</view>
+              </view>
+              <text class="answer-time">{{answer.createdAt | formatTime}}</text>
+            </view>
+            <view class="answer-content">{{answer.content}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="ask-modal {{showAskModal ? 'show' : ''}}" bindtap="hideAskModal">
+    <view class="modal-content" catchtap="">
+      <view class="modal-header">
+        <view class="modal-title">发表提问</view>
+        <view class="modal-close" bindtap="hideAskModal">✕</view>
+      </view>
+      <view class="modal-body">
+        <textarea 
+          class="question-input" 
+          placeholder="请输入您的问题..." 
+          value="{{newQuestion}}" 
+          bindinput="onQuestionInput"
+          maxlength="200"
+          auto-height
+        ></textarea>
+        <view class="input-hint">请输入5-200个字符</view>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel-btn" bindtap="hideAskModal">取消</button>
+        <button class="modal-btn confirm-btn" bindtap="submitQuestion">提交</button>
+      </view>
+    </view>
+  </view>
+</view>

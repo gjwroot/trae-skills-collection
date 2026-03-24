@@ -1,0 +1,71 @@
+<view class="notifications-container">
+  <scroll-view class="main-content" scroll-y="{{true}}" refresher-enabled="{{true}}" refresher-triggered="{{refreshing}}" bindrefresherrefresh="onRefresh">
+    <view class="tabs">
+      <view class="tab-item {{activeTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">
+        <view class="tab-text-wrapper">
+          <text>All</text>
+          <view class="tab-badge" wx:if="{{unreadCount.all > 0}}">{{unreadCount.all}}</view>
+        </view>
+      </view>
+      <view class="tab-item {{activeTab === 'order' ? 'active' : ''}}" bindtap="switchTab" data-tab="order">
+        <view class="tab-text-wrapper">
+          <text>Orders</text>
+          <view class="tab-badge" wx:if="{{unreadCount.order > 0}}">{{unreadCount.order}}</view>
+        </view>
+      </view>
+      <view class="tab-item {{activeTab === 'promotion' ? 'active' : ''}}" bindtap="switchTab" data-tab="promotion">
+        <view class="tab-text-wrapper">
+          <text>Promotions</text>
+          <view class="tab-badge" wx:if="{{unreadCount.promotion > 0}}">{{unreadCount.promotion}}</view>
+        </view>
+      </view>
+      <view class="tab-item {{activeTab === 'system' ? 'active' : ''}}" bindtap="switchTab" data-tab="system">
+        <view class="tab-text-wrapper">
+          <text>System</text>
+          <view class="tab-badge" wx:if="{{unreadCount.system > 0}}">{{unreadCount.system}}</view>
+        </view>
+      </view>
+    </view>
+
+    <loading-state 
+      wx:if="{{loading}}" 
+      show="{{true}}" 
+      type="loading" 
+      text="Loading notifications..."
+    />
+
+    <view class="notification-list" wx:else>
+      <empty-state 
+        wx:if="{{notifications.length === 0}}"
+        icon="bell-o"
+        title="No notifications"
+        desc="You're all caught up!"
+        showBtn="{{false}}"
+      />
+      
+      <view class="notification-item {{item.read ? 'read' : ''}}" wx:for="{{notifications}}" wx:key="id" bindtap="viewNotification" data-item="{{item}}">
+        <view class="notification-icon">
+          <custom-icon name="{{getIconName(item.type)}}" size="24px" color="{{getIconColor(item.type)}}" />
+        </view>
+        <view class="notification-content">
+          <view class="notification-header">
+            <text class="notification-title">{{item.title}}</text>
+            <text class="notification-time">{{item.time}}</text>
+          </view>
+          <text class="notification-desc">{{item.content}}</text>
+          <view class="notification-tag" wx:if="{{item.tag}}">{{item.tag}}</view>
+        </view>
+        <view class="unread-dot" wx:if="{{!item.read}}"></view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="bottom-actions" wx:if="{{notifications.length > 0}}">
+    <button class="action-btn mark-read-btn" bindtap="markAllAsRead">
+      Mark all as read
+    </button>
+    <button class="action-btn clear-btn" bindtap="clearAll">
+      Clear all
+    </button>
+  </view>
+</view>

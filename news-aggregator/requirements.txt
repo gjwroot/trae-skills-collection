@@ -1,0 +1,16 @@
+# 核心依赖
+requests>=2.31.0
+feedparser>=6.0.10
+python-dateutil>=2.8.2
+PyYAML>=6.0.1
+
+# Web 框架
+flask>=3.0.0
+
+# AI 相关（可选）
+# openai>=1.0.0
+# anthropic>=0.7.0
+
+# 工具
+beautifulsoup4>=4.12.0
+lxml>=4.9.0

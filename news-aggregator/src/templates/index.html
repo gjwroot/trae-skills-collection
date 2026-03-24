@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}新闻聚合器 - 全球新闻一览{% endblock %}
+
+{% block content %}
+<div class="category-tabs" id="categoryTabs">
+    <button class="cat-tab active" data-category="all">全部</button>
+    {% for cid in categories %}
+    <button class="cat-tab" data-category="{{ cid }}">
+        {{ category_info[cid].emoji }} {{ category_info[cid].name }}
+    </button>
+    {% endfor %}
+</div>
+
+<div class="stats-bar" id="statsBar">
+    <span id="totalCount">加载中...</span>
+</div>
+
+<div class="news-container" id="newsContainer">
+    <div class="loading" id="loadingIndicator">正在加载新闻...</div>
+</div>
+{% endblock %}

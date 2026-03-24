@@ -1,0 +1,83 @@
+<view class="vip-benefits-container">
+  <scroll-view class="main-content" scroll-y="{{true}}">
+    <view class="vip-header">
+      <view class="vip-card">
+        <view class="vip-badge" style="background: rgba(255,255,255,0.3);">
+          <custom-icon name="gem-o" size="20px" color="#FFD700" />
+          <text>VIP {{userInfo.vipLevel || 1}}</text>
+        </view>
+        <view class="vip-name">{{userInfo.nickname || 'VIP User'}}</view>
+        <view class="vip-points">
+          <text class="points-label">My Points</text>
+          <text class="points-value">{{userInfo.points || 0}}</text>
+        </view>
+        
+        <view class="progress-section" wx:if="{{userInfo.vipLevel < vipLevels.length}}">
+          <view class="progress-info">
+            <text class="progress-text">{{currentLevel.desc}}</text>
+            <text class="progress-next">{{pointsToNextLevel}} points to {{nextLevel.desc}}</text>
+          </view>
+          <view class="progress-bar">
+            <view class="progress-fill" style="width: {{progressPercent}}%"></view>
+          </view>
+          <view class="progress-levels">
+            <text class="level-start">{{currentLevel.pointsRequired}}</text>
+            <text class="level-end">{{nextLevel.pointsRequired}}</text>
+          </view>
+        </view>
+        
+        <view class="progress-section max-level" wx:if="{{userInfo.vipLevel >= vipLevels.length}}">
+          <view class="max-level-badge">
+            <custom-icon name="success" size="20px" color="#FFD700" />
+            <text>You've reached the highest level!</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="vip-levels-section">
+      <view class="section-title">VIP Levels</view>
+      <view class="level-list">
+        <view class="level-item {{item.level === userInfo.vipLevel ? 'current' : ''}} {{item.level < userInfo.vipLevel ? 'unlocked' : ''}}" wx:for="{{vipLevels}}" wx:key="level">
+          <view class="level-badge" style="border-color: {{item.color}};">
+            <custom-icon name="gem-o" size="24px" color="{{item.level <= userInfo.vipLevel ? item.color : '#999'}}" />
+          </view>
+          <view class="level-info">
+            <text class="level-name">VIP {{item.level}}</text>
+            <text class="level-desc">{{item.desc}}</text>
+          </view>
+          <view class="level-points">
+            <text class="points-required">{{item.pointsRequired}} Points</text>
+            <custom-icon wx:if="{{item.level < userInfo.vipLevel}}" name="success" size="16px" color="#4CAF50" />
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="benefits-section">
+      <view class="section-title">Exclusive Benefits</view>
+      <view class="benefits-grid">
+        <view class="benefit-item" wx:for="{{benefits}}" wx:key="index">
+          <view class="benefit-icon">
+            <custom-icon name="{{item.icon}}" size="32px" color="#FF6B4A" />
+          </view>
+          <text class="benefit-title">{{item.title}}</text>
+          <text class="benefit-desc">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="rules-section">
+      <view class="section-title">How to Earn Points</view>
+      <view class="rule-list">
+        <view class="rule-item" wx:for="{{rules}}" wx:key="index">
+          <view class="rule-dot"></view>
+          <view class="rule-content">
+            <text class="rule-title">{{item.title}}</text>
+            <text class="rule-points">+{{item.points}} Points</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,83 @@
+{
+  "pages": [
+    "pages/splash/splash",
+    "pages/guide/guide",
+    "pages/index/index",
+    "pages/category/category",
+    "pages/cart/cart",
+    "pages/mine/mine",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/forgot-password/forgot-password",
+    "pages/goods-detail/goods-detail",
+    "pages/order-list/order-list",
+    "pages/order-detail/order-detail",
+    "pages/checkout/checkout",
+    "pages/search/search",
+    "pages/profile/profile",
+    "pages/favorites/favorites",
+    "pages/history/history",
+    "pages/coupons/coupons",
+    "pages/settings/settings",
+    "pages/address-list/address-list",
+    "pages/address-edit/address-edit",
+    "pages/help/help",
+    "pages/review/review",
+    "pages/reviews/reviews",
+    "pages/goods-review/goods-review",
+    "pages/promotion/promotion",
+    "pages/refund-apply/refund-apply",
+    "pages/refund-detail/refund-detail",
+    "pages/refund-list/refund-list",
+    "pages/vip-benefits/vip-benefits",
+    "pages/points-rules/points-rules",
+    "pages/coupon-center/coupon-center",
+    "pages/flash-sale/flash-sale",
+    "pages/goods-compare/goods-compare",
+    "pages/privacy-policy/privacy-policy",
+    "pages/user-agreement/user-agreement",
+    "pages/notifications/notifications",
+    "pages/sign-in/sign-in",
+    "pages/customer-service/customer-service",
+    "pages/wishlist/wishlist",
+    "pages/qna/qna",
+    "pages/member-activity/member-activity"
+  ],
+  "lazyCodeLoading": "requiredComponents",
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FF6B4A",
+    "navigationBarTitleText": "Overseas Mall",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#666666",
+    "selectedColor": "#FF6B4A",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "Home"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "Category"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "Cart"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "Mine"
+      }
+    ]
+  },
+  "usingComponents": {
+    "custom-icon": "/components/icon/icon"
+  },
+  "sitemapLocation": "sitemap.json",
+  "darkmode": false
+}

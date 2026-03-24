@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>合成大西瓜 🍉</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-wrapper">
+        <div class="header">
+            <h1>🍉 合成大西瓜 🍉</h1>
+            <div class="score-board">
+                <div class="score-item">
+                    <span class="label">当前分数</span>
+                    <span class="value" id="score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">最高记录</span>
+                    <span class="value" id="best-score">0</span>
+                </div>
+                <div class="next-fruit-box">
+                    <span class="label">下一个</span>
+                    <div class="next-fruit" id="next-fruit"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-area" id="game-area">
+            <canvas id="game-canvas"></canvas>
+            <div class="danger-line"></div>
+        </div>
+        
+        <div class="controls">
+            <button id="restart-btn" class="btn-restart">🔄 重新开始</button>
+        </div>
+        
+        <div class="fruit-guide">
+            <div class="fruit-chain">
+                <span class="fruit-item">🍇</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍒</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍊</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍋</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍎</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍐</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍑</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item">🍍</span>
+                <span class="arrow">→</span>
+                <span class="fruit-item highlight">🍉</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="game-over-modal" id="game-over-modal">
+        <div class="modal-content">
+            <div class="modal-icon">😢</div>
+            <h2>游戏结束</h2>
+            <p class="final-score-text">最终得分</p>
+            <div class="final-score" id="final-score">0</div>
+            <button id="play-again-btn" class="btn-play-again">再来一局 🎮</button>
+        </div>
+    </div>
+    
+    <script src="js/game.js"></script>
+</body>
+</html>

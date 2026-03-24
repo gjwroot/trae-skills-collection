@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "My Refunds",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "custom-icon": "/components/icon/icon",
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}

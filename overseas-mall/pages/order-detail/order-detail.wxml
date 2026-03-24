@@ -1,0 +1,111 @@
+<view class="order-detail-container">
+  <scroll-view class="main-content" scroll-y="{{true}}">
+    <view class="status-section">
+      <view class="status-icon-box">
+        <custom-icon name="{{statusIcon}}" size="40px" color="#FF6B4A" />
+      </view>
+      <text class="status-text">{{orderInfo.statusText}}</text>
+      <text class="status-desc">{{statusDesc}}</text>
+    </view>
+
+    <view class="logistics-section" wx:if="{{logisticsList.length > 0}}">
+      <view class="section-title">
+        <custom-icon name="logistics" size="20px" color="#FF6B4A" />
+        <text>Logistics Tracking</text>
+      </view>
+      <view class="logistics-list">
+        <view class="logistics-item {{index === 0 ? 'active' : ''}}" wx:for="{{logisticsList}}" wx:key="index">
+          <view class="logistics-dot">
+            <view class="dot-inner"></view>
+          </view>
+          <view class="logistics-line" wx:if="{{index < logisticsList.length - 1}}"></view>
+          <view class="logistics-content">
+            <text class="logistics-time">{{item.time}}</text>
+            <text class="logistics-desc">{{item.desc}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="address-section">
+      <view class="address-header">
+        <custom-icon name="location" size="20px" color="#FF6B4A" />
+        <text class="address-name">{{orderInfo.address.name}}</text>
+        <text class="address-phone">{{orderInfo.address.phone}}</text>
+      </view>
+      <text class="address-detail">{{orderInfo.address.province}} {{orderInfo.address.city}} {{orderInfo.address.district}} {{orderInfo.address.detail}}</text>
+    </view>
+
+    <view class="goods-section">
+      <view class="shop-header">
+        <custom-icon name="shop-o" size="16px" color="#FF6B4A" />
+        <text class="shop-name">{{orderInfo.shopName}}</text>
+      </view>
+      <view class="goods-list">
+        <view class="goods-item" wx:for="{{orderInfo.goods}}" wx:key="id">
+          <image class="goods-image" lazy-load="{{true}}" src="{{item.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+          <view class="goods-info">
+            <text class="goods-name">{{item.name}}</text>
+            <text class="goods-spec" wx:if="{{item.spec}}">{{item.spec}}</text>
+            <view class="price-row">
+              <text class="price">${{item.price}}</text>
+              <text class="quantity">x{{item.quantity}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="info-section">
+      <view class="info-row">
+        <text class="info-label">Order Number</text>
+        <text class="info-value">{{orderInfo.orderNo}}</text>
+        <text class="copy-btn" bindtap="copyOrderNo">Copy</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">Create Time</text>
+        <text class="info-value">{{orderInfo.createTime}}</text>
+      </view>
+      <view class="info-row" wx:if="{{orderInfo.payTime}}">
+        <text class="info-label">Pay Time</text>
+        <text class="info-value">{{orderInfo.payTime}}</text>
+      </view>
+      <view class="info-row" wx:if="{{orderInfo.shipTime}}">
+        <text class="info-label">Ship Time</text>
+        <text class="info-value">{{orderInfo.shipTime}}</text>
+      </view>
+      <view class="info-row" wx:if="{{orderInfo.completeTime}}">
+        <text class="info-label">Complete Time</text>
+        <text class="info-value">{{orderInfo.completeTime}}</text>
+      </view>
+    </view>
+
+    <view class="price-section">
+      <view class="price-row">
+        <text class="price-label">Subtotal</text>
+        <text class="price-value">${{orderInfo.subtotal}}</text>
+      </view>
+      <view class="price-row">
+        <text class="price-label">Shipping</text>
+        <text class="price-value">{{orderInfo.shipping > 0 ? '$' + orderInfo.shipping : 'Free'}}</text>
+      </view>
+      <view class="price-row" wx:if="{{orderInfo.discount > 0}}">
+        <text class="price-label">Coupon</text>
+        <text class="price-value discount">-${{orderInfo.discount}}</text>
+      </view>
+      <view class="price-row total">
+        <text class="price-label">Total</text>
+        <text class="price-value">${{orderInfo.totalPrice}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="bottom-bar" wx:if="{{orderInfo.status === 'pending' || orderInfo.status === 'shipped' || orderInfo.status === 'completed'}}">
+    <button wx:if="{{orderInfo.status === 'pending'}}" class="btn-outline" bindtap="cancelOrder">Cancel Order</button>
+    <button wx:if="{{orderInfo.status === 'pending'}}" class="btn-primary" bindtap="payOrder">Pay Now</button>
+    <button wx:if="{{orderInfo.status === 'shipped'}}" class="btn-outline" bindtap="applyRefund">Apply Refund</button>
+    <button wx:if="{{orderInfo.status === 'shipped'}}" class="btn-primary" bindtap="confirmReceive">Confirm Receipt</button>
+    <button wx:if="{{orderInfo.status === 'completed'}}" class="btn-outline" bindtap="applyRefund">Apply Refund</button>
+    <button wx:if="{{orderInfo.status === 'completed'}}" class="btn-primary" bindtap="writeReview">Write Review</button>
+  </view>
+</view>

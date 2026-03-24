@@ -1,0 +1,68 @@
+<view class="flash-sale-container">
+  <scroll-view class="main-content" scroll-y="{{true}}">
+    <view class="header-section">
+      <view class="countdown-box">
+        <text class="countdown-label">Ends in</text>
+        <view class="countdown-timer">
+          <text class="time-box">{{countdown.hours}}</text>
+          <text class="separator">:</text>
+          <text class="time-box">{{countdown.minutes}}</text>
+          <text class="separator">:</text>
+          <text class="time-box">{{countdown.seconds}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="tabs-section">
+      <view 
+        class="tab-item {{activeTab === 'current' ? 'active' : ''}}" 
+        bindtap="switchTab" 
+        data-tab="current"
+      >
+        <text>Current</text>
+      </view>
+      <view 
+        class="tab-item {{activeTab === 'upcoming' ? 'active' : ''}}" 
+        bindtap="switchTab" 
+        data-tab="upcoming"
+      >
+        <text>Upcoming</text>
+      </view>
+    </view>
+
+    <view class="product-list">
+      <view class="product-item" wx:for="{{productList}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+        <image class="product-image" src="{{item.image}}" mode="aspectFill" />
+        <view class="product-info">
+          <text class="product-name">{{item.name}}</text>
+          <view class="price-row">
+            <text class="sale-price">${{item.salePrice}}</text>
+            <text class="original-price">${{item.originalPrice}}</text>
+          </view>
+          <view class="progress-section">
+            <view class="progress-bar">
+              <view class="progress-fill" style="width: {{item.progress}}%"></view>
+            </view>
+            <text class="progress-text">{{item.sold}}% sold</text>
+          </view>
+          <button 
+            class="buy-btn {{item.sold >= 100 ? 'disabled' : ''}}" 
+            catchtap="quickBuy" 
+            data-id="{{item.id}}"
+            disabled="{{item.sold >= 100}}"
+          >
+            {{item.sold >= 100 ? 'Sold Out' : 'Snap Up'}}
+          </button>
+        </view>
+      </view>
+    </view>
+
+    <empty-state 
+      wx:if="{{productList.length === 0 && !loading}}"
+      icon="description"
+      title="No flash sale products"
+      desc="Check back later for amazing deals"
+      showBtn="{{false}}"
+    />
+  </scroll-view>
+</view>

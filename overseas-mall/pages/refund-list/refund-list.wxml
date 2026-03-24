@@ -1,0 +1,100 @@
+<view class="refund-list-container">
+  <view class="tab-bar">
+    <view 
+      class="tab-item {{activeTab === 'all' ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="all"
+    >
+      <text>All</text>
+      <view class="tab-badge" wx:if="{{tabCounts.all > 0}}">{{tabCounts.all}}</view>
+    </view>
+    <view 
+      class="tab-item {{activeTab === 'pending' ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="pending"
+    >
+      <text>Pending</text>
+      <view class="tab-badge" wx:if="{{tabCounts.pending > 0}}">{{tabCounts.pending}}</view>
+    </view>
+    <view 
+      class="tab-item {{activeTab === 'processing' ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="processing"
+    >
+      <text>Processing</text>
+      <view class="tab-badge" wx:if="{{tabCounts.processing > 0}}">{{tabCounts.processing}}</view>
+    </view>
+    <view 
+      class="tab-item {{activeTab === 'completed' ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="completed"
+    >
+      <text>Completed</text>
+      <view class="tab-badge" wx:if="{{tabCounts.completed > 0}}">{{tabCounts.completed}}</view>
+    </view>
+  </view>
+
+  <scroll-view class="refund-scroll" scroll-y="{{true}}" bindscrolltolower="loadMore">
+    <view class="refund-list" wx:if="{{refundList.length > 0}}">
+      <view 
+        class="refund-card" 
+        wx:for="{{refundList}}" 
+        wx:key="id"
+        bindtap="goToDetail" 
+        data-id="{{item.id}}"
+      >
+        <view class="refund-header">
+          <text class="refund-no">{{item.refundNo}}</text>
+          <text class="refund-status status-{{item.status}}">{{item.statusText}}</text>
+        </view>
+        
+        <view class="refund-goods">
+          <image class="goods-image" lazy-load="{{true}}" src="{{item.goodsImage || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+          <view class="goods-info">
+            <text class="goods-name">{{item.goodsName}}</text>
+            <text class="goods-spec">{{item.goodsSpec}}</text>
+            <view class="price-row">
+              <text class="refund-amount">Refund: ${{item.amount}}</text>
+              <text class="refund-type">{{item.typeText}}</text>
+            </view>
+          </view>
+        </view>
+        
+        <view class="refund-footer">
+          <text class="apply-time">{{item.applyTime}}</text>
+          <view class="action-buttons">
+            <button 
+              class="btn-cancel" 
+              wx:if="{{item.status === 'pending'}}" 
+              bindtap="cancelRefund" 
+              data-id="{{item.id}}"
+              catchtap="true"
+            >
+              Cancel
+            </button>
+            <button 
+              class="btn-detail" 
+              bindtap="goToDetail" 
+              data-id="{{item.id}}"
+              catchtap="true"
+            >
+              View Detail
+            </button>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <empty-state 
+      wx:if="{{refundList.length === 0 && !loading}}"
+      icon="orders-o"
+      title="No refund records"
+      desc="Your refund requests will appear here"
+      showBtn="{{false}}"
+    />
+    
+    <view class="loading-more" wx:if="{{loading}}">
+      <text>Loading...</text>
+    </view>
+  </scroll-view>
+</view>

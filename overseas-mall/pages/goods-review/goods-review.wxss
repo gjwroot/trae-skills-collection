@@ -1,0 +1,273 @@
+.goods-review-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+}
+
+.main-content {
+  flex: 1;
+  height: 0;
+  padding: 20rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.section-title .required {
+  color: #FF6B4A;
+  margin-left: 4rpx;
+}
+
+.goods-section,
+.rating-section,
+.tags-section,
+.content-section,
+.images-section,
+.anonymous-section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.goods-item {
+  display: flex;
+  gap: 20rpx;
+}
+
+.goods-image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+  background: #f5f5f5;
+}
+
+.goods-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8rpx;
+}
+
+.goods-name {
+  font-size: 28rpx;
+  color: #333;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.goods-spec {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.goods-price {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #FF6B4A;
+}
+
+.rating-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 16rpx;
+}
+
+.star-item {
+  padding: 8rpx;
+}
+
+.rating-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.tag-item {
+  padding: 16rpx 32rpx;
+  background: #f5f5f5;
+  border-radius: 40rpx;
+  font-size: 26rpx;
+  color: #666;
+  border: 2rpx solid transparent;
+}
+
+.tag-item.active {
+  background: #FFF0ED;
+  color: #FF6B4A;
+  border-color: #FF6B4A;
+}
+
+.review-input {
+  width: 100%;
+  min-height: 200rpx;
+  padding: 20rpx;
+  background: #f5f5f5;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+.char-count {
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+  margin-top: 12rpx;
+}
+
+.images-section .section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.image-count {
+  font-size: 24rpx;
+  color: #999;
+  font-weight: normal;
+}
+
+.image-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.image-item {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.image-item .image {
+  width: 100%;
+  height: 100%;
+  border-radius: 12rpx;
+}
+
+.delete-btn {
+  position: absolute;
+  top: -8rpx;
+  right: -8rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-btn {
+  width: 160rpx;
+  height: 160rpx;
+  border: 2rpx dashed #ddd;
+  border-radius: 12rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  background: #fafafa;
+}
+
+.upload-btn text {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.upload-tip {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 16rpx;
+}
+
+.anonymous-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.anonymous-label {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.switch-box {
+  width: 88rpx;
+  height: 48rpx;
+  background: #ddd;
+  border-radius: 24rpx;
+  position: relative;
+  padding: 4rpx;
+  transition: all 0.3s;
+}
+
+.switch-box.active {
+  background: #FF6B4A;
+}
+
+.switch-dot {
+  width: 40rpx;
+  height: 40rpx;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 4rpx;
+  left: 4rpx;
+  transition: all 0.3s;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
+}
+
+.switch-box.active .switch-dot {
+  left: 44rpx;
+}
+
+.bottom-bar {
+  background: #fff;
+  padding: 20rpx 30rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: linear-gradient(135deg, #FF6B4A 0%, #FF8E6B 100%);
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 600;
+  border-radius: 44rpx;
+  border: none;
+}
+
+.submit-btn::after {
+  border: none;
+}
+
+.submit-btn[disabled] {
+  opacity: 0.5;
+}

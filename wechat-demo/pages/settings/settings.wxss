@@ -1,0 +1,147 @@
+.container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 0 32rpx 40rpx;
+}
+
+/* 页面标题 */
+.page-header {
+  padding: 32rpx 0;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+/* 区块 */
+.section {
+  margin-bottom: 32rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  color: #636e72;
+  font-weight: 500;
+  margin-bottom: 16rpx;
+  padding-left: 8rpx;
+}
+
+/* 菜单列表 */
+.menu-list {
+  background: #ffffff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx;
+  border-bottom: 2rpx solid #f8f9fa;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item.switch-item {
+  padding: 24rpx 32rpx;
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.menu-icon {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-img {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.profile-icon {
+  background: #e3f2fd;
+}
+
+.password-icon {
+  background: #fff3e0;
+}
+
+.notify-icon {
+  background: #e8f5e9;
+}
+
+.promo-icon {
+  background: #fce4ec;
+}
+
+.cache-icon {
+  background: #f5f5f5;
+}
+
+.about-icon {
+  background: #f3e5f5;
+}
+
+.menu-text {
+  font-size: 30rpx;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.menu-right {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.cache-size {
+  font-size: 26rpx;
+  color: #b2bec3;
+}
+
+.menu-arrow {
+  font-size: 32rpx;
+  color: #b2bec3;
+}
+
+/* 退出登录 */
+.logout-section {
+  margin-top: 48rpx;
+}
+
+.logout-btn {
+  background: #ffffff;
+  color: #ff6b4a;
+  text-align: center;
+  padding: 32rpx;
+  border-radius: 24rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+/* 版本信息 */
+.version-info {
+  text-align: center;
+  margin-top: 48rpx;
+}
+
+.version-text {
+  font-size: 24rpx;
+  color: #b2bec3;
+}

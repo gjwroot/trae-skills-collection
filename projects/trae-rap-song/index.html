@@ -1,0 +1,293 @@
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-CN"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;TRAE AI IDE - 说唱歌词&lt;/title&gt;
+    &lt;style&gt;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .lyrics-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .lyrics-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #764ba2;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .lyrics-section {
+            margin-bottom: 25px;
+        }
+
+        .lyrics-section h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .lyrics-section p {
+            line-height: 1.8;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .tools-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .tools-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #764ba2;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .tool-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tool-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .tool-card p {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .tool-card a {
+            display: inline-block;
+            background: #764ba2;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .tool-card a:hover {
+            background: #667eea;
+        }
+
+        .tips-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .tips-section h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+        }
+
+        .tips-section ul {
+            color: #555;
+            margin-left: 20px;
+        }
+
+        .tips-section li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .lyrics-card, .tools-section {
+                padding: 25px;
+            }
+            
+            .lyrics-title, .tools-title {
+                font-size: 1.5rem;
+            }
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;div class="header"&gt;
+            &lt;h1&gt;🎵 TRAE AI IDE 说唱&lt;/h1&gt;
+            &lt;p&gt;《TRAE 代码时代》官方歌词 + 音乐生成工具&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;div class="lyrics-card"&gt;
+            &lt;div class="lyrics-title"&gt;🎤 TRAE 代码时代&lt;/div&gt;
+            
+            &lt;div class="lyrics-section"&gt;
+                &lt;h3&gt;(Intro)&lt;/h3&gt;
+                &lt;p&gt;Yo, 麦克风检查 1 2 3&lt;br&gt;
+                把键盘敲起来 准备起飞啦&lt;br&gt;
+                TRAE AI IDE 在这里&lt;br&gt;
+                代码时代的新传奇&lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;div class="lyrics-section"&gt;
+                &lt;h3&gt;(Hook)&lt;/h3&gt;
+                &lt;p&gt;TRAE TRAE 代码在飞&lt;br&gt;
+                智能编写 从不疲惫&lt;br&gt;
+                自动化 工作流 全都到位&lt;br&gt;
+                编程界的新势力 谁与争锋谁&lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;div class="lyrics-section"&gt;
+                &lt;h3&gt;(Verse 1)&lt;/h3&gt;
+                &lt;p&gt;打开 IDE 界面一片清爽&lt;br&gt;
+                代码高亮 智能提示 根本不用慌&lt;br&gt;
+                自主执行 自动化工作流&lt;br&gt;
+                从需求到交付 一步到位不用愁&lt;br&gt;
+                技能市场应有尽有&lt;br&gt;
+                想要什么技能 随时都能有&lt;br&gt;
+                RAP 技能 前端技能 游戏技能&lt;br&gt;
+                想要什么技能 一键安装就搞定&lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;div class="lyrics-section"&gt;
+                &lt;h3&gt;(Hook)&lt;/h3&gt;
+                &lt;p&gt;TRAE TRAE 代码在飞&lt;br&gt;
+                智能编写 从不疲惫&lt;br&gt;
+                自动化 工作流 全都到位&lt;br&gt;
+                编程界的新势力 谁与争锋谁&lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;div class="lyrics-section"&gt;
+                &lt;h3&gt;(Verse 2)&lt;/h3&gt;
+                &lt;p&gt;调试不头疼 重构不心烦&lt;br&gt;
+                智能代码审查 帮你把好关&lt;br&gt;
+                Bug 自动修复 错误自动排&lt;br&gt;
+                效率翻倍 头发不掉 爽歪歪&lt;br&gt;
+                终端运行顺畅 预览实时更新&lt;br&gt;
+                Git 集成 Commit 一键成&lt;br&gt;
+                多智能体 蜂群协作&lt;br&gt;
+                复杂任务 轻松搞定没话说&lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;div class="lyrics-section"&gt;
+                &lt;h3&gt;(Hook)&lt;/h3&gt;
+                &lt;p&gt;TRAE TRAE 代码在飞&lt;br&gt;
+                智能编写 从不疲惫&lt;br&gt;
+                自动化 工作流 全都到位&lt;br&gt;
+                编程界的新势力 谁与争锋谁&lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;div class="lyrics-section"&gt;
+                &lt;h3&gt;(Bridge)&lt;/h3&gt;
+                &lt;p&gt;传统编程已经过时&lt;br&gt;
+                AI 助力才是未来的方式&lt;br&gt;
+                TRAE 在改变游戏规则&lt;br&gt;
+                让每个开发者都能展翅&lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;div class="lyrics-section"&gt;
+                &lt;h3&gt;(Outro)&lt;/h3&gt;
+                &lt;p&gt;Yeah, 这就是 TRAE AI IDE&lt;br&gt;
+                未来编程 从这里开始&lt;br&gt;
+                一起加入 代码的革命&lt;br&gt;
+                TRAE 与你同行 永不停息！&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="tools-section"&gt;
+            &lt;div class="tools-title"&gt;🎧 推荐音乐生成工具&lt;/div&gt;
+            
+            &lt;div class="tool-card"&gt;
+                &lt;h3&gt;🌟 Suno AI&lt;/h3&gt;
+                &lt;p&gt;全球知名的AI音乐生成平台，支持输入歌词生成歌曲，中文支持优秀，生成速度快。可以生成说唱、流行、摇滚等多种风格。&lt;/p&gt;
+                &lt;a href="https://suno.com" target="_blank"&gt;访问 Suno AI&lt;/a&gt;
+            &lt;/div&gt;
+
+            &lt;div class="tool-card"&gt;
+                &lt;h3&gt;🎵 Udio&lt;/h3&gt;
+                &lt;p&gt;专业级AI音乐制作工具，音质极佳，支持歌词创作和音乐生成。适合追求高品质音乐体验的用户。&lt;/p&gt;
+                &lt;a href="https://udio.com" target="_blank"&gt;访问 Udio&lt;/a&gt;
+            &lt;/div&gt;
+
+            &lt;div class="tool-card"&gt;
+                &lt;h3&gt;🎤 Melo音乐&lt;/h3&gt;
+                &lt;p&gt;零门槛中文音乐生成小程序，语义理解优秀，生成快速，适合中文内容创作。&lt;/p&gt;
+                &lt;a href="https://www.melomusic.cn" target="_blank"&gt;访问 Melo音乐&lt;/a&gt;
+            &lt;/div&gt;
+
+            &lt;div class="tool-card"&gt;
+                &lt;h3&gt;🎶 网易天音&lt;/h3&gt;
+                &lt;p&gt;网易云音乐生态内的AI音乐创作工具，适合网易音乐人使用，集成了网易云音乐的生态资源。&lt;/p&gt;
+                &lt;a href="https://music.163.com" target="_blank"&gt;访问 网易天音&lt;/a&gt;
+            &lt;/div&gt;
+
+            &lt;div class="tips-section"&gt;
+                &lt;h3&gt;💡 使用建议&lt;/h3&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;选择节奏轻快的Trap或Hip-Hop风格&lt;/li&gt;
+                    &lt;li&gt;设置BPM在120-140之间，适合说唱节奏&lt;/li&gt;
+                    &lt;li&gt;可以多次尝试，AI生成每次都会有不同的惊喜&lt;/li&gt;
+                    &lt;li&gt;建议先试听伴奏，再配上歌词会更有感觉&lt;/li&gt;
+                    &lt;li&gt;可以调整情绪为"欢快"、"兴奋"、"科技感"&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;

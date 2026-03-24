@@ -1,0 +1,65 @@
+<view class="order-list-container">
+  <view class="order-tabs">
+    <view class="tab-item {{activeTab === 'all' ? 'active' : ''}}" bindtap="onTabChange" data-name="all">All</view>
+    <view class="tab-item {{activeTab === 'pending' ? 'active' : ''}}" bindtap="onTabChange" data-name="pending">Pending</view>
+    <view class="tab-item {{activeTab === 'paid' ? 'active' : ''}}" bindtap="onTabChange" data-name="paid">Paid</view>
+    <view class="tab-item {{activeTab === 'shipped' ? 'active' : ''}}" bindtap="onTabChange" data-name="shipped">Shipped</view>
+    <view class="tab-item {{activeTab === 'completed' ? 'active' : ''}}" bindtap="onTabChange" data-name="completed">Completed</view>
+    <view class="tab-item {{activeTab === 'refund' ? 'active' : ''}}" bindtap="onTabChange" data-name="refund">Refund</view>
+  </view>
+
+  <scroll-view class="order-list" scroll-y="{{true}}" bindscrolltolower="loadMoreOrders">
+    <view class="order-item" wx:for="{{orderList}}" wx:key="id">
+      <view class="order-header">
+        <view class="shop-info">
+          <custom-icon name="shop-o" size="16px" color="#FF6B4A" />
+          <text class="shop-name">{{item.shopName}}</text>
+        </view>
+        <view class="header-right">
+          <text class="refund-btn" wx:if="{{item.status === 'paid' || item.status === 'shipped' || item.status === 'completed'}}" bindtap="applyRefund" data-id="{{item.id}}">Refund</text>
+          <text class="order-status">{{item.statusText}}</text>
+        </view>
+      </view>
+
+      <view class="goods-list" bindtap="navigateToDetail" data-id="{{item.id}}">
+        <view class="goods-item" wx:for="{{item.goods}}" wx:key="id" wx:for-item="goods">
+          <image class="goods-image" lazy-load="{{true}}" src="{{goods.image || '/assets/images/product-1.jpg'}}" mode="aspectFill" />
+          <view class="goods-info">
+            <text class="goods-name">{{goods.name}}</text>
+            <text class="goods-spec" wx:if="{{goods.spec}}">{{goods.spec}}</text>
+            <view class="price-row">
+              <text class="price">${{goods.price}}</text>
+              <text class="quantity">x{{goods.quantity}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="order-footer">
+        <text class="total-text">Total: <text class="total-price">${{item.totalPrice}}</text></text>
+        <view class="action-buttons">
+          <button wx:if="{{item.status === 'pending'}}" class="btn-outline" bindtap="cancelOrder" data-id="{{item.id}}">Cancel</button>
+          <button wx:if="{{item.status === 'pending'}}" class="btn-primary" bindtap="payOrder" data-id="{{item.id}}">Pay</button>
+          <button wx:if="{{item.status === 'shipped'}}" class="btn-primary" bindtap="confirmReceive" data-id="{{item.id}}">Confirm</button>
+          <button wx:if="{{item.status === 'completed'}}" class="btn-outline" bindtap="writeReview" data-id="{{item.id}}">Review</button>
+          <button wx:if="{{item.status === 'completed'}}" class="btn-outline" bindtap="reorder" data-id="{{item.id}}">Reorder</button>
+        </view>
+      </view>
+    </view>
+
+    <view class="load-more" wx:if="{{loading}}">
+      <view class="loading-spinner"></view>
+      <text>Loading...</text>
+    </view>
+
+    <empty-state 
+      wx:if="{{orderList.length === 0 && !loading}}"
+      icon="orders-o"
+      title="No orders yet"
+      desc="Start shopping and your orders will appear here"
+      btnText="Go Shopping"
+      btnIcon="shop-o"
+      bind:btntap="goShopping"
+    />
+  </scroll-view>
+</view>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>合成大西瓜 | 极简版</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-wrapper">
+        <header class="header">
+            <h1 class="title">FRUIT MERGE</h1>
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-label">SCORE</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">BEST</span>
+                    <span class="stat-value" id="best-score">0</span>
+                </div>
+                <div class="next-indicator">
+                    <span class="stat-label">NEXT</span>
+                    <div class="next-fruit" id="next-fruit"></div>
+                </div>
+            </div>
+        </header>
+        
+        <main class="game-area" id="game-area">
+            <canvas id="game-canvas"></canvas>
+            <div class="danger-line"></div>
+        </main>
+        
+        <footer class="footer">
+            <button id="restart-btn" class="btn-restart">RESTART</button>
+            <div class="fruit-chain">
+                <span class="fruit">🍇</span>
+                <span class="separator">→</span>
+                <span class="fruit">🍒</span>
+                <span class="separator">→</span>
+                <span class="fruit">🍊</span>
+                <span class="separator">→</span>
+                <span class="fruit">🍋</span>
+                <span class="separator">→</span>
+                <span class="fruit">🍎</span>
+                <span class="separator">→</span>
+                <span class="fruit">🍐</span>
+                <span class="separator">→</span>
+                <span class="fruit">🍑</span>
+                <span class="separator">→</span>
+                <span class="fruit">🍍</span>
+                <span class="separator">→</span>
+                <span class="fruit target">🍉</span>
+            </div>
+        </footer>
+    </div>
+    
+    <div class="modal" id="game-over-modal">
+        <div class="modal-box">
+            <div class="modal-icon">GAME OVER</div>
+            <div class="modal-score">
+                <span class="modal-label">FINAL SCORE</span>
+                <div class="modal-value" id="final-score">0</div>
+            </div>
+            <button id="play-again-btn" class="btn-play">PLAY AGAIN</button>
+        </div>
+    </div>
+    
+    <script src="js/game.js"></script>
+</body>
+</html>

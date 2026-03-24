@@ -1,0 +1,119 @@
+<view class="container">
+  <!-- 权限限制说明 -->
+  <view class="warning-box">
+    <view class="warning-title">⚠️ 权限使用限制</view>
+    <view class="warning-item">1. 首次拒绝后需引导用户去设置页开启</view>
+    <view class="warning-item">2. 部分权限只能触发一次授权弹窗</view>
+    <view class="warning-item">3. 获取手机号必须使用原生按钮</view>
+    <view class="warning-item">4. 个人小程序权限受限更多</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">权限管理</view>
+
+    <!-- 获取手机号 - 必须使用原生按钮 -->
+    <button class="permission-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+      <view class="permission-content">
+        <view class="permission-icon phone-icon">
+          <image src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231a73e8'%3E%3Cpath d='M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z'/%3E%3C/svg%3E" mode="aspectFit"></image>
+        </view>
+        <view class="permission-info">
+          <text class="permission-name">获取手机号</text>
+          <text class="permission-desc">用于快速登录和绑定账号</text>
+        </view>
+      </view>
+      <text class="arrow">></text>
+    </button>
+
+    <view class="permission-item" bindtap="getLocation">
+      <view class="permission-content">
+        <view class="permission-icon location-icon">
+          <image src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b4a'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/%3E%3C/svg%3E" mode="aspectFit"></image>
+        </view>
+        <view class="permission-info">
+          <text class="permission-name">获取位置</text>
+          <text class="permission-desc">用于推荐附近的餐厅</text>
+        </view>
+      </view>
+      <text class="arrow">></text>
+    </view>
+
+    <view class="permission-item" bindtap="chooseImage">
+      <view class="permission-content">
+        <view class="permission-icon image-icon">
+          <image src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234caf50'%3E%3Cpath d='M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z'/%3E%3C/svg%3E" mode="aspectFit"></image>
+        </view>
+        <view class="permission-info">
+          <text class="permission-name">选择图片</text>
+          <text class="permission-desc">用于上传头像和菜品图片</text>
+        </view>
+      </view>
+      <text class="arrow">></text>
+    </view>
+
+    <view class="permission-item" bindtap="scanCode">
+      <view class="permission-content">
+        <view class="permission-icon scan-icon">
+          <image src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23607d8b'%3E%3Cpath d='M9.5 6.5v3h-3v-3h3M11 5H5v6h6V5zm-1.5 9.5v3h-3v-3h3M11 13H5v6h6v-6zm6.5-6.5v3h-3v-3h3M19 5h-6v6h6V5zm-6 8h1.5v1.5H13V13zm1.5 1.5H16V16h-1.5v-1.5zM16 13h1.5v1.5H16V13zm-3 3h1.5v1.5H13V16zm1.5 1.5H16V19h-1.5v-1.5zM16 16h1.5v1.5H16V16zm1.5-1.5H19V16h-1.5v-1.5zM19 13h1.5v1.5H19V13zm-1.5 1.5H19V16h-1.5v-1.5z'/%3E%3C/svg%3E" mode="aspectFit"></image>
+        </view>
+        <view class="permission-info">
+          <text class="permission-name">扫码</text>
+          <text class="permission-desc">用于扫描二维码点餐</text>
+        </view>
+      </view>
+      <text class="arrow">></text>
+    </view>
+
+    <view class="permission-item" bindtap="getUserInfo">
+      <view class="permission-content">
+        <view class="permission-icon user-icon">
+          <image src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239c27b0'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" mode="aspectFit"></image>
+        </view>
+        <view class="permission-info">
+          <text class="permission-name">获取用户信息</text>
+          <text class="permission-desc">用于展示用户头像和昵称</text>
+        </view>
+      </view>
+      <text class="arrow">></text>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">原生组件</view>
+
+    <view class="component-item">
+      <view class="component-header">
+        <text class="component-name">地图组件</text>
+        <text class="component-tip">层级最高，会覆盖其他元素</text>
+      </view>
+      <map style="width: 100%; height: 400rpx;" longitude="113.324520" latitude="23.099994" scale="14"></map>
+    </view>
+
+    <view class="component-item">
+      <view class="component-header">
+        <text class="component-name">视频组件</text>
+        <text class="component-tip">同层渲染，层级较高</text>
+      </view>
+      <video style="width: 100%; height: 300rpx;" src="https://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"></video>
+    </view>
+  </view>
+
+  <!-- 权限状态展示 -->
+  <view class="section">
+    <view class="section-title">权限状态</view>
+    <view class="status-list">
+      <view class="status-item">
+        <text class="status-name">位置权限</text>
+        <text class="status-value {{locationAuth ? 'granted' : 'denied'}}">{{locationAuth ? '已授权' : '未授权'}}</text>
+      </view>
+      <view class="status-item">
+        <text class="status-name">相册权限</text>
+        <text class="status-value {{albumAuth ? 'granted' : 'denied'}}">{{albumAuth ? '已授权' : '未授权'}}</text>
+      </view>
+      <view class="status-item">
+        <text class="status-name">相机权限</text>
+        <text class="status-value {{cameraAuth ? 'granted' : 'denied'}}">{{cameraAuth ? '已授权' : '未授权'}}</text>
+      </view>
+    </view>
+  </view>
+</view>

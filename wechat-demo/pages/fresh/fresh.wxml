@@ -1,0 +1,80 @@
+<view class="container">
+  <!-- 顶部 -->
+  <view class="hero-section">
+    <view class="hero-content">
+      <text class="hero-title">新鲜食材</text>
+      <text class="hero-subtitle">每日新鲜采购，从田间到餐桌</text>
+    </view>
+  </view>
+
+  <!-- 食材分类 -->
+  <view class="category-section">
+    <view class="section-title">
+      <text class="title">食材分类</text>
+    </view>
+    
+    <scroll-view scroll-x="true" class="category-scroll">
+      <view class="category-item {{currentCategory === item.id ? 'active' : ''}}" 
+            wx:for="{{categories}}" 
+            wx:key="id"
+            bindtap="selectCategory"
+            data-id="{{item.id}}">
+        {{item.name}}
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 食材列表 -->
+  <view class="items-section">
+    <view class="section-title">
+      <text class="title">{{categoryName}}</text>
+    </view>
+    
+    <view class="items-grid">
+      <view class="item-card" wx:for="{{filteredItems}}" wx:key="id">
+        <image class="item-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="item-info">
+          <view class="item-name">{{item.name}}</view>
+          <view class="item-tag">{{item.tag}}</view>
+          <view class="item-bottom">
+            <view class="item-price">
+              <text class="currency">¥</text>
+              <text class="price">{{item.price}}</text>
+              <text class="unit">/{{item.unit}}</text>
+            </view>
+            <view class="quantity-control" catchtap="preventBubble">
+              <view class="quantity-btn minus" wx:if="{{item.quantity > 0}}" catchtap="decreaseQuantity" data-item="{{item}}">−</view>
+              <text class="quantity" wx:if="{{item.quantity > 0}}">{{item.quantity}}</text>
+              <view class="quantity-btn plus" catchtap="addToCart" data-item="{{item}}">+</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 品质保证 -->
+  <view class="quality-section">
+    <view class="quality-title">品质保证</view>
+    <view class="quality-list">
+      <view class="quality-item">
+        <view class="quality-icon-wrapper fresh-bg">
+          <image class="quality-icon" src="{{icons.fresh}}"></image>
+        </view>
+        <text class="quality-text">当日新鲜</text>
+      </view>
+      <view class="quality-item">
+        <view class="quality-icon-wrapper source-bg">
+          <image class="quality-icon" src="{{icons.shield}}"></image>
+        </view>
+        <text class="quality-text">源头直采</text>
+      </view>
+      <view class="quality-item">
+        <view class="quality-icon-wrapper check-bg">
+          <image class="quality-icon" src="{{icons.verified}}"></image>
+        </view>
+        <text class="quality-text">质检合格</text>
+      </view>
+    </view>
+  </view>
+</view>
