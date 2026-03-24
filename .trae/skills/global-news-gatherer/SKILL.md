@@ -1,499 +1,562 @@
 ---
 name: "global-news-gatherer"
-description: "全球新闻聚合器 Pro - 从80+个高价值信源（参考 ai-news-aggregator、Horizon、RSSHub）搜集新闻，支持 RSSHub 镜像源，AI智能评分过滤，生成多场景早报（综合/财经/科技/AI深度/娱乐）。Invoke when user asks to gather, organize, or categorize news from global or Chinese sources."
+description: "全球新闻聚合器 Ultimate v5 - 五级数据源（Bash curl → RSS → WebFetch → WebSearch → MCP），50+ 信源含 ArXiv/少数派/RSSHub，Bash 直取 JSON API，深度阅读，趋势检测，多轮追问，定时早报。Invoke when user asks to gather, organize, or categorize news from global or Chinese sources."
 ---
 
-# 🌍 全球新闻聚合器 Pro MAX
+# 全球新闻聚合器 Ultimate v5
 
-## 功能概述
-
-本技能深度参考 GitHub 优秀项目（ai-news-aggregator、Horizon、news-aggregator-skill、RSSHub），从全球 **80+ 个高价值信源**搜集、整理、分类新闻，具备以下核心功能：
-
-### ✨ 核心特性
-
-1. **🌍 全网多源聚合**：覆盖硅谷科技、中国创投、开源社区、金融市场、AI 播客的 **80+ 个高价值信源**（参考 ai-news-aggregator 项目）
-2. **🤖 AI 智能评分**：对每条新闻进行 0-10 分的智能评分，过滤噪音
-3. **📰 场景化早报**：内置 5 套场景预设（综合早报、财经早报、科技早报、AI 深度日报、吃瓜早报）
-4. **🪄 交互式菜单**：通过"新闻聚合器"唤醒全局交互式菜单
-5. **🌐 双语摘要**：支持中英文双语输出
-6. **🔗 跨源去重**：自动合并不同平台的重复新闻
-7. **💬 社区声音**：收集并总结 HackerNews、Reddit 等平台的讨论
-8. **🔄 RSSHub 镜像源支持**：集成 RSSHub，支持微博、知乎、抖音、B站等没有 RSS 的网站
-9. **⚡ 自动更新**：参考 Horizon 项目，支持定时自动更新
+> **v5 核心升级**：新增 Bash curl+jq 直取 JSON API（已验证 HN Algolia 完美可用）、ArXiv 论文 RSS、少数派 RSS、RSSHub 万能兜底、定时自动早报、历史对比模式、信源健康监控。
 
 ---
 
-## 📚 聚合信源图谱
+## 核心能力
 
-### 🎯 核心新闻源（80+ 个 - 参考 ai-news-aggregator）
-
-#### 全球科技
-- 🦄 **Hacker News** - 硅谷科技圈热榜
-- 🐱 **Product Hunt** - 每日新产品
-- 🐙 **GitHub Trending** - 开源趋势
-- 🤓 **V2EX** - 国内开发者社区
-- 📰 **TechCrunch** - 科技创业资讯
-- 💡 **Wired** - 科技深度报道
-
-#### 国内科技
-- 🚀 **36Kr** - 中国创投
-- 🐧 **腾讯科技** - 科技新闻
-- 🐯 **虎嗅** - 科技商业
-- 🔩 **钛媒体** - 科技商业
-- 📱 **爱范儿** - 消费电子
-- 🎮 **品玩** - 科技文化
-
-#### 金融市场
-- 📈 **华尔街见闻** - 全球金融
-- 💰 **财新网** - 财经深度
-- 📊 **第一财经** - 财经商业
-- 📉 **经济观察报** - 财经观察
-- 💹 **21世纪经济报道** - 财经新闻
-
-#### 社会热点
-- 🔴 **微博热搜** - 热门话题
-- 🧠 **知乎热榜** - 热门讨论
-- 🔍 **百度热搜** - 热门搜索
-- 🎵 **抖音热点** - 短视频热门
-
-#### AI 行业内参
-- 🤗 **Hugging Face Papers** - AI 论文
-- 🧪 **Latent Space AINews** - AI 新闻
-- 🌏 **ChinAI** - 中国 AI
-- 💡 **Ben's Bites** - AI 资讯
-- 📚 **One Useful Thing** - AI 洞见
-
-#### 深度思考 & 播客
-- 🏛️ **Paul Graham** - 创业教父
-- ✍️ **Wait But Why** - 深度长文
-- 🎙️ **Lex Fridman Podcast** - 顶级播客
-- 💭 **Latent Space** - AI 播客
+| 能力 | 说明 |
+|------|------|
+| **五级数据源** | Tier S Bash curl → Tier 0 RSS → Tier 1 WebFetch → Tier 2 WebSearch → Tier 3 MCP |
+| **Bash 直取 JSON** | `curl + python3/jq` 直接解析 HN Algolia API、GitHub API，**已实测验证**，100% 可靠 |
+| **50+ 信源** | 含 ArXiv (cs.AI/cs.LG/cs.CL)、少数派、Techmeme、Papers With Code、RSSHub |
+| **7 大场景早报** | 综合、财经、科技、AI 深度、AI 编程、前端开发者、吃瓜 |
+| **深度阅读** | Top 新闻 WebFetch 原文全文 + 社区评论 |
+| **跨源趋势检测** | 2+ 信源共同报道 → 🔥趋势置顶 |
+| **多轮追问** | 早报后支持 "展开第N条"、"第N条评论"、"搜搜XXX" |
+| **三种输出格式** | 详细卡片 / 紧凑表格 / 纯链接列表 |
+| **定时自动早报** | 集成 CronCreate，每天定时自动推送 |
+| **历史对比** | 对比上次早报，标记 🆕 新内容 |
+| **信源健康监控** | 记录成功/失败，自动调整降级策略 |
 
 ---
 
-## 🎮 使用方式
+## 五级信源架构
 
-### 方式一：🪄 唤醒交互菜单（推荐）
+### Tier S：Bash curl 直取 JSON API（最可靠，已实测验证）
 
-**最简单的方式**，直接说：
-> **"新闻聚合器"**
+> **为什么 Tier S 最强**：Bash curl 不经过 WebFetch 的 AI 解析，直接获取原始 JSON/XML 数据，再用 python3 精确解析。零幻觉、零遗漏、100% 结构化。
 
-系统将立即展示精美功能菜单，直接回复数字序号即可！
+#### 已验证可用的 Bash 命令：
 
-### 方式二：🗣️ 自然语言触发
-
-你可以直接通过对话指定需求：
-
-#### 场景化早报
-- **"帮我生成一份综合早报"** → 综合早报（所有分类）
-- **"给我看看财经早报"** → 财经早报（股票、市场、投资）
-- **"我要科技早报"** → 科技早报（硅谷、创投、新产品）
-- **"来一份 AI 深度日报"** → AI 深度（论文、技术、行业动态）
-- **"来个 AI 和编程类的新闻"** → AI &amp; 编程早报（AI、大模型、编程、GitHub、开源）
-- **"今天有什么瓜？"** → 吃瓜早报（娱乐、社会热点）
-
-#### 自定义组合
-- **"把 Hacker News、36氪 和微博热搜揉在一起"** → 自定义信源组合
-- **"只看科技类，要 20 条"** → 指定分类和数量
-- **"只要国内新闻"** → 仅限国内信源
-- **"只要全球科技新闻"** → 仅限全球科技信源
-
----
-
-## 📋 工作流程
-
-### Phase 0: 模式判断
-
-**目标**：判断用户需求，选择执行路径
-
-**判断逻辑**：
-1. 如果用户说"新闻聚合器"或类似触发词 → 进入 **交互菜单模式**
-2. 如果用户提到"早报"或特定场景 → 进入 **场景早报模式**
-3. 其他情况 → 进入 **自定义搜集模式**
-
----
-
-### Phase 1: 交互菜单模式
-
-**目标**：提供友好的交互式选择界面
-
-**菜单展示格式**：
-```
-# 🌍 全球新闻聚合器 - 功能菜单
-
-请选择您需要的功能（回复数字即可）：
-
-📰 【场景早报】
-1. 🚀 综合早报 - 全球科技 + 国内创投 + 金融市场
-2. 💰 财经早报 - 股市、投资、商业动态
-3. 🔬 科技早报 - 硅谷、新产品、开源项目
-4. 🤖 AI 深度日报 - 论文、技术、行业动态
-5. 🍉 吃瓜早报 - 娱乐、社会热点
-
-🔧 【自定义】
-6. 🌍 全球信源全搜集
-7. 🇨🇳 仅限国内信源
-8. 🔍 搜索特定主题
-9. ⚙️ 高级配置
-
-❓ 【帮助】
-0. 查看使用说明
-
-请回复数字：_
+**Hacker News Algolia API（首页热门）**：
+```bash
+curl -s "https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=20" | python3 -c "
+import sys,json
+data=json.load(sys.stdin)
+for i,h in enumerate(data['hits'],1):
+    print(f\"{i}. {h['title']} | {h.get('points',0)} pts | {h.get('num_comments',0)} comments | {h.get('url','https://news.ycombinator.com/item?id='+str(h['objectID']))}\")
+"
 ```
 
+**Hacker News Algolia API（AI 话题搜索）**：
+```bash
+curl -s "https://hn.algolia.com/api/v1/search?query=AI+LLM+GPT+Claude&tags=story&hitsPerPage=15&numericFilters=points>50" | python3 -c "
+import sys,json
+data=json.load(sys.stdin)
+for i,h in enumerate(data['hits'],1):
+    print(f\"{i}. {h['title']} | {h.get('points',0)} pts | {h.get('num_comments',0)} comments | {h.get('url','')}\")
+"
+```
+
+**Hacker News Algolia API（Show HN）**：
+```bash
+curl -s "https://hn.algolia.com/api/v1/search?tags=show_hn&hitsPerPage=10" | python3 -c "
+import sys,json
+data=json.load(sys.stdin)
+for i,h in enumerate(data['hits'],1):
+    print(f\"{i}. {h['title']} | {h.get('points',0)} pts | {h.get('url','')}\")
+"
+```
+
+**Hacker News Algolia API（Ask HN）**：
+```bash
+curl -s "https://hn.algolia.com/api/v1/search?tags=ask_hn&hitsPerPage=10" | python3 -c "
+import sys,json
+data=json.load(sys.stdin)
+for i,h in enumerate(data['hits'],1):
+    print(f\"{i}. {h['title']} | {h.get('points',0)} pts | {h.get('num_comments',0)} comments\")
+"
+```
+
+**Hacker News Algolia API（任意关键词搜索）**：
+```bash
+curl -s "https://hn.algolia.com/api/v1/search?query={KEYWORD}&tags=story&hitsPerPage=15&numericFilters=points>20" | python3 -c "
+import sys,json
+data=json.load(sys.stdin)
+for i,h in enumerate(data['hits'],1):
+    print(f\"{i}. {h['title']} | {h.get('points',0)} pts | {h.get('url','')}\")
+"
+```
+> 将 `{KEYWORD}` 替换为搜索词，如 `React+19`、`Rust`、`TypeScript`、`DeepSeek` 等。多词用 `+` 连接。
+
+**少数派 RSS（已验证可用）**：
+```bash
+curl -s "https://sspai.com/feed" | python3 -c "
+import sys,re
+content=sys.stdin.read()
+items=re.findall(r'<item>.*?<title>(.*?)</title>.*?<link>(.*?)</link>.*?</item>',content,re.DOTALL)
+for i,(t,l) in enumerate(items[:15],1):
+    print(f'{i}. {t} | {l}')
+"
+```
+
+**ArXiv cs.AI 论文（已验证可用，需 -L 跟随重定向）**：
+```bash
+curl -sL "https://export.arxiv.org/rss/cs.AI" | python3 -c "
+import sys,re,html
+content=sys.stdin.read()
+items=re.findall(r'<item[^>]*>.*?<title>(.*?)</title>.*?<link>(.*?)</link>.*?<description>(.*?)</description>.*?</item>',content,re.DOTALL)
+for i,(t,l,d) in enumerate(items[:10],1):
+    title=html.unescape(re.sub(r'<[^>]+>','',t)).strip()
+    desc=html.unescape(re.sub(r'<[^>]+>','',d)).strip()[:150]
+    print(f'{i}. {title} | {l} | {desc}...')
+"
+```
+
+**ArXiv cs.LG（机器学习）**：
+```bash
+curl -sL "https://export.arxiv.org/rss/cs.LG" | python3 -c "
+import sys,re,html
+content=sys.stdin.read()
+items=re.findall(r'<item[^>]*>.*?<title>(.*?)</title>.*?<link>(.*?)</link>',content,re.DOTALL)
+for i,(t,l) in enumerate(items[:10],1):
+    print(f'{i}. {html.unescape(re.sub(r\"<[^>]+>\",\"\",t)).strip()} | {l}')
+"
+```
+
+**ArXiv cs.CL（NLP/计算语言学）**：
+```bash
+curl -sL "https://export.arxiv.org/rss/cs.CL" | python3 -c "
+import sys,re,html
+content=sys.stdin.read()
+items=re.findall(r'<item[^>]*>.*?<title>(.*?)</title>.*?<link>(.*?)</link>',content,re.DOTALL)
+for i,(t,l) in enumerate(items[:10],1):
+    print(f'{i}. {html.unescape(re.sub(r\"<[^>]+>\",\"\",t)).strip()} | {l}')
+"
+```
+
+### Tier 0：RSS / WebFetch（高可靠）
+
+用 WebFetch 抓取 RSS feed 或 HTML 页面。
+
+#### RSS Feeds（WebFetch 提取）
+
+| 信源 | RSS URL | 场景 |
+|------|---------|------|
+| **HN RSS** | `https://hnrss.org/frontpage?count=20` | 综合、科技、AI编程 |
+| **HN Best** | `https://hnrss.org/best?count=15` | 科技 |
+| **Techmeme** | `https://www.techmeme.com/feed.xml` | 综合、科技 |
+| **TechCrunch** | `https://techcrunch.com/feed/` | 综合、科技 |
+| **The Verge** | `https://www.theverge.com/rss/index.xml` | 综合、科技 |
+| **Ars Technica** | `https://feeds.arstechnica.com/arstechnica/index` | 科技 |
+| **Wired** | `https://www.wired.com/feed/rss` | 科技 |
+| **Lobsters** | `https://lobste.rs/rss` | AI编程、前端 |
+| **Dev.to** | `https://dev.to/feed` | AI编程、前端 |
+| **Reddit r/technology** | `https://www.reddit.com/r/technology/.rss` | 综合、科技 |
+| **Reddit r/programming** | `https://www.reddit.com/r/programming/.rss` | AI编程 |
+| **Reddit r/MachineLearning** | `https://www.reddit.com/r/MachineLearning/.rss` | AI深度 |
+| **Reddit r/LocalLLaMA** | `https://www.reddit.com/r/LocalLLaMA/.rss` | AI深度 |
+| **Reddit r/webdev** | `https://www.reddit.com/r/webdev/.rss` | 前端 |
+| **Reddit r/reactjs** | `https://www.reddit.com/r/reactjs/.rss` | 前端 |
+| **Reddit r/vuejs** | `https://www.reddit.com/r/vuejs/.rss` | 前端 |
+| **Reddit r/investing** | `https://www.reddit.com/r/investing/.rss` | 财经 |
+| **TLDR Tech** | `https://tldr.tech/api/rss/tech` | AI编程 |
+| **TLDR AI** | `https://tldr.tech/api/rss/ai` | AI深度、AI编程 |
+| **TLDR Web Dev** | `https://tldr.tech/api/rss/webdev` | 前端 |
+| **JS Weekly** | `https://javascriptweekly.com/rss/` | 前端 |
+| **Frontend Focus** | `https://frontendfoc.us/rss/` | 前端 |
+| **React Status** | `https://react.statuscode.com/rss/` | 前端 |
+| **Node Weekly** | `https://nodeweekly.com/rss/` | 前端 |
+| **Bytes.dev** | `https://bytes.dev/rss` | 前端 |
+| **CSS Weekly** | `https://css-weekly.com/feed/` | 前端 |
+| **This Week in Rust** | `https://this-week-in-rust.org/atom.xml` | AI编程 |
+| **Golang Weekly** | `https://golangweekly.com/rss/` | AI编程 |
+
+**通用 WebFetch RSS Prompt**: "从此 RSS/Atom feed 提取所有文章条目：标题、简介(如有)、链接URL。中文编号列表输出。"
+
+#### WebFetch HTML（无 RSS 的信源）
+
+| 信源 | URL | 场景 |
+|------|-----|------|
+| **GitHub Trending** | `https://github.com/trending` | 综合、科技、AI编程 |
+| **GitHub Trending (Python)** | `https://github.com/trending/python` | AI编程 |
+| **GitHub Trending (TypeScript)** | `https://github.com/trending/typescript` | 前端、AI编程 |
+| **GitHub Trending (Rust)** | `https://github.com/trending/rust` | AI编程 |
+| **GitHub Trending (Go)** | `https://github.com/trending/go` | AI编程 |
+| **Product Hunt** | `https://www.producthunt.com/` | 综合、科技 |
+| **HuggingFace Papers** | `https://huggingface.co/papers` | AI深度 |
+| **Papers With Code** | `https://paperswithcode.com/latest` | AI深度 |
+| **Techmeme HTML** | `https://techmeme.com/` | 综合、科技 |
+| **Echo JS** | `https://www.echojs.com/` | 前端 |
+| **CSS-Tricks** | `https://css-tricks.com/` | 前端 |
+| **Smashing Magazine** | `https://www.smashingmagazine.com/articles/` | 前端 |
+
+### Tier 1：RSSHub 万能代理（中国源的救星）
+
+> RSSHub 可以为几乎所有中国网站生成 RSS。使用公共实例或自建实例。
+
+**公共实例**（按可用性排序尝试）：
+1. `https://rsshub.app`
+2. `https://rsshub.rssforever.com`
+3. `https://rsshub.pseudoyu.com`
+
+| 信源 | RSSHub 路径 | 完整 URL (rsshub.app) | 场景 |
+|------|------------|----------------------|------|
+| **36氪热榜** | `/36kr/hot-list` | `https://rsshub.app/36kr/hot-list` | 综合、科技 |
+| **知乎热榜** | `/zhihu/hot` | `https://rsshub.app/zhihu/hot` | 吃瓜 |
+| **微博热搜** | `/weibo/search/hot` | `https://rsshub.app/weibo/search/hot` | 综合、吃瓜 |
+| **B站热门** | `/bilibili/ranking/0/3/1` | `https://rsshub.app/bilibili/ranking/0/3/1` | 吃瓜 |
+| **抖音热点** | `/douyin/trending` | `https://rsshub.app/douyin/trending` | 吃瓜 |
+| **虎嗅** | `/huxiu/article` | `https://rsshub.app/huxiu/article` | 科技 |
+| **钛媒体** | `/tmtpost/recommend` | `https://rsshub.app/tmtpost/recommend` | 科技 |
+| **V2EX 热门** | `/v2ex/topics/hot` | `https://rsshub.app/v2ex/topics/hot` | AI编程 |
+| **InfoQ 中文** | `/infoq/recommend` | `https://rsshub.app/infoq/recommend` | AI编程 |
+| **掘金前端** | `/juejin/trending/frontend/1` | `https://rsshub.app/juejin/trending/frontend/1` | 前端 |
+| **掘金后端** | `/juejin/trending/backend/1` | `https://rsshub.app/juejin/trending/backend/1` | AI编程 |
+| **掘金 AI** | `/juejin/trending/ai/1` | `https://rsshub.app/juejin/trending/ai/1` | AI深度 |
+
+**使用方式**：
+```
+WebFetch(url="https://rsshub.app/36kr/hot-list", prompt="从此 RSS feed 提取所有条目：标题、链接。中文编号列表输出。")
+```
+如果 rsshub.app 不可用，依次尝试其他公共实例。
+
+### Tier 2：WebSearch（兜底）
+
+| 信源 | 搜索查询 | 场景 |
+|------|---------|------|
+| 36氪 | `"36氪 {date} 今日热门"` | 综合、科技 |
+| 虎嗅 | `"虎嗅网 {date} 科技"` | 科技 |
+| 华尔街见闻 | `"华尔街见闻 {date} 全球金融"` | 综合、财经 |
+| 财新网 | `"财新网 {date} 财经"` | 财经 |
+| 第一财经 | `"第一财经 {date} 商业"` | 财经 |
+| 微博热搜 | `"微博热搜榜 今天"` | 综合、吃瓜 |
+| 知乎热榜 | `"知乎热榜 今天"` | 吃瓜 |
+| 百度热搜 | `"百度热搜 今天"` | 吃瓜 |
+| Latent Space | `"Latent Space AI news {date}"` | AI深度 |
+| Ben's Bites | `"Ben's Bites AI {date}"` | AI深度 |
+| Vue.js | `"Vue.js news latest {date}"` | 前端 |
+| Next.js | `"Next.js blog latest {date}"` | 前端 |
+
+### Tier 3：MCP 工具（最后兜底）
+
+`mcp_hotnews.get_hot_news` / `mcp_HotNews_Server.get_hot_news`：
+1=知乎, 2=36氪, 3=百度, 4=B站, 5=微博, 6=抖音, 7=虎扑, 8=豆瓣, 9=IT新闻
+
 ---
 
-### Phase 2: 场景早报模式
+## 7 大场景配置
 
-**目标**：根据预设场景快速生成专业早报
+### 1. 综合早报
 
-#### 预设场景配置
+| 优先级 | 信源 | 方式 |
+|--------|------|------|
+| **Tier S** | HN Algolia API (curl) | Bash |
+| **Tier 0** | Techmeme RSS, TechCrunch RSS, Verge RSS | WebFetch RSS |
+| **Tier 0** | GitHub Trending, Product Hunt | WebFetch HTML |
+| **Tier 1** | 36氪 (RSSHub), 微博热搜 (RSSHub) | WebFetch RSSHub |
+| **Tier 2** | 华尔街见闻 | WebSearch |
 
-##### 1. 🚀 综合早报
-- **信源**：Hacker News + Product Hunt + 36Kr + 微博热搜 + 华尔街见闻
-- **分类**：所有分类
-- **数量**：每条源 Top 10
-- **AI 评分阈值**：6.0
+**板块**：🔥趋势 → ⭐头条 → 🔬科技前沿 → 🚀国内创投 → 💼财经 → 🏠社会热点 → 💡推荐Top3
 
-##### 2. 💰 财经早报
-- **信源**：华尔街见闻 + 财新网 + 第一财经 + 经济观察报
-- **分类**：仅财经商业
-- **数量**：每条源 Top 15
-- **AI 评分阈值**：5.5
+### 2. 财经早报
 
-##### 3. 🔬 科技早报
-- **信源**：Hacker News + Product Hunt + GitHub Trending + 36Kr + TechCrunch
-- **分类**：仅科技前沿
-- **数量**：每条源 Top 15
-- **AI 评分阈值**：6.0
+| 优先级 | 信源 | 方式 |
+|--------|------|------|
+| **Tier 0** | Reddit r/investing RSS | WebFetch RSS |
+| **Tier 1** | 36氪 (RSSHub) | WebFetch RSSHub |
+| **Tier 2** | 华尔街见闻, 财新网, 第一财经 | WebSearch |
 
-##### 4. 🤖 AI 深度日报
-- **信源**：Hugging Face Papers + Latent Space AINews + Ben's Bites + Hacker News (AI)
-- **分类**：仅科技前沿（AI 相关）
-- **数量**：每条源 Top 10
-- **AI 评分阈值**：7.0
-- **特殊**：包含论文摘要、技术深度
+**板块**：🔥趋势 → ⭐头条 → 📈市场动态 → 🏢公司新闻 → 💰投资观点 → 🌍国际财经
 
-##### 5. 🍉 吃瓜早报
-- **信源**：微博热搜 + 知乎热榜 + 抖音热点 + 百度热搜
-- **分类**：文化娱乐 + 社会民生
-- **数量**：每条源 Top 20
-- **AI 评分阈值**：4.0
+### 3. 科技早报
 
----
+| 优先级 | 信源 | 方式 |
+|--------|------|------|
+| **Tier S** | HN Algolia API (curl) | Bash |
+| **Tier 0** | Techmeme RSS, TechCrunch RSS, Verge RSS, Ars RSS, Wired RSS | WebFetch RSS |
+| **Tier 0** | GitHub Trending, Product Hunt | WebFetch HTML |
+| **Tier 1** | 36氪 (RSSHub) | WebFetch RSSHub |
 
-### Phase 3: 新闻搜集（核心）
+**板块**：🔥趋势 → ⭐头条 → 🦄硅谷(HN) → 🐱新产品(PH) → 🐙开源(GH) → 🇨🇳国内 → 💡推荐Top3
 
-**目标**：从多个信源高效搜集新闻
+### 4. AI 深度日报
 
-**执行步骤**：
+| 优先级 | 信源 | 方式 |
+|--------|------|------|
+| **Tier S** | HN Algolia (AI搜索, curl), ArXiv cs.AI (curl), ArXiv cs.LG (curl), ArXiv cs.CL (curl) | Bash |
+| **Tier 0** | Reddit r/ML RSS, Reddit r/LocalLLaMA RSS, TLDR AI RSS | WebFetch RSS |
+| **Tier 0** | HuggingFace Papers, Papers With Code | WebFetch HTML |
+| **Tier 1** | 掘金 AI (RSSHub) | WebFetch RSSHub |
+| **Tier 2** | Latent Space, Ben's Bites | WebSearch |
 
-1. **获取当前时间**
-   ```
-   使用 mcp_Time.get_current_time 获取当前时间
-   ```
+**板块**：🔥趋势 → ⭐头条 → 📝论文精选(ArXiv+HF) → 📰行业动态 → 🛠️开源项目 → 💭深度观点 → 🎯技术趋势 → 💡推荐Top3
 
-2. **尝试 MCP 新闻工具（优先）**
-   - 首先尝试调用 `mcp_hotnews.get_hot_news` 或 `mcp_HotNews_Server.get_hot_news`
-   - 支持的信源 ID：
-     - 1 = 知乎热榜
-     - 2 = 36氪热榜
-     - 3 = 百度热点
-     - 4 = B站热榜
-     - 5 = 微博热搜
-     - 6 = 抖音热点
-     - 7 = 虎扑热榜
-     - 8 = 豆瓣热榜
-     - 9 = IT新闻
-   - 如果 MCP 工具连接失败（如 api.vvhan.com 无法解析），则降级使用 WebSearch
+### 5. AI & 编程早报
 
-3. **并行搜集（WebSearch 降级方案）**
-   - 根据场景/配置，从选定信源并行搜集
-   - 每个信源搜集 Top N 条（N 根据场景配置）
+| 优先级 | 信源 | 方式 |
+|--------|------|------|
+| **Tier S** | HN Algolia API (curl), 少数派 RSS (curl) | Bash |
+| **Tier 0** | Lobsters RSS, Dev.to RSS, TLDR AI RSS, TLDR Tech RSS | WebFetch RSS |
+| **Tier 0** | GitHub Trending, GH(Python), GH(TypeScript), GH(Rust), GH(Go) | WebFetch HTML |
+| **Tier 1** | V2EX (RSSHub), 掘金后端 (RSSHub), InfoQ (RSSHub) | WebFetch RSSHub |
 
-4. **搜集策略（WebSearch）**
-   - **Hacker News**：搜索 "{日期} Hacker News top stories today"
-   - **Product Hunt**：搜索 "{日期} Product Hunt today's top products"
-   - **GitHub Trending**：搜索 "{日期} GitHub trending repositories today"
-   - **国内信源**：搜索 "{日期} {信源名称} 最新热点"
-   - **微博热搜**：搜索 "{日期} 微博热搜榜 最新"
+**板块**：🔥趋势 → ⭐头条 → 🤖AI动态 → 💻编程热点 → 🐙开源趋势 → 🛠️开发者工具 → 💡推荐Top3
 
-5. **严格时间验证（超级重要！）**
-   - 检查每条新闻的发布时间
-   - **严格过滤规则（必须遵守）**：
-     1. **必须包含**："{日期}"（如 "2026年3月24日"）、"今天"、"今日"、"刚刚" 等明确表示是今天的关键词
-     2. **如果不包含上述关键词**：**直接过滤掉**，不保留
-     3. **不要猜测**：如果不确定是不是今天的新闻，直接删除
-     4. **宁愿少不要错**：宁可只有 3-5 条真实的今天新闻，也不要混入旧闻
-   - 验证方式：
-     - 检查搜索结果摘要中是否包含 "{日期}"、"今天"、"今日"、"刚刚" 等时间关键词
-     - 如果无法确定时间，**直接丢弃**，不要保留
-   - **最后检查**：在生成早报前，再次验证所有新闻是否都是今天的
+### 6. 前端/开发者日报
+
+| 优先级 | 信源 | 方式 |
+|--------|------|------|
+| **Tier S** | HN Algolia (React/Vue/CSS/TypeScript 搜索, curl) | Bash |
+| **Tier 0** | JS Weekly RSS, Frontend Focus RSS, React Status RSS, Node Weekly RSS, Bytes RSS, CSS Weekly RSS, TLDR WebDev RSS | WebFetch RSS |
+| **Tier 0** | Reddit r/reactjs RSS, r/vuejs RSS, r/webdev RSS, Dev.to RSS, Lobsters RSS | WebFetch RSS |
+| **Tier 0** | Echo JS, CSS-Tricks, Smashing Magazine, GH Trending(TS) | WebFetch HTML |
+| **Tier 1** | 掘金前端 (RSSHub) | WebFetch RSSHub |
+| **Tier 2** | Vue.js news, Next.js blog, Tailwind CSS | WebSearch |
+
+**板块**：🔥趋势 → ⭐头条 → ⚛️框架(React/Vue/Svelte) → 🎨CSS&UI → 🔧工具链(Vite/Bun) → 📘TS/Node → 📦组件库 → 📬Newsletter精华 → 💡推荐Top3
+
+### 7. 吃瓜早报
+
+| 优先级 | 信源 | 方式 |
+|--------|------|------|
+| **Tier 1** | 微博 (RSSHub), 知乎 (RSSHub), B站 (RSSHub), 抖音 (RSSHub) | WebFetch RSSHub |
+| **Tier 2** | 微博热搜, 知乎热榜, 百度热搜, 抖音热点 | WebSearch |
+| **Tier 3** | MCP hotnews (5,1,3,6,7,8,4) | MCP |
+
+**板块**：🔥热搜Top10 → 🎭娱乐 → 💬知乎热议 → 😂最佳评论 → 💡最值得关注的3个瓜
 
 ---
 
-### Phase 3.5: 智能关键词扩展（重要！参考 cclank/news-aggregator-skill）
+## 工作流程（4 Phase + 3 高级模式）
 
-**目标**：智能扩展用户输入的关键词，提升搜索效果
+### Phase 1: Resolve（模式判断）
 
-**关键词扩展规则**：
+1. **触发词映射**：
+   | 触发词 | 场景 |
+   |--------|------|
+   | 新闻聚合器、news | → 交互菜单 |
+   | 综合早报、今日新闻 | 综合 |
+   | 财经早报、股市、金融 | 财经 |
+   | 科技早报、tech news、硅谷 | 科技 |
+   | AI日报、AI新闻、大模型 | AI深度 |
+   | AI编程、coding news、开发者新闻 | AI编程 |
+   | 前端日报、React、Vue、CSS | 前端 |
+   | 吃瓜、热搜、八卦 | 吃瓜 |
 
-| 用户输入关键词 | 自动扩展为 |
-|---|---|
-| **"AI"** | "AI,LLM,GPT,Claude,Agent,RAG,DeepSeek" |
-| **"大模型"** | "大模型,LLM,GPT,Claude,文心一言,通义千问" |
-| **"开源"** | "开源,open source,GitHub" |
-| **"融资"** | "融资,funding,IPO,收购,acquisition" |
-| **"科技"** | "科技,tech,技术,产品,发布" |
+2. **格式选择**：默认详细卡片 / "表格"→紧凑 / "链接"→纯列表
+
+3. **高级模式检测**：
+   - "深度模式" → 开启深度阅读
+   - "和上次比" / "有什么新的" → 历史对比模式
+   - "每天早上9点" → 定时早报模式
+
+### Phase 2: Fetch（五级并行抓取 - 核心！）
+
+**降级链**：Tier S → Tier 0 → Tier 1 → Tier 2 → Tier 3，成功即停。
+
+#### Step 1：Tier S — 并行 Bash curl 命令
+
+**在同一 turn 内并行发起多个 Bash 调用**，直取 JSON/XML API：
+
+```
+并行 Bash 调用：
+1. curl HN Algolia API → python3 解析 → 结构化新闻列表
+2. curl ArXiv cs.AI RSS → python3 解析 → 论文列表（AI 场景）
+3. curl 少数派 RSS → python3 解析 → 文章列表（AI编程场景）
+```
+
+> Bash 获取的数据是**最精确的**，因为 python3 直接解析 JSON/XML，无 AI 幻觉。
+
+#### Step 2：Tier 0 — 并行 WebFetch RSS + HTML
+
+```
+并行 WebFetch 调用：
+- WebFetch(url="https://www.techmeme.com/feed.xml", prompt="提取所有条目：标题、来源、链接。中文编号列表。")
+- WebFetch(url="https://github.com/trending", prompt="提取趋势仓库前15个：全名、描述、语言、今日star。中文编号列表。")
+- WebFetch(url="https://www.producthunt.com/", prompt="提取今日产品前10：名称、tagline、票数、链接。中文编号列表。")
+```
+
+#### Step 3：Tier 1 — 并行 WebFetch RSSHub（中国源）
+
+```
+并行 WebFetch 调用（RSSHub 中国源）：
+- WebFetch(url="https://rsshub.app/36kr/hot-list", prompt="提取所有条目：标题、链接。中文编号列表。")
+- WebFetch(url="https://rsshub.app/weibo/search/hot", prompt="提取热搜条目：排名、话题、热度。中文编号列表。")
+```
+> 如果 rsshub.app 不可用，尝试 rsshub.rssforever.com 或 rsshub.pseudoyu.com。
+
+#### Step 4：Tier 2 — 并行 WebSearch
+
+```
+并行 WebSearch 调用：
+- WebSearch("华尔街见闻 全球金融 2026年3月24日")
+- WebSearch("知乎热榜 今天")
+```
+
+#### Step 5：Tier 3 — MCP 备选
+
+仅当所有上游 Tier 都失败时。
+
+#### 降级规则
+- 返回错误/超时/空内容 → 静默降级
+- 有效条目 < 2 → 降级
+- **不在输出中提及降级**
+
+### Phase 3: Process（智能处理 + 趋势检测）
+
+#### 3.1 跨源去重
+- 核心实体重叠 >= 2 → 同一事件
+- 标题相似度 > 60% → 同一事件
+- 合并策略：保留最丰富版本，合并来源标注和链接
+
+#### 3.2 跨源趋势检测
+- 2+ 不同信源报道 → `🔥 趋势`
+- 3+ 不同信源报道 → `🔥🔥 热门趋势`
+- 趋势置顶展示
+
+#### 3.3 排序
+- 趋势 → 原生指标（points/stars/votes/热度）→ 搜索结果顺序
+
+#### 3.4 深度阅读（Top 3-5 或用户要求时）
+1. WebFetch 原文提取全文摘要
+2. WebSearch 背景知识
+3. WebFetch HN/Reddit 评论页提取 Top 讨论
+4. 生成深度分析
+
+#### 3.5 时间验证
+- Tier S Bash：API 返回时间戳，精确校验
+- Tier 0 RSS：pubDate 校验
+- Tier 1 WebFetch：首页实时 = 当天
+- Tier 2 WebSearch：检查日期标识
+- 不确定 → `⚠️ 时间未确认`
+
+### Phase 4: Output
+
+1. 在对话中完整展示 Markdown 早报
+2. 保存 `daily_brief_{YYYYMMDD}_{scene}.md` 到当前工作目录
+3. 告知文件路径
+4. 附带追问提示
+
+**模板参见** `resources/output-template.md`
+
+---
+
+## 高级模式 A：深度阅读
+
+**触发**："深度模式"、"展开第 N 条"
+
+**执行**：WebFetch 原文 → 全文摘要(5-8句) → 关键数据 → 社区讨论 → 深度点评
+
+---
+
+## 高级模式 B：多轮追问
+
+**早报生成后支持**：
+- "展开第 N 条" → 深度阅读
+- "第 N 条的评论" → WebFetch 评论页
+- "搜搜 XXX" → WebSearch 扩展
+- "这个项目的 GitHub" → WebFetch README
+- "这篇论文的方法" → WebFetch 论文页
+
+---
+
+## 高级模式 C：定时自动早报（v5 新增）
+
+**触发**："每天早上9点给我科技早报"、"定时早报"
+
+**执行**：使用 CronCreate 工具创建定时任务：
+```
+CronCreate(cron="3 9 * * *", prompt="请执行科技早报场景，生成今日科技早报。", recurring=true)
+```
+
+**注意**：
+- CronCreate 任务仅在当前 Claude 会话中有效（会话关闭后失效）
+- 定时任务最长持续 7 天
+- 创建后告知用户会话限制
+
+---
+
+## 高级模式 D：历史对比（v5 新增）
+
+**触发**："和上次比有什么新的"、"今天有什么新变化"
+
+**执行**：
+1. 检查当前工作目录是否有之前的 `daily_brief_*.md` 文件
+2. 如果有，读取上一份早报
+3. 对比新旧两份数据，标记：
+   - `🆕` 新出现的新闻/项目
+   - `📈` 排名上升的条目
+   - `🔄` 持续热门的话题
+4. 输出对比报告
+
+---
+
+## 高级模式 E：信源健康监控（v5 新增）
 
 **执行逻辑**：
-1. 分析用户输入的关键词
-2. 自动扩展为相关关键词列表
-3. 使用扩展后的关键词进行搜索
-
----
-
-### Phase 3.6: 智能补充机制（重要！参考 cclank/news-aggregator-skill）
-
-**目标**：当搜索结果不足时，自动补充高质量内容
-
-**触发条件**：
-- 任何时间段的搜索结果 < 5 条
-- 或者某个分类的新闻 < 3 条
-
-**补充策略**：
-1. **放宽时间范围**：从 48 小时放宽到 7 天
-2. **降低评分阈值**：从 6.0 降低到 4.0
-3. **标记补充内容**：补充的新闻前添加 ⚠️ 标识
-4. **说明原因**：告诉用户这是补充内容
-
----
-
-### Phase 3.7: 统一报告模板（重要！参考 cclank/news-aggregator-skill）
-
-**目标**：所有信源使用同一个统一的报告格式
-
-**报告格式（所有信源通用）**：
-```markdown
-### N. [标题 (中文翻译)](https://original-url.com)
-- **Source**: 源名 | **Time**: 时间 | **Heat**: 🔥 热度值
-- **Links**: [Discussion](hn_url) | [GitHub](gh_url)     ← 仅在数据存在时显示
-- **Summary**: 一句话中文摘要。
-- **Deep Dive**: 💡 **Insight**: 深度分析（背景、影响、技术价值）。
-```
-
-**信源特定热度指标**：
-| 信源 | 热度指标 |
-|---|---|
-| **Hacker News** | Points（点数） |
-| **GitHub** | Stars（星数） |
-| **Product Hunt** | Votes（票数） |
-| **微博** | Heat（热度值，如"108万"） |
-| **其他** | AI Score（AI 评分） |
-
----
-
-### Phase 4: AI 智能处理
-
-**目标**：对搜集到的新闻进行智能处理
-
-#### 4.1 跨源去重
-- 比较新闻标题和链接
-- 自动合并重复新闻
-- 保留来源最多的版本
-
-#### 4.2 AI 评分（0-10 分）
-对每条新闻从以下维度评分：
-- **技术深度**（0-3）：是否有技术含量？
-- **新颖性**（0-3）：是否是新消息？
-- **影响力**（0-2）：对行业/社会有多大影响？
-- **可读性**（0-2）：内容是否易读？
-
-**评分公式**：`总分 = 技术深度 + 新颖性 + 影响力 + 可读性`
-
-#### 4.3 过滤
-- 保留 AI 评分 >= 阈值的新闻（阈值根据场景配置）
-- 按评分降序排列
-
----
-
-### Phase 5: 内容丰富化
-
-**目标**：为高质量新闻增加背景信息
-
-**执行步骤**：
-1. **高价值新闻识别**：AI 评分 >= 8.0 的新闻
-2. **背景知识搜索**：使用 WebSearch 搜索相关背景
-3. **社区讨论收集**：搜索 HackerNews、Reddit 等平台的讨论
-4. **生成深度解读**：整合以上信息，生成深度解读
-
----
-
-### Phase 6: 输出整理
-
-**目标**：生成杂志级排版的 Markdown 报告
-
-#### 输出格式（综合早报示例）
+- 每次抓取时记录每个信源的成功/失败状态
+- 在早报末尾附带信源状态摘要（仅当有失败时）：
 
 ```markdown
-# 📰 {日期} 全球新闻早报
-
----
-
-## 📊 今日概览
-- 搜集时间：{时间}
-- 信源数量：{数量}
-- 新闻总数：{数量}
-- AI 筛选后：{数量}
-- 平均评分：{分数}
-
----
-
-## 🔥 头条新闻（AI 评分 Top 5）
-
-### 1. [新闻标题] ⭐{评分}
-**来源**：{来源} | **时间**：{时间}
-**摘要**：{摘要}
-
-**深度解读**：
-{背景知识 + 社区讨论总结}
-
-**链接**：{链接}
-
----
-
-## 🔬 科技前沿
-
-### 1. [新闻标题] ⭐{评分}
-- 来源：{来源}
-- 摘要：{摘要}
-- 链接：{链接}
-
----
-
-## 💼 财经商业
-
-...
-
----
-
-## 🌍 国际新闻
-
-...
-
----
-
-## 🏠 社会民生
-
-...
-
----
-
-## 🎭 文化娱乐
-
-...
-
----
-
-## 💡 编辑推荐
-{今日最值得关注的 3 条新闻，带简短评论}
-
----
-
-_生成时间：{时间} | 由 🌍 全球新闻聚合器 提供_
+> ⚙️ 信源状态：{success_count}/{total_count} 成功
+> ⚠️ 降级信源：{failed_source_1}(→WebSearch), {failed_source_2}(→跳过)
 ```
 
 ---
 
-### Phase 7: 展示结果（超级重要！）
+## 使用方式速查
 
-**目标**：直接在对话中展示完整早报，**并且必须打开生成的两个文件**，绝对不要让用户自己找文件！
+| 方式 | 示例 |
+|------|------|
+| 交互菜单 | "新闻聚合器" |
+| 场景早报 | "科技早报"、"AI深度日报"、"前端日报" |
+| 自定义 | "把 HN 和 GH Trending 揉一起" |
+| 格式指定 | "科技早报，表格格式" |
+| 深度模式 | "综合早报，深度模式" |
+| 追问 | "展开第3条"、"搜搜 React 19" |
+| 定时 | "每天早上9点科技早报" |
+| 对比 | "和上次比有什么新的" |
 
-**执行步骤**：
-1. 生成 Markdown 报告
-2. **直接在对话中完整展示** Markdown 内容（不是只保存文件）
-3. 同时也保存两份文件：
-   - 一份在当前工作目录（`daily_brief_{YYYYMMDD}_{scene}.md`）
-   - 一份在 news-aggregator/data/output/ 目录（Python 聚合器生成的）
-4. **必须直接打开这两个文件**，不要让用户自己去找！
-
-**展示要求**：
-- 完整展示整个早报，包括概览、头条、分类新闻等
-- 使用 Markdown 格式，保持美观
-- 不要只说"文件已生成"，要把内容直接展示出来！
-- **最重要**：必须自动打开生成的两个文件，让用户直接看到！
-
----
-
-### Phase 8: 归档 + 打开文件（必须！）
-
-同时将新闻保存为 Markdown 文件，并**必须打开**：
-- **文件命名**：`daily_brief_{YYYYMMDD}_{scene}.md`
-  - 综合早报：`daily_brief_20260322_comprehensive.md`
-  - 财经早报：`daily_brief_20260322_finance.md`
-  - 科技早报：`daily_brief_20260322_tech.md`
-  - AI 深度：`daily_brief_20260322_ai.md`
-  - 吃瓜早报：`daily_brief_20260322_entertainment.md`
-- **保存位置**：
-  1. 当前工作目录
-  2. news-aggregator/data/output/ 目录（Python 聚合器）
-- **必须直接打开这两个文件**，不要让用户自己去找！
+### 快捷指令
+| 缩写 | 信源 |
+|------|------|
+| HN | Hacker News |
+| GH | GitHub Trending |
+| PH | Product Hunt |
+| TM | Techmeme |
+| HF | HuggingFace Papers |
+| PWC | Papers With Code |
+| DEV | Dev.to |
+| 36氪 | 36Kr |
+| 微博 | 微博热搜 |
+| SSP | 少数派 |
 
 ---
 
-## 🎯 使用示例
+## 智能关键词扩展
 
-### 示例 1：综合早报
-**用户**："给我一份今天的综合早报"
-
-**执行**：
-1. 确定场景：综合早报
-2. 搜集信源：Hacker News + Product Hunt + 36Kr + 微博热搜 + 华尔街见闻
-3. AI 评分过滤（阈值 6.0）
-4. 生成 Markdown 报告
-5. 展示给用户
-
-### 示例 2：AI 深度日报
-**用户**："我要一份 AI 深度日报"
-
-**执行**：
-1. 确定场景：AI 深度日报
-2. 搜集信源：Hugging Face Papers + Latent Space AINews + Ben's Bites
-3. AI 评分过滤（阈值 7.0）
-4. 内容丰富化（背景知识 + 社区讨论）
-5. 生成 Markdown 报告
-6. 展示给用户
-
-### 示例 3：自定义组合
-**用户**："把 Hacker News 和 36Kr 今天的 Top 10 揉在一起"
-
-**执行**：
-1. 确定信源：Hacker News + 36Kr
-2. 搜集数量：各 Top 10
-3. 去重、AI 评分
-4. 生成 Markdown 报告
-5. 展示给用户
+| 输入 | 扩展 |
+|------|------|
+| AI | AI, LLM, GPT, Claude, Agent, RAG, DeepSeek, Gemini, Llama, MCP |
+| 大模型 | 大模型, LLM, GPT, Claude, 文心一言, 通义千问, DeepSeek, Kimi, Qwen |
+| 前端 | React, Vue, Svelte, Angular, Next.js, Nuxt, CSS, TypeScript, Tailwind, Astro |
+| 后端 | Node.js, Go, Rust, Python, Java, Kubernetes, Docker, API, gRPC |
+| 开源 | 开源, open source, GitHub, MIT license, Apache |
+| 融资 | 融资, funding, IPO, 收购, acquisition, Series A/B/C |
+| Rust | Rust, Cargo, WASM, Tokio, Axum |
+| 全栈 | Full-stack, Next.js, Nuxt, tRPC, Prisma, Supabase, Drizzle |
+| DevOps | CI/CD, Docker, K8s, Terraform, GitHub Actions, ArgoCD |
+| 安全 | Security, CVE, vulnerability, 漏洞, zero-day, OWASP |
 
 ---
 
-## 💡 进阶技巧
+## 重要规则（必须遵守）
 
-### 信源快捷指令
-- **"HN"** → Hacker News
-- **"PH"** → Product Hunt
-- **"36氪"** → 36Kr
-- **"微博"** → 微博热搜
-- **"AI"** → AI 相关信源
-
-### 数量控制
-- **"要 30 条"** → 指定总数量
-- **"每条源要 15 条"** → 指定每个信源的数量
-
-### 评分控制
-- **"只要高质量的"** → 阈值设为 7.0
-- **"都给我看看"** → 阈值设为 0（不过滤）
-
----
-
-_本技能深度参考 GitHub 优秀项目：ai-news-aggregator (SuYxh, 80+ 信源)、Horizon (Thysrael, 全自动 AI 聚合)、news-aggregator-skill (cclank)、RSSHub (DIYgod, 万物皆可 RSS)_
+1. **Tier S 最优先**：能用 Bash curl 的信源必须先 curl，它是最精确的
+2. **极致并行**：同一 turn 内并行发起尽可能多的 Bash/WebFetch/WebSearch 调用
+3. **完整展示**：必须在对话中完整展示早报，不要只保存文件
+4. **保存文件**：同时保存 .md 文件
+5. **中文为主**：英文翻译中文摘要，保留原文标题和链接
+6. **真实指标**：不编造评分，用原生指标
+7. **静默降级**：失败时默默降级，用户只看结果
+8. **趋势置顶**：多源报道话题必须置顶
+9. **支持追问**：保持上下文，支持追问
+10. **RSSHub 多实例容错**：rsshub.app 失败时尝试备用实例

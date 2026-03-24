@@ -1,0 +1,129 @@
+name: frontend-architecture-planner
+version: "1.0.0"
+description: 前端架构规划师 - 在启动新前端项目或重构现有项目时使用。通过结构化提问，在实施前明确产品范围、UI模式、组件架构、数据流、状态管理、路由、渲染策略、样式以及工程约束。
+
+features:
+  - structured_clarification: true
+  - architectural_read: true
+  - architecture_recommendation: true
+  - open_decisions: true
+  - tradeoff_analysis: true
+  - product_context: true
+  - page_interaction_patterns: true
+  - rendering_strategy: true
+  - data_state_architecture: true
+  - component_architecture: true
+  - styling_system: true
+  - engineering_standards: true
+
+dependencies: []
+
+tools: []
+
+triggers:
+  - "前端架构规划"
+  - "架构规划"
+  - "帮我规划前端架构"
+  - "在编码前确定前端技术栈"
+  - "设计一个可维护的前端结构"
+  - "frontend architecture"
+  - "architecture planning"
+  - "define frontend architecture"
+  - "determine frontend stack"
+  - "maintainable frontend structure"
+  - "路由"
+  - "状态管理"
+  - "组件架构"
+  - "项目结构"
+  - "技术选型"
+
+category: "planning"
+tags:
+  - "frontend"
+  - "architecture"
+  - "planning"
+  - "react"
+  - "vue"
+  - "angular"
+  - "state-management"
+  - "routing"
+  - "components"
+  - "styling"
+  - "typescript"
+
+architecture_aspects:
+  product_context:
+    - project_type
+    - target_users
+    - key_user_tasks
+    - new_or_refactor
+    - team_size
+    - delivery_priority
+    - design_references
+
+  page_interaction:
+    - page_types
+    - core_interactions
+    - key_components
+    - complex_forms
+    - responsive_design
+    - accessibility
+
+  rendering_strategy:
+    - seo_importance
+    - rendering_mode
+    - first_paint
+    - private_routes
+    - application_type
+    - internationalization
+
+  data_state:
+    - data_source
+    - caching_offline
+    - state_type
+    - cross_page_state
+    - optimistic_updates
+    - preferred_libraries
+
+  component_architecture:
+    - ui_library_choice
+    - existing_design_system
+    - component_layering
+    - common_patterns
+    - reuse_rules
+
+  styling_system:
+    - styling_method
+    - design_tokens
+    - dark_mode
+    - common_layout
+    - responsive_breakpoints
+
+  engineering_standards:
+    - typescript
+    - type_strictness
+    - testing_level
+    - storybook
+    - linting_formatting
+    - folder_structure
+    - naming_conventions
+    - performance_constraints
+
+decision_principles:
+  - clarity_over_speed
+  - consistency_over_novelty
+  - reuse_over_duplication
+  - clear_state_boundaries
+  - predictable_page_patterns
+  - maintainable_component_layering
+  - user_interaction_quality
+
+anti_patterns:
+  - code_before_clarification
+  - popularity_based_library_selection
+  - mixed_server_ui_state
+  - per_page_layout_invention
+  - per_form_validation_invention
+  - per_component_interaction_rules
+  - styling_as_architecture
+  - folder_naming_as_architecture

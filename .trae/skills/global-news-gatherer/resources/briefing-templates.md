@@ -1,414 +1,163 @@
-# 📰 场景化早报模板
+# 场景早报模板 v5
 
-## 🚀 综合早报模板
+所有场景共用统一模板结构（见 `output-template.md`），此文件定义每个场景的**特有板块、特殊格式、Tier S Bash 命令和趋势检测规则**。
 
+---
+
+## 1. 综合早报
+
+**板块顺序**：
+1. 🔥 趋势话题（跨源共同报道，如有）
+2. ⭐ 头条精选（Top 3，带深度点评）
+3. 🔬 科技前沿（HN + Techmeme + TechCrunch + Verge）
+4. 🚀 国内创投（36氪）
+5. 💼 财经商业（华尔街见闻）
+6. 🏠 社会热点（微博热搜）
+7. 💡 编辑推荐 Top 3
+
+**趋势检测重点**：科技公司动态、融资事件、产品发布
+
+---
+
+## 2. 财经早报
+
+**板块顺序**：
+1. 🔥 趋势话题
+2. ⭐ 头条精选（Top 3，带市场影响分析）
+3. 📈 市场动态（华尔街见闻 + Reddit r/investing）
+4. 🏢 公司新闻（财新 + 36氪融资）
+5. 💰 投资观点
+6. 🌍 国际财经（第一财经）
+7. 💡 编辑推荐 Top 3
+
+**特殊**：头条增加"市场影响"分析：
 ```markdown
-# 🌅 {date} 全球新闻早报
-
----
-
-## 📊 今日概览
-- 搜集时间：{time}
-- 信源数量：5 个（Hacker News、Product Hunt、36Kr、微博热搜、华尔街见闻）
-- 新闻总数：{total_count} 条
-- AI 筛选后：{filtered_count} 条
-- 平均评分：{avg_score} ⭐
-
----
-
-## 🔥 头条新闻（AI 评分 Top 5）
-
-### 1. {news_title} ⭐{score}
-**来源**：{source} | **时间**：{time}
-**摘要**：{summary}
-
-**深度解读**：
-{background_knowledge}
-
-**社区讨论**：
-{community_discussion}
-
-**链接**：{link}
-
----
-
-### 2. {news_title} ⭐{score}
-**来源**：{source} | **时间**：{time}
-**摘要**：{summary}
-
-**链接**：{link}
-
----
-
-## 🔬 科技前沿
-
-### 1. {news_title} ⭐{score}
-- 来源：{source}
-- 摘要：{summary}
-- 链接：{link}
-
----
-
-## 💼 财经商业
-
-### 1. {news_title} ⭐{score}
-- 来源：{source}
-- 摘要：{summary}
-- 链接：{link}
-
----
-
-## 🌍 国际新闻
-
-### 1. {news_title} ⭐{score}
-- 来源：{source}
-- 摘要：{summary}
-- 链接：{link}
-
----
-
-## 🏠 社会民生
-
-### 1. {news_title} ⭐{score}
-- 来源：{source}
-- 摘要：{summary}
-- 链接：{link}
-
----
-
-## 🎭 文化娱乐
-
-### 1. {news_title} ⭐{score}
-- 来源：{source}
-- 摘要：{summary}
-- 链接：{link}
-
----
-
-## 💡 编辑推荐
-
-### 今日最值得关注
-1. **{news_title}** - {brief_comment}
-2. **{news_title}** - {brief_comment}
-3. **{news_title}** - {brief_comment}
-
----
-
-_生成时间：{time} | 由 🌍 全球新闻聚合器 提供_
+> 📊 **市场影响**：{analysis}
 ```
 
+**趋势检测重点**：央行政策、大公司财报、行业监管
+
 ---
 
-## 💰 财经早报模板
+## 3. 科技早报
 
+**板块顺序**：
+1. 🔥 趋势话题
+2. ⭐ 头条精选（Top 3，带技术亮点）
+3. 🦄 硅谷动态（Hacker News）— 使用 HN 帖子格式
+4. 🐱 新产品发现（Product Hunt）— 使用产品卡片格式
+5. 🐙 开源趋势（GitHub Trending）— 使用项目卡片格式
+6. 🇨🇳 国内创投（36氪）
+7. 💡 编辑推荐 Top 3
+
+**趋势检测重点**：新框架/工具发布、科技公司动态、开源项目爆火
+
+---
+
+## 4. AI 深度日报
+
+**板块顺序**：
+1. 🔥 趋势话题
+2. ⭐ 头条精选（Top 3，带技术深度分析）
+3. 📝 论文精选（ArXiv cs.AI/cs.LG/cs.CL via Bash curl + HuggingFace Papers + Papers With Code）— 使用学术卡片格式
+4. 📰 行业动态（Ben's Bites + Latent Space + TLDR AI）
+5. 🛠️ 开源项目（GitHub Trending AI + Reddit r/ML + r/LocalLLaMA）
+6. 💭 深度观点
+7. 🎯 本周技术趋势 Top 3
+8. 💡 编辑推荐 Top 3
+
+**特殊**：论文条目使用学术卡片：
 ```markdown
-# 💼 {date} 财经早报
-
----
-
-## 📊 市场概览
-- 搜集时间：{time}
-- 信源数量：5 个（华尔街见闻、财新网、第一财经、经济观察报、21世纪经济报道）
-- 新闻总数：{total_count} 条
-- AI 筛选后：{filtered_count} 条
-- 平均评分：{avg_score} ⭐
-
----
-
-## 📈 市场动态
-
-### 1. {news_title} ⭐{score}
-**来源**：{source} | **时间**：{time}
-**摘要**：{summary}
-
-**市场影响**：
-{market_impact}
-
-**链接**：{link}
-
----
-
-## 🏢 公司新闻
-
-### 1. {news_title} ⭐{score}
-- 来源：{source}
-- 摘要：{summary}
-- 链接：{link}
-
----
-
-## 💰 投资观点
-
-### 1. {news_title} ⭐{score}
-- 来源：{source}
-- 摘要：{summary}
-- 链接：{link}
-
----
-
-## 🌍 国际财经
-
-### 1. {news_title} ⭐{score}
-- 来源：{source}
-- 摘要：{summary}
-- 链接：{link}
-
----
-
-## 💡 财经日历
-
-- 今日重要事件：{events}
-- 经济数据发布：{data_releases}
-
----
-
-_生成时间：{time} | 由 🌍 全球新闻聚合器 提供_
-```
-
----
-
-## 🔬 科技早报模板
-
-```markdown
-# 🚀 {date} 科技早报
-
----
-
-## 📊 今日概览
-- 搜集时间：{time}
-- 信源数量：5 个（Hacker News、Product Hunt、GitHub Trending、36Kr、TechCrunch）
-- 新闻总数：{total_count} 条
-- AI 筛选后：{filtered_count} 条
-- 平均评分：{avg_score} ⭐
-
----
-
-## 🌟 今日焦点
-
-### 1. {news_title} ⭐{score}
-**来源**：{source} | **时间**：{time}
-**摘要**：{summary}
-
-**技术亮点**：
-{technical_highlights}
-
-**链接**：{link}
-
----
-
-## 🦄 硅谷动态（Hacker News）
-
-### 1. {news_title} ⭐{score}
-- 来源：Hacker News
-- 摘要：{summary}
-- HN 讨论热度：{heat}
-- 链接：{link}
-
----
-
-## 🐱 新产品发现（Product Hunt）
-
-### 1. {product_name} ⭐{score}
-- 发布者：{creator}
-- 一句话介绍：{tagline}
-- 链接：{link}
-
----
-
-## 🐙 开源趋势（GitHub Trending）
-
-### 1. {repo_name} ⭐{score}
-- 语言：{language}
-- Star 增长：{growth}
-- 简介：{description}
-- 链接：{link}
-
----
-
-## 🇨🇳 国内创投（36Kr）
-
-### 1. {news_title} ⭐{score}
-- 来源：36Kr
-- 摘要：{summary}
-- 链接：{link}
-
----
-
-## 💡 编辑推荐
-
-### 最值得关注的 3 个项目
-1. **{name}** - {reason}
-2. **{name}** - {reason}
-3. **{name}** - {reason}
-
----
-
-_生成时间：{time} | 由 🌍 全球新闻聚合器 提供_
-```
-
----
-
-## 🤖 AI 深度日报模板
-
-```markdown
-# 🧠 {date} AI 深度日报
-
----
-
-## 📊 今日概览
-- 搜集时间：{time}
-- 信源数量：4 个（Hugging Face Papers、Latent Space、Ben's Bites、Hacker News AI）
-- 新闻总数：{total_count} 条
-- AI 筛选后：{filtered_count} 条
-- 平均评分：{avg_score} ⭐
-
----
-
-## 📝 论文精选
-
-### 1. {paper_title} ⭐{score}
+### {rank}. [{paper_title}]({url})
 **作者**：{authors} | **机构**：{institution}
-**摘要**：{abstract}
-
+**摘要**：{abstract_zh}（1-2 句）
 **核心贡献**：
 - {contribution_1}
 - {contribution_2}
-- {contribution_3}
-
-**方法亮点**：
-{method_details}
-
-**实验结果**：
-{results}
-
-**链接**：{link}
-
----
-
-## 📰 行业动态
-
-### 1. {news_title} ⭐{score}
-- 来源：{source}
-- 摘要：{summary}
-- 链接：{link}
-
----
-
-## 💭 深度观点
-
-### 1. {opinion_title} ⭐{score}
-- 作者：{author}
-- 核心观点：{key_points}
-- 链接：{link}
-
----
-
-## 🛠️ 开源项目
-
-### 1. {project_name} ⭐{score}
-- GitHub: {repo_link}
-- 简介：{description}
-- 主要功能：{features}
-
----
-
-## 🎯 技术趋势
-
-### 本周热点方向
-1. **{trend_1}** - {reason}
-2. **{trend_2}** - {reason}
-3. **{trend_3}** - {reason}
-
----
-
-## 💡 编辑推荐
-
-### 必读论文/项目
-1. **{name}** - {why}
-2. **{name}** - {why}
-3. **{name}** - {why}
-
----
-
-_生成时间：{time} | 由 🌍 全球新闻聚合器 提供_
 ```
 
+**趋势检测重点**：新模型发布、Benchmark 突破、开源大模型、AI 监管政策
+
 ---
 
-## 🍉 吃瓜早报模板
+## 5. AI & 编程早报
 
+**板块顺序**：
+1. 🔥 趋势话题
+2. ⭐ 头条精选（Top 3）
+3. 🤖 AI 动态（TLDR AI + HN AI 相关）
+4. 💻 编程热点（Dev.to + Lobsters）
+5. 🐙 开源趋势（GitHub Trending 多语言）— 使用项目卡片
+6. 🛠️ 开发者工具（新工具/库发布）
+7. 💡 编辑推荐 Top 3
+
+**趋势检测重点**：新语言/框架版本、AI 编程工具、开发者体验
+
+---
+
+## 6. 前端/开发者日报
+
+**板块顺序**：
+1. 🔥 趋势话题
+2. ⭐ 头条精选（Top 3）
+3. ⚛️ 框架动态（React/Vue/Svelte/Angular 相关）
+4. 🎨 CSS & UI（CSS-Tricks + Tailwind + 设计系统）
+5. 🔧 工具链（Vite/Webpack/esbuild/Turbopack/Bun/Deno）
+6. 📘 TypeScript / Node.js（Node Weekly + TS 相关）
+7. 📦 开源组件库（新发布/更新的 UI 库和工具包）
+8. 📬 本周 Newsletter 精华（合并 JS Weekly + Frontend Focus + React Status + Bytes.dev）
+9. 💡 编辑推荐 Top 3
+
+**特殊**：Newsletter 精华用合并表格：
 ```markdown
-# 🍉 {date} 吃瓜早报
-
----
-
-## 📊 今日热点
-- 搜集时间：{time}
-- 信源数量：4 个（微博热搜、知乎热榜、抖音热点、百度热搜）
-- 新闻总数：{total_count} 条
-- AI 筛选后：{filtered_count} 条
-- 平均评分：{avg_score} ⭐
-
----
-
-## 🔥 热搜 Top 10
-
-### 1. 🔥 {topic} - {heat} 热度
-- 平台：{platform}
-- 事件摘要：{summary}
-- 舆论风向：{public_opinion}
-
----
-
-### 2. {topic} - {heat} 热度
-- 平台：{platform}
-- 事件摘要：{summary}
-
----
-
-## 🎭 娱乐动态
-
-### 1. {news_title}
-- 来源：{source}
-- 摘要：{summary}
-- 链接：{link}
-
----
-
-## 💬 知乎热议
-
-### 1. {question_title}
-- 关注者：{followers}
-- 回答数：{answers}
-- 高赞观点：{top_answer}
-- 链接：{link}
-
----
-
-## 🎵 抖音热门
-
-### 1. {video_title}
-- 创作者：{creator}
-- 播放量：{views}
-- 简介：{description}
-- 链接：{link}
-
----
-
-## 😂 今日梗图/段子
-
-- {meme_content}
-
----
-
-## 💡 编辑推荐
-
-### 最值得吃的 3 个瓜
-1. **{topic}** - {reason}
-2. **{topic}** - {reason}
-3. **{topic}** - {reason}
-
----
-
-_生成时间：{time} | 由 🌍 全球新闻聚合器 提供_
+#### 📬 本周 Newsletter 精华
+| 来源 | 标题 | 简介 |
+|------|------|------|
+| JS Weekly | [{title}]({url}) | {desc} |
+| Frontend Focus | [{title}]({url}) | {desc} |
+| React Status | [{title}]({url}) | {desc} |
+| Bytes.dev | [{title}]({url}) | {desc} |
 ```
+
+**分类关键词映射**：
+| 板块 | 归类关键词 |
+|------|-----------|
+| 框架动态 | React, Vue, Svelte, Angular, Next.js, Nuxt, Remix, Solid, Qwik, Astro |
+| CSS & UI | CSS, Tailwind, UnoCSS, Sass, styled-components, Radix, shadcn, Open Props |
+| 工具链 | Vite, Webpack, esbuild, Turbopack, Rollup, Bun, Deno, pnpm, Biome |
+| TS/Node | TypeScript, Node.js, Express, Fastify, Hono, tRPC, Zod |
+| 开源组件库 | UI library, component, design system, Ant Design, Material UI, Headless UI |
+
+**趋势检测重点**：框架新版本、CSS 新特性、构建工具更新、浏览器 API
+
+---
+
+## 7. 吃瓜早报
+
+**板块顺序**：
+1. 🔥 热搜 Top 10（微博 + 百度 + 抖音合并，按热度排序）
+2. 🎭 娱乐动态
+3. 💬 知乎热议（Top 讨论 + 高赞回答摘要）
+4. 😂 今日最佳评论/段子
+5. 💡 编辑推荐 — 最值得关注的 3 个瓜
+
+**特殊**：热搜条目格式：
+```markdown
+### {rank}. {topic} — 🔥 {heat_value}
+**平台**：{platform} | **类型**：{category}
+**摘要**：{summary}
+```
+
+**合并排序规则**：微博热度 > 百度搜索量 > 抖音播放量，归一化后统一排序
+
+---
+
+## 通用规则
+
+1. **趋势话题**放在最前面（如有检测到），没有则跳过
+2. **头条精选**紧随其后，3-5 条最重要新闻，默认带深度点评
+3. **编辑推荐**放在最后，3 条 + 推荐理由
+4. 每板块按信源原生指标降序排列
+5. 板块不足 3 条 → 标注 `📌 补充` + 放宽搜索
+6. 英文翻译中文摘要，保留原文标题和链接
+7. **追问提示**：每份早报末尾必须附带追问引导语

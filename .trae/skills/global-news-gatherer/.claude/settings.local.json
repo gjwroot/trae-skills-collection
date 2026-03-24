@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:feeds.arstechnica.com)",
+      "WebFetch(domain:techmeme.com)",
+      "Bash(curl -s \"https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=3\")",
+      "Bash(curl -s \"https://www.v2ex.com/index.xml\")",
+      "Bash(curl -s \"https://arxiv.org/rss/cs.AI\")",
+      "Bash(curl -s \"https://sspai.com/feed\")",
+      "Bash(curl -sL \"https://export.arxiv.org/rss/cs.AI\")",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(f''''{h[\"\"title\"\"]} | {h.get\\(\"\"points\"\",0\\)} pts | {h.get\\(\"\"num_comments\"\",0\\)} comments | {h.get\\(\"\"url\"\",\"\"\"\"\\)}''''\\) for h in data[''''hits'''']]\")",
+      "Bash(curl -s \"https://www.oschina.net/news/rss\")",
+      "Bash(curl -sL https://rsshub.app/36kr/hot-list)",
+      "Bash(curl -sL https://rsshub.app/zhihu/hot)"
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品管理系统</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>产品管理系统</h1>
+            <p class="subtitle">搜索 · 浏览 · 发现</p>
+        </header>
+
+        <main class="main-content">
+            <section class="search-section" id="searchSection">
+                <div class="search-box">
+                    <div class="search-input-wrapper">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        <input type="text" id="searchInput" class="search-input" placeholder="搜索产品名称、描述..." autocomplete="off">
+                        <button class="clear-btn" id="clearBtn" style="display: none;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="search-filters">
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="">全部分类</option>
+                            <option value="电子产品">电子产品</option>
+                            <option value="家居用品">家居用品</option>
+                            <option value="服装配饰">服装配饰</option>
+                            <option value="运动户外">运动户外</option>
+                        </select>
+                        <select id="sortFilter" class="filter-select">
+                            <option value="default">默认排序</option>
+                            <option value="price-low">价格从低到高</option>
+                            <option value="price-high">价格从高到低</option>
+                            <option value="name">名称排序</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-wrapper">
+                <div class="list-section" id="listSection">
+                    <div class="list-header">
+                        <h2 class="section-title">产品列表</h2>
+                        <span class="result-count" id="resultCount">共 12 件商品</span>
+                    </div>
+                    <div class="product-grid" id="productGrid">
+                    </div>
+                </div>
+
+                <div class="detail-section" id="detailSection">
+                    <button class="back-btn" id="backBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        返回列表
+                    </button>
+                    <div class="detail-content" id="detailContent">
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
