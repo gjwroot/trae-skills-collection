@@ -1,0 +1,16 @@
+name: follow-builders
+version: "2.2.0"
+description: AI Builders 日报 v2.2 — 全球信源 + 鲜度过滤 + 两轮搜索 + 三级优先级 + 智能降级。追踪 30+ 位 AI 建设者、8 个播客、10+ 个实验室博客、20+ 个全球媒体源（北美/欧洲/中国/日韩/印度）。默认只收录 48 小时内新鲜内容。Follow builders, not influencers。
+triggers:
+  - follow builders
+  - follow-builders
+  - AI builders
+  - 建设者日报
+  - /ai
+priority: 50
+category: "news"
+tags:
+  - "AI"
+  - "builders"
+  - "news"
+  - "digest"

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "last_updated": "2026-03-23",
+  "last_updated": "2026-03-28",
   "installed_skills": [
     {
       "name": "feishu-doc-master",
@@ -36,6 +36,20 @@
       "enabled": true,
       "description": "自主执行总调度器",
       "triggers": ["开始", "继续", "自主执行", "蜂群"]
+    },
+    {
+      "name": "follow-builders",
+      "version": "1.0.0",
+      "enabled": true,
+      "description": "AI Builders 追踪器 - 追踪25位AI建设者、5个顶尖播客、官方博客，生成高质量简报。核心理念：Follow builders, not influencers。",
+      "triggers": ["follow builders", "follow-builders", "AI builders", "建设者日报", "Andrej Karpathy", "Swyx", "Sam Altman", "AI Agent", "Anthropic", "Claude"]
+    },
+    {
+      "name": "last30days",
+      "version": "2.9.5",
+      "enabled": true,
+      "description": "Deep research engine covering the last 30 days across 10+ sources - Reddit, X/Twitter, YouTube, TikTok, Instagram, Hacker News, Polymarket, Bluesky, Truth Social, web. AI synthesizes findings into grounded, cited reports.",
+      "triggers": ["last30", "last30days", "research", "deep research", "trends", "news", "citations"]
     }
   ]
 }

@@ -1,17 +1,95 @@
 {
   "permissions": {
     "allow": [
+      "WebSearch",
+
+      "## Tier S: Bash curl API 直取 ##",
+      "## HN Algolia API (多种查询模式) ##",
+      "Bash(curl -s \"https://hn.algolia.com/api/v1/search*\")",
+      "Bash(curl -s --connect-timeout 10 --max-time 30 \"https://hn.algolia.com/api/v1/search*\")",
+      "Bash(curl -s \"https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=3\")",
+      "Bash(curl -s \"https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=20\")",
+      "Bash(curl -s \"https://hn.algolia.com/api/v1/search?query=AI+LLM+GPT+Claude&tags=story&hitsPerPage=15&numericFilters=points>50\")",
+      "Bash(curl -s \"https://hn.algolia.com/api/v1/search?query=React+Vue+CSS+TypeScript+Next.js&tags=story&hitsPerPage=15&numericFilters=points>20\")",
+
+      "## HN Firebase API (Algolia 备用) ##",
+      "Bash(curl -s \"https://hacker-news.firebaseio.com/v0/topstories.json\")",
+      "Bash(curl -s --connect-timeout 10 --max-time 30 \"https://hacker-news.firebaseio.com/v0/topstories.json\")",
+      "Bash(curl -s \"https://hacker-news.firebaseio.com/v0/item/*\")",
+
+      "## Lobsters JSON API ##",
+      "Bash(curl -s \"https://lobste.rs/hottest.json\")",
+      "Bash(curl -s --connect-timeout 10 --max-time 30 \"https://lobste.rs/hottest.json\")",
+      "Bash(curl -s \"https://lobste.rs/newest.json\")",
+
+      "## Dev.to API ##",
+      "Bash(curl -s \"https://dev.to/api/articles*\")",
+      "Bash(curl -s --connect-timeout 10 --max-time 30 \"https://dev.to/api/articles*\")",
+
+      "## ArXiv RSS (cs.AI/LG/CL/CV/SE) ##",
+      "Bash(curl -sL \"https://export.arxiv.org/rss/cs.AI\")",
+      "Bash(curl -sL \"https://export.arxiv.org/rss/cs.LG\")",
+      "Bash(curl -sL \"https://export.arxiv.org/rss/cs.CL\")",
+      "Bash(curl -sL \"https://export.arxiv.org/rss/cs.CV\")",
+      "Bash(curl -sL \"https://export.arxiv.org/rss/cs.SE\")",
+      "Bash(curl -sL --connect-timeout 10 --max-time 30 \"https://export.arxiv.org/rss/*\")",
+
+      "## 少数派 RSS ##",
+      "Bash(curl -s \"https://sspai.com/feed\")",
+      "Bash(curl -s --connect-timeout 10 --max-time 30 \"https://sspai.com/feed\")",
+
+      "## 中国源 (V2EX / OSChina / RSSHub) ##",
+      "Bash(curl -s \"https://www.v2ex.com/index.xml\")",
+      "Bash(curl -s \"https://www.oschina.net/news/rss\")",
+      "Bash(curl -sL https://rsshub.app/*)",
+      "Bash(curl -sL https://rsshub.rssforever.com/*)",
+      "Bash(curl -sL https://rsshub.pseudoyu.com/*)",
+
+      "## Python3 解析 (通配符) ##",
+      "Bash(python3 -c \":*)",
+
+      "## WebFetch: 英文科技媒体 RSS ##",
       "WebFetch(domain:feeds.arstechnica.com)",
       "WebFetch(domain:techmeme.com)",
-      "Bash(curl -s \"https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=3\")",
-      "Bash(curl -s \"https://www.v2ex.com/index.xml\")",
-      "Bash(curl -s \"https://arxiv.org/rss/cs.AI\")",
-      "Bash(curl -s \"https://sspai.com/feed\")",
-      "Bash(curl -sL \"https://export.arxiv.org/rss/cs.AI\")",
-      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(f''''{h[\"\"title\"\"]} | {h.get\\(\"\"points\"\",0\\)} pts | {h.get\\(\"\"num_comments\"\",0\\)} comments | {h.get\\(\"\"url\"\",\"\"\"\"\\)}''''\\) for h in data[''''hits'''']]\")",
-      "Bash(curl -s \"https://www.oschina.net/news/rss\")",
-      "Bash(curl -sL https://rsshub.app/36kr/hot-list)",
-      "Bash(curl -sL https://rsshub.app/zhihu/hot)"
+      "WebFetch(domain:www.techmeme.com)",
+      "WebFetch(domain:techcrunch.com)",
+      "WebFetch(domain:www.theverge.com)",
+      "WebFetch(domain:www.wired.com)",
+
+      "## WebFetch: GitHub / Product Hunt ##",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.producthunt.com)",
+
+      "## WebFetch: AI 学术源 ##",
+      "WebFetch(domain:huggingface.co)",
+      "WebFetch(domain:paperswithcode.com)",
+
+      "## WebFetch: 开发者社区 (备用 RSS) ##",
+      "WebFetch(domain:lobste.rs)",
+      "WebFetch(domain:dev.to)",
+      "WebFetch(domain:www.reddit.com)",
+      "WebFetch(domain:old.reddit.com)",
+
+      "## WebFetch: Newsletter RSS ##",
+      "WebFetch(domain:tldr.tech)",
+      "WebFetch(domain:javascriptweekly.com)",
+      "WebFetch(domain:nodeweekly.com)",
+      "WebFetch(domain:frontendfoc.us)",
+      "WebFetch(domain:react.statuscode.com)",
+      "WebFetch(domain:bytes.dev)",
+      "WebFetch(domain:css-weekly.com)",
+      "WebFetch(domain:golangweekly.com)",
+      "WebFetch(domain:this-week-in-rust.org)",
+
+      "## WebFetch: 前端 HTML 源 ##",
+      "WebFetch(domain:www.echojs.com)",
+      "WebFetch(domain:css-tricks.com)",
+      "WebFetch(domain:www.smashingmagazine.com)",
+
+      "## WebFetch: RSSHub (含备用实例) ##",
+      "WebFetch(domain:rsshub.app)",
+      "WebFetch(domain:rsshub.rssforever.com)",
+      "WebFetch(domain:rsshub.pseudoyu.com)"
     ]
   }
 }

@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:my.feishu.cn)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:zara.faces.site)",
+      "Bash(gh repo:*)",
+      "Bash(gh api:*)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Bash(done)",
+      "Bash(npm install:*)",
+      "Bash(node prepare-digest.js)",
+      "Bash(curl -sI \"https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-x.json\")",
+      "Bash(curl -s --connect-timeout 10 \"https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-x.json\")",
+      "Bash(curl -v --connect-timeout 5 \"https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-x.json\")",
+      "Bash(echo $https_proxy $http_proxy $HTTP_PROXY $HTTPS_PROXY $ALL_PROXY)",
+      "Read(//Users/gengjiawei/**)",
+      "Bash(env)",
+      "WebSearch",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:claude.com)",
+      "WebFetch(domain:openai.com)"
+    ]
+  }
+}

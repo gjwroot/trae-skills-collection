@@ -9,7 +9,7 @@
 ```markdown
 # {scene_emoji} {date} {scene_name}
 
-> 📊 信源：{source_count} 个 | 新闻：{total_count} 条 | 格式：详细 | 生成：{time}
+> 📊 **信源**：{source_1}、{source_2}、{source_3}、... ({source_count} 个) | **新闻**：{total_count} 条 | **格式**：详细 | **生成**：{time}
 
 ---
 
@@ -31,10 +31,12 @@
 
 ## ⭐ 头条精选
 
+<!-- ⚠️ 必填字段：📝中文翻译、来源、🔗链接 — 任何条目缺少这三项则不得展示 -->
+
 ### 1. {title}
-- 📝 **中文翻译**：{title_zh}
-- **来源**：{source} | **{metric_name}**：{metric_value}
-- 🔗 [链接]({url})
+- 📝 **中文翻译**：{title_zh}  ← **必填**
+- **来源**：{source} | **{metric_name}**：{metric_value}  ← **必填**
+- 🔗 [链接]({url})  ← **必填，真实URL**
 > 💡 **深度点评**：{insight}
 
 ### 2. {title}
@@ -83,7 +85,7 @@ _由 🌍 全球新闻聚合器 Ultimate v5 生成 | {time}_
 ```markdown
 # {scene_emoji} {date} {scene_name}
 
-> 📊 信源：{source_count} 个 | 新闻：{total_count} 条 | 格式：紧凑 | 生成：{time}
+> 📊 **信源**：{source_1}、{source_2}、{source_3}、... ({source_count} 个) | **新闻**：{total_count} 条 | **格式**：紧凑 | **生成**：{time}
 
 ## 🔥 趋势
 | 话题 | 信源数 | 链接 |
@@ -317,3 +319,19 @@ _🌍 v5 | {time}_
 - 🔗 [链接]({arxiv_url})
 - 📝 Abstract: {abstract_truncated}...
 ```
+
+---
+
+## 质量自检区块（内部使用，不输出给用户）
+
+在生成最终 Markdown 之前，执行以下检查。不通过则补数据后重新生成：
+
+```
+✅ 中文翻译：{english_items_with_zh}/{total_english_items} = {percentage}% （要求 100%）
+✅ 原链覆盖：{items_with_link}/{total_items} = {percentage}% （要求 100%）
+✅ 信源多样性：实际信源 = [{source_list}] = {count} 个（要求 ≥ 场景最低数）
+✅ 板块条目数：头条={n}(≥3) | {section1}={n}(≥2) | {section2}={n}(≥2) | ...
+✅ 趋势跨源：{trend_count} 个趋势，每个 ≥2 信源
+```
+
+> **关键原则**：宁可少展示几条高质量条目，也不要展示缺翻译、缺链接、缺来源的条目。

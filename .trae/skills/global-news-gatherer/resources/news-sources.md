@@ -29,7 +29,7 @@
 ### 少数派
 
 ```bash
-curl -s "https://sspai.com/feed" | python3 -c "
+curl -s --connect-timeout 10 --max-time 30 "https://sspai.com/feed" | python3 -c "
 import sys,re
 content=sys.stdin.read()
 items=re.findall(r'<item>.*?<title>(.*?)</title>.*?<link>(.*?)</link>.*?</item>',content,re.DOTALL)
@@ -37,6 +37,54 @@ for i,(t,l) in enumerate(items[:15],1):
     print(f'{i}. {t} | {l}')
 "
 ```
+
+### Lobsters JSON API（v5.1 新增，已验证可用）
+
+```bash
+curl -s --connect-timeout 10 --max-time 30 "https://lobste.rs/hottest.json" | python3 -c "
+import sys,json
+data=json.load(sys.stdin)
+for i,h in enumerate(data[:15],1):
+    tags=','.join(h.get('tags',[]))
+    print(f\"{i}. {h['title']} | {h.get('score',0)} pts | {tags} | {h.get('url','')}\")
+"
+```
+
+### Dev.to API（v5.1 新增，已验证可用）
+
+**热门文章（过去 7 天）**：
+```bash
+curl -s --connect-timeout 10 --max-time 30 "https://dev.to/api/articles?per_page=15&top=7" | python3 -c "
+import sys,json
+data=json.load(sys.stdin)
+for i,h in enumerate(data[:15],1):
+    print(f\"{i}. {h['title']} | {h.get('positive_reactions_count',0)} reactions | {h.get('url','')}\")
+"
+```
+
+**按标签搜索（AI/React/Vue 等）**：
+```bash
+curl -s --connect-timeout 10 --max-time 30 "https://dev.to/api/articles?tag={TAG}&per_page=10&top=7" | python3 -c "
+import sys,json
+data=json.load(sys.stdin)
+for i,h in enumerate(data[:10],1):
+    print(f\"{i}. {h['title']} | {h.get('positive_reactions_count',0)} reactions | {h.get('url','')}\")
+"
+```
+> `{TAG}` 替换为：`ai`、`react`、`vue`、`typescript`、`python`、`rust`、`go`、`webdev`、`devops` 等。
+
+### HN Firebase API（v5.1 新增，Algolia 备用方案）
+
+```bash
+curl -s --connect-timeout 10 --max-time 30 "https://hacker-news.firebaseio.com/v0/topstories.json" | python3 -c "
+import sys,json,urllib.request
+ids=json.load(sys.stdin)[:20]
+for i,id in enumerate(ids,1):
+    item=json.loads(urllib.request.urlopen(f'https://hacker-news.firebaseio.com/v0/item/{id}.json').read())
+    print(f\"{i}. {item.get('title','')} | {item.get('score',0)} pts | {item.get('url','')}\")
+"
+```
+> 当 HN Algolia 不可用时自动切换到此 API。
 
 ---
 
@@ -92,15 +140,17 @@ for i,(t,l) in enumerate(items[:15],1):
 
 ## 场景 → 信源映射速查（v5）
 
-| 场景 | Tier S (Bash) | Tier 0 (RSS/WebFetch) | Tier 1 (RSSHub) | Tier 2 (WebSearch) |
-|------|--------------|----------------------|-----------------|-------------------|
-| **综合** | HN API | Techmeme RSS, TC RSS, Verge RSS, GH Trending, PH | 36氪, 微博 | 华尔街见闻 |
+| 场景 | Tier S (Bash curl) | Tier 0 (RSS/WebFetch) | Tier 1 (RSSHub) | Tier 2 (WebSearch) |
+|------|-------------------|----------------------|-----------------|-------------------|
+| **综合** | HN Algolia (+Firebase备用) | Techmeme RSS, TC RSS, Verge RSS, GH Trending, PH | 36氪, 微博 | 华尔街见闻 |
 | **财经** | — | Reddit r/investing RSS | 36氪 | 华尔街见闻, 财新, 第一财经 |
-| **科技** | HN API | Techmeme RSS, TC RSS, Verge RSS, Ars RSS, Wired RSS, GH Trending, PH | 36氪 | — |
-| **AI深度** | HN API(AI), ArXiv cs.AI, cs.LG, cs.CL | Reddit r/ML RSS, r/LocalLLaMA RSS, TLDR AI RSS, HF Papers, PWC | 掘金AI | Latent Space, Ben's Bites |
-| **AI编程** | HN API, 少数派 | Lobsters RSS, Dev.to RSS, TLDR AI/Tech RSS, GH Trending(多语言) | V2EX, 掘金后端, InfoQ | — |
-| **前端** | HN API(前端搜索) | JS/Frontend/React/Node Weekly RSS, Bytes RSS, CSS Weekly RSS, Reddit r/reactjs/vuejs/webdev RSS, Dev.to RSS, Lobsters RSS, Echo JS, CSS-Tricks, Smashing, GH(TS) | 掘金前端 | Vue/Next/Tailwind |
+| **科技** | HN Algolia (+Firebase备用), **Lobsters JSON** | Techmeme RSS, TC RSS, Verge RSS, Ars RSS, Wired RSS, GH Trending, PH | 36氪 | — |
+| **AI深度** | HN Algolia(AI), ArXiv cs.AI/LG/CL, **Dev.to API(tag:ai)** | Reddit r/ML RSS, r/LocalLLaMA RSS, TLDR AI RSS, HF Papers, PWC | 掘金AI | Latent Space, Ben's Bites |
+| **AI编程** | HN Algolia (+Firebase备用), 少数派, **Lobsters JSON**, **Dev.to API** | TLDR AI/Tech RSS, GH Trending(多语言) | V2EX, 掘金后端, InfoQ | — |
+| **前端** | HN Algolia(前端搜索), **Lobsters JSON**, **Dev.to API(tag:react/vue/css)** | JS/Frontend/React/Node Weekly RSS, Bytes RSS, CSS Weekly RSS, Reddit r/reactjs/vuejs/webdev RSS, Echo JS, CSS-Tricks, Smashing, GH(TS) | 掘金前端 | Vue/Next/Tailwind |
 | **吃瓜** | — | — | 微博, 知乎, B站, 抖音, 虎扑, 豆瓣 | 百度热搜 |
+
+> **v5.1 变更**：Lobsters 和 Dev.to 从 Tier 0 升级为 Tier S（JSON API 直取，零 AI 幻觉）；HN 新增 Firebase 备用 API。
 
 ---
 
